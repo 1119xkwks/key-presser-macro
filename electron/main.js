@@ -25,7 +25,8 @@ function createWindow() {
             nodeIntegration: false,
             contextIsolation: true,
         },
-        title: "Key Presser Macro",
+        title: "Key Presser Macro (키 프레서 매크로)",
+        icon: path.join(__dirname, '../public/icon.png'),
         autoHideMenuBar: true,
     });
 

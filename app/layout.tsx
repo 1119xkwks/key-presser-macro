@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hello World",
+  title: "Key Presser Macro (키 프레서 매크로)",
   description: "Next.js project cleaned by Antigravity",
 };
 export default function RootLayout({

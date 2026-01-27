@@ -26,7 +26,8 @@
       "package.json"
     ],
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "icon": "public/icon.png"
     }
   },
   "dependencies": {
