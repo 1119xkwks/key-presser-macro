@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/icon.png" width="128" height="128" alt="Key Presser Macro Icon">
+</p>
+
 # Key Presser Macro (키 프레서 매크로)
 
 키보드의 특정 키를 지속적으로 누르고 있거나, 설정한 주기에 맞춰 자동으로 입력해주는 간편한 매크로 프로그램입니다. Electron과 Next.js를 기반으로 제작되었습니다.
