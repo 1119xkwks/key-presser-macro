@@ -27,12 +27,30 @@ function initPowerShell() {
         Add-Type -TypeDefinition @"
         using System;
         using System.Runtime.InteropServices;
+        using System.Threading;
+
         public class Win32Input {
             [DllImport("user32.dll")]
             public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
+
+            [DllImport("user32.dll")]
+            public static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
             public static void SendKey(byte vKey) {
-                keybd_event(vKey, 0, 0, 0); // Down
-                keybd_event(vKey, 0, 2, 0); // Up
+                uint dwFlagsDown = 0;
+                uint dwFlagsUp = 2; // KEYEVENTF_KEYUP
+
+                // Insert, Delete, Home, End, PageUp, PageDown, 방향키는 Extended Key 플래그 필요
+                if ((vKey >= 0x21 && vKey <= 0x2E)) {
+                    dwFlagsDown |= 1; // KEYEVENTF_EXTENDEDKEY
+                    dwFlagsUp |= 1;
+                }
+
+                byte scanCode = (byte)MapVirtualKey(vKey, 0);
+
+                keybd_event(vKey, scanCode, dwFlagsDown, 0); // Down
+                Thread.Sleep(15); // 다른 매크로 프로그램이 감지할 수 있도록 최소한의 누름 시간 유지
+                keybd_event(vKey, scanCode, dwFlagsUp, 0);   // Up
             }
         }
 "@
