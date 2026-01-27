@@ -20,7 +20,7 @@ export const useMacro = () => {
         mode: 'PERIODIC',
         interval: 100,
         repeatCount: 0,
-        startStopShortcut: 'F1',
+        startStopShortcut: 'F2',
     });
 
     /**
