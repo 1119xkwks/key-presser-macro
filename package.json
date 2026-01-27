@@ -1,6 +1,6 @@
 {
   "name": "key-presser-macro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A powerful keyboard macro application built with Electron and Next.js",
   "author": "Antigravity",
   "private": true,
@@ -27,7 +27,7 @@
     ],
     "win": {
       "target": "portable",
-      "icon": "public/icon.png"
+      "icon": "electron/icon.png"
     }
   },
   "dependencies": {

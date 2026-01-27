@@ -12,6 +12,11 @@ let mainWindow;
 let macroInterval = null;
 let isMacroRunning = false;
 
+// Windows에서 아이콘이 작업표시줄에 올바르게 그룹화되고 표시되도록 설정
+if (process.platform === 'win32') {
+    app.setAppUserModelId('com.macro.keypresser');
+}
+
 /**
  * @function createWindow
  * @description 메인 윈도우를 생성하고 설정을 초기화합니다.
@@ -26,7 +31,7 @@ function createWindow() {
             contextIsolation: true,
         },
         title: "Key Presser Macro (키 프레서 매크로)",
-        icon: path.join(__dirname, '../public/icon.png'),
+        icon: path.join(__dirname, 'icon.png'),
         autoHideMenuBar: true,
     });
 
