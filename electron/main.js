@@ -1,26 +1,72 @@
 /**
  * @file electron/main.js
- * @description Electron 메인 프로세스 설정 및 매크로 로직을 담당합니다.
+ * @description 게임 호환성 및 성능 최적화 버전
  */
 
 const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 
 const isDev = !app.isPackaged;
 let mainWindow;
 let macroInterval = null;
 let isMacroRunning = false;
 
-// Windows에서 아이콘이 작업표시줄에 올바르게 그룹화되고 표시되도록 설정
-if (process.platform === 'win32') {
-    app.setAppUserModelId('com.macro.keypresser');
+// PowerShell 프로세스 관리
+let psProcess = null;
+
+/**
+ * @function initPowerShell
+ * @description 저수준 입력을 위해 PowerShell 프로세스를 미리 실행하고 유지합니다.
+ */
+function initPowerShell() {
+    if (psProcess) return;
+
+    // keybd_event API를 사용하는 C# 코드를 포함한 PowerShell 세션 시작
+    const bootstrapUtils = `
+        Add-Type -TypeDefinition @"
+        using System;
+        using System.Runtime.InteropServices;
+        public class Win32Input {
+            [DllImport("user32.dll")]
+            public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
+            public static void SendKey(byte vKey) {
+                keybd_event(vKey, 0, 0, 0); // Down
+                keybd_event(vKey, 0, 2, 0); // Up
+            }
+        }
+"@
+    `;
+
+    psProcess = spawn('powershell', ['-NoProfile', '-Command', '-'], {
+        stdio: ['pipe', 'inherit', 'inherit']
+    });
+
+    psProcess.stdin.write(bootstrapUtils + "\n");
 }
 
 /**
- * @function createWindow
- * @description 메인 윈도우를 생성하고 설정을 초기화합니다.
+ * @function getVirtualKeyCode
+ * @description PowerShell SendKeys 형식을 Virtual Key Code로 변환합니다.
  */
+function getVirtualKeyCode(key) {
+    const mapping = {
+        'a': 0x41, 'b': 0x42, 'c': 0x43, 'd': 0x44, 'e': 0x45, 'f': 0x46, 'g': 0x47, 'h': 0x48, 'i': 0x49, 'j': 0x4A, 'k': 0x4B, 'l': 0x4C, 'm': 0x4D, 'n': 0x4E, 'o': 0x4F, 'p': 0x50, 'q': 0x51, 'r': 0x52, 's': 0x53, 't': 0x54, 'u': 0x55, 'v': 0x56, 'w': 0x57, 'x': 0x58, 'y': 0x59, 'z': 0x5A,
+        '0': 0x30, '1': 0x31, '2': 0x32, '3': 0x33, '4': 0x34, '5': 0x35, '6': 0x36, '7': 0x37, '8': 0x38, '9': 0x39,
+        '{ENTER}': 0x0D, ' ': 0x20, '{ESC}': 0x1B, '{BS}': 0x08, '{TAB}': 0x09, '{INS}': 0x2D, '{DEL}': 0x2E,
+        '{HOME}': 0x24, '{END}': 0x23, '{PGUP}': 0x21, '{PGDN}': 0x22,
+        '{UP}': 0x26, '{DOWN}': 0x28, '{LEFT}': 0x25, '{RIGHT}': 0x27,
+        '{F1}': 0x70, '{F2}': 0x71, '{F3}': 0x72, '{F4}': 0x73, '{F5}': 0x74, '{F6}': 0x75, '{F7}': 0x76, '{F8}': 0x77, '{F9}': 0x78, '{F10}': 0x79, '{F11}': 0x7A, '{F12}': 0x7B
+    };
+    return mapping[key.toLowerCase()] || mapping[key] || 0x41; // 기본값 A
+}
+
+function sendKeyLowLevel(key) {
+    if (!psProcess) initPowerShell();
+    const vKey = getVirtualKeyCode(key);
+    psProcess.stdin.write(`[Win32Input]::SendKey(${vKey})\n`);
+}
+
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 600,
@@ -35,12 +81,14 @@ function createWindow() {
         autoHideMenuBar: true,
     });
 
-    // 배포 환경에서 정적 파일 로드 시 경로 문제 해결을 위해 file:// 프로토콜 사용
+    if (process.platform === 'win32') {
+        app.setAppUserModelId('com.macro.keypresser');
+    }
+
     const startUrl = isDev
         ? 'http://localhost:3000'
         : `file://${path.join(__dirname, '../out/index.html')}`;
 
-    console.log(`Loading URL: ${startUrl}`);
     mainWindow.loadURL(startUrl);
 
     if (isDev) {
@@ -50,46 +98,19 @@ function createWindow() {
     mainWindow.on('closed', () => (mainWindow = null));
 }
 
-/**
- * @function sendKeyViaPowerShell
- * @description PowerShell을 사용하여 키 입력을 시뮬레이션합니다.
- * @param {string} key - 전송할 키 이름
- */
-function sendKeyViaPowerShell(key) {
-    const psCommand = `powershell -Command "$wshell = New-Object -ComObject WScript.Shell; $wshell.SendKeys('${key}')"`;
-    exec(psCommand, (error) => {
-        if (error) {
-            console.error(`키 전송 오류: ${error}`);
-        }
-    });
-}
-
-/**
- * @function startMacro
- * @description 설정된 구성에 따라 매크로를 시작합니다.
- * @param {Object} config - 매크로 구성 객체
- */
 function startMacro(config) {
     if (isMacroRunning) return;
 
     isMacroRunning = true;
     mainWindow.webContents.send('macro-status-changed', true);
 
-    if (config.mode === 'PERIODIC') {
-        macroInterval = setInterval(() => {
-            sendKeyViaPowerShell(config.targetKey);
-        }, config.interval);
-    } else if (config.mode === 'HOLD') {
-        macroInterval = setInterval(() => {
-            sendKeyViaPowerShell(config.targetKey);
-        }, 50);
-    }
+    const interval = config.mode === 'HOLD' ? 50 : config.interval;
+
+    macroInterval = setInterval(() => {
+        sendKeyLowLevel(config.targetKey);
+    }, interval);
 }
 
-/**
- * @function stopMacro
- * @description 실행 중인 매크로를 중지합니다.
- */
 function stopMacro() {
     if (!isMacroRunning) return;
 
@@ -102,10 +123,8 @@ function stopMacro() {
     mainWindow.webContents.send('macro-status-changed', false);
 }
 
-// IPC 통신 설정
 ipcMain.handle('update-macro-config', (event, config) => {
     globalShortcut.unregisterAll();
-
     try {
         globalShortcut.register(config.startStopShortcut, () => {
             if (isMacroRunning) {
@@ -120,20 +139,19 @@ ipcMain.handle('update-macro-config', (event, config) => {
     }
 });
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+    initPowerShell();
+    createWindow();
+});
 
 app.on('window-all-closed', () => {
+    if (psProcess) psProcess.kill();
     if (process.platform !== 'darwin') {
         app.quit();
     }
 });
 
-app.on('activate', () => {
-    if (mainWindow === null) {
-        createWindow();
-    }
-});
-
 app.on('will-quit', () => {
+    if (psProcess) psProcess.kill();
     globalShortcut.unregisterAll();
 });
