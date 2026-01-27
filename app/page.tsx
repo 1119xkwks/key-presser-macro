@@ -1,64 +1,123 @@
-import Image from "next/image";
+'use client';
+
+/**
+ * @file app/page.tsx
+ * @description 매크로 설정을 위한 메인 GUI 페이지입니다.
+ * 모든 스타일은 globals.css에서 관리하며, TSX에는 구조를 나타내는 클래스명만 사용합니다.
+ */
+
+import { useState } from 'react';
+import { useMacro } from '@/app/hooks/useMacro';
+import { MacroMode } from '@/app/types/macro';
+import { TARGET_KEYS, SHORTCUT_KEYS } from '@/app/constants/keys';
+import { AutoSelect } from '@/app/components/AutoSelect';
 
 export default function Home() {
+  const { config, isRunning, error, updateConfig } = useMacro();
+  const [warning, setWarning] = useState<string | null>(null);
+
+  /**
+   * @function handleConfigChange
+   * @description 설정을 변경하기 전 동일한 키가 선택되었는지 확인합니다.
+   * @param {Partial<typeof config>} newPartialConfig 
+   */
+  const handleConfigChange = (newPartialConfig: Partial<typeof config>) => {
+    // 업데이트될 전체 설정 시뮬레이션
+    const nextConfig = { ...config, ...newPartialConfig };
+
+    // 대상 키와 단축키의 레이블을 비교하여 충돌 확인
+    const targetLabel = TARGET_KEYS.find(k => k.value === nextConfig.targetKey)?.label;
+    const shortcutLabel = SHORTCUT_KEYS.find(k => k.value === nextConfig.startStopShortcut)?.label;
+
+    if (targetLabel === shortcutLabel) {
+      setWarning(`실행 대상 키(${targetLabel})와 단축키가 동일할 수 없습니다.`);
+      return;
+    }
+
+    setWarning(null);
+    updateConfig(newPartialConfig);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="container">
+      <header className="header">
+        <h1>KEY PRESSER</h1>
+        <p>데스크탑 키보드 매크로 시스템</p>
+      </header>
+
+      <main className="main-content">
+        {/* 상태 표시 카드 */}
+        <div className={`status-card ${isRunning ? 'running' : ''}`}>
+          <div className="status-info">
+            <span className="label">Status</span>
+            <div className="indicator-group">
+              <div className={`dot ${isRunning ? 'active' : ''}`} />
+              <span className={`text ${isRunning ? 'active' : ''}`}>
+                {isRunning ? 'RUNNING' : 'STOPPED'}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* 에러 또는 경고 메시지 */}
+        {(error || warning) && (
+          <div className="error-box">
+            ⚠️ {error || warning}
+          </div>
+        )}
+
+        {/* 설정 구역 */}
+        <section className="config-section">
+          {/* 대상 키 설정 */}
+          <AutoSelect
+            label="Target Key (매크로 실행 키)"
+            options={TARGET_KEYS}
+            value={config.targetKey}
+            onChange={(val) => handleConfigChange({ targetKey: val })}
+            placeholder="키 검색 (예: A, Enter...)"
+          />
+
+          {/* 모드 선택 */}
+          <div className="input-group">
+            <label>Input Mode</label>
+            <div className="mode-toggle">
+              {(['PERIODIC', 'HOLD'] as MacroMode[]).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => updateConfig({ mode })}
+                  className={config.mode === mode ? 'active' : ''}
+                >
+                  {mode === 'PERIODIC' ? '주기적 입력' : '지속 누름'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 주기 설정 (PERIODIC 모드일 때만) */}
+          {config.mode === 'PERIODIC' && (
+            <div className="input-group">
+              <label>Interval (ms)</label>
+              <input
+                type="number"
+                value={config.interval}
+                onChange={(e) => updateConfig({ interval: Number(e.target.value) })}
+              />
+            </div>
+          )}
+
+          {/* 단축키 설정 */}
+          <AutoSelect
+            label="Start/Stop Shortcut (단축키)"
+            options={SHORTCUT_KEYS}
+            value={config.startStopShortcut}
+            onChange={(val) => handleConfigChange({ startStopShortcut: val })}
+            placeholder="단축키 검색 (예: F1, Ctrl...)"
+          />
+        </section>
+
+        <footer className="footer-info">
+          Hotkey: {config.startStopShortcut} to toggle
+        </footer>
       </main>
     </div>
   );

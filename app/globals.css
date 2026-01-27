@@ -1,26 +1,179 @@
+/* app/globals.css */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+    --animate-fade-in: fade-in 2s ease-in-out;
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.container {
+    @apply min-h-screen bg-zinc-950 p-8 text-zinc-100 flex flex-col items-center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.header {
+    @apply mb-12 text-center;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.header h1 {
+    @apply text-4xl font-black tracking-tighter mb-2 bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent;
+    animation: fade-in 2s ease-in-out;
+}
+
+.header p {
+    @apply text-zinc-500 font-medium;
+}
+
+.main-content {
+    @apply w-full max-w-md space-y-6;
+}
+
+.status-card {
+    @apply p-4 rounded-2xl border transition-all duration-300 bg-zinc-900 border-zinc-800;
+}
+
+.status-card.running {
+    @apply bg-green-500/10 border-green-500/50;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+.status-info {
+    @apply flex items-center justify-between;
+}
+
+.label {
+    @apply text-sm font-bold uppercase tracking-widest text-zinc-400;
+}
+
+.indicator-group {
+    @apply flex items-center gap-2;
+}
+
+.dot {
+    @apply w-2 h-2 rounded-full bg-red-500;
+}
+
+.dot.active {
+    @apply bg-green-500 animate-pulse;
+}
+
+.text {
+    @apply font-mono text-lg text-red-500;
+}
+
+.text.active {
+    @apply text-green-500;
+}
+
+.error-box {
+    @apply p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-500 text-sm animate-bounce;
+}
+
+.config-section {
+    @apply bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 space-y-6;
+}
+
+.input-group {
+    @apply space-y-2;
+}
+
+.input-group label {
+    @apply text-xs font-bold text-zinc-500 uppercase;
+}
+
+.input-group input,
+.input-group select {
+    @apply w-full bg-zinc-900 border border-zinc-700/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all font-mono text-zinc-100 shadow-inner;
+}
+
+.input-group select {
+    @apply appearance-none cursor-pointer hover:border-zinc-500 hover:bg-zinc-800/80;
+    /* 커스텀 화살표 아이콘 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    background-size: 1.2em;
+}
+
+/* 셀렉트 박스 옵션 배경색 보정 */
+.input-group select option {
+    @apply bg-zinc-900 text-zinc-100;
+}
+
+.mode-toggle {
+    @apply grid grid-cols-2 gap-3;
+}
+
+.mode-toggle button {
+    @apply py-4 rounded-2xl text-sm font-bold transition-all bg-zinc-900 border border-zinc-800 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300;
+}
+
+.mode-toggle button.active {
+    @apply bg-linear-to-br from-purple-600 to-pink-600 text-white border-transparent;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.shortcut-input {
+    @apply w-full bg-zinc-900 border-2 border-dashed border-zinc-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all font-mono text-center;
+}
+
+.footer-info {
+    @apply text-center text-[10px] text-zinc-600 uppercase tracking-[0.2em] font-bold;
+}
+
+/* AutoSelect 컴포넌트 스타일 */
+.auto-select-container {
+    @apply relative space-y-2;
+}
+
+.auto-select-label {
+    @apply text-xs font-bold text-zinc-500 uppercase;
+}
+
+.auto-select-input-wrapper {
+    @apply relative;
+}
+
+.auto-select-input {
+    @apply w-full bg-zinc-900 border border-zinc-700/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all font-mono text-zinc-100 shadow-inner cursor-text;
+}
+
+.auto-select-arrow {
+    @apply absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 transition-transform duration-200 pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.auto-select-arrow.open {
+    @apply rotate-180;
+}
+
+.auto-select-dropdown {
+    @apply absolute z-50 w-full mt-2 max-h-60 overflow-y-auto bg-zinc-900 border border-zinc-700/50 rounded-2xl shadow-2xl py-2;
+    animation: fade-in 2s ease-in-out;
+    scrollbar-width: thin;
+    scrollbar-color: #3f3f46 #18181b;
+}
+
+.auto-select-option {
+    @apply px-5 py-3 cursor-pointer transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white;
+}
+
+.auto-select-option.selected {
+    @apply bg-purple-600/20 text-purple-400 font-bold;
+}
+
+.auto-select-no-results {
+    @apply px-5 py-3 text-zinc-500 text-sm italic;
 }
