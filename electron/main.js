@@ -64,7 +64,8 @@ function initPowerShell() {
     `;
 
     psProcess = spawn('powershell', ['-NoProfile', '-Command', '-'], {
-        stdio: ['pipe', 'inherit', 'inherit']
+        stdio: ['pipe', 'inherit', 'inherit'],
+        windowsHide: true // 이 설정을 통해 팝업되는 PowerShell 창을 숨깁니다.
     });
 
     psProcess.stdin.write(bootstrapUtils + "\n");
