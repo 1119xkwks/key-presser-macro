@@ -5,9 +5,9 @@
 
 const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
-const isDev = require('electron-is-dev');
 const { exec } = require('child_process');
 
+const isDev = !app.isPackaged;
 let mainWindow;
 let macroInterval = null;
 let isMacroRunning = false;
@@ -29,11 +29,12 @@ function createWindow() {
         autoHideMenuBar: true,
     });
 
-    // 개발 환경에서는 localhost:3000으로, 배포 환경에서는 빌드된 파일로 로드
+    // 배포 환경에서 정적 파일 로드 시 경로 문제 해결을 위해 file:// 프로토콜 사용
     const startUrl = isDev
         ? 'http://localhost:3000'
         : `file://${path.join(__dirname, '../out/index.html')}`;
 
+    console.log(`Loading URL: ${startUrl}`);
     mainWindow.loadURL(startUrl);
 
     if (isDev) {
@@ -49,8 +50,6 @@ function createWindow() {
  * @param {string} key - 전송할 키 이름
  */
 function sendKeyViaPowerShell(key) {
-    // PowerShell의 SendKeys 형식을 따릅니다.
-    // 특수 키 처리가 필요할 수 있습니다 (예: {ENTER}, {ESC})
     const psCommand = `powershell -Command "$wshell = New-Object -ComObject WScript.Shell; $wshell.SendKeys('${key}')"`;
     exec(psCommand, (error) => {
         if (error) {
@@ -71,15 +70,13 @@ function startMacro(config) {
     mainWindow.webContents.send('macro-status-changed', true);
 
     if (config.mode === 'PERIODIC') {
-        // 주기적 입력 모드
         macroInterval = setInterval(() => {
             sendKeyViaPowerShell(config.targetKey);
         }, config.interval);
     } else if (config.mode === 'HOLD') {
-        // 지속 누름 모드 (PowerShell SendKeys는 누름 유지가 어려우므로 짧은 주기로 반복 입력)
         macroInterval = setInterval(() => {
             sendKeyViaPowerShell(config.targetKey);
-        }, 50); // 50ms 간격으로 반복 전송하여 유지 효과
+        }, 50);
     }
 }
 
@@ -101,7 +98,6 @@ function stopMacro() {
 
 // IPC 통신 설정
 ipcMain.handle('update-macro-config', (event, config) => {
-    // 기존 단축키 해제 후 새 단축키 등록
     globalShortcut.unregisterAll();
 
     try {
@@ -133,6 +129,5 @@ app.on('activate', () => {
 });
 
 app.on('will-quit', () => {
-    // 앱 종료 시 모든 단축키 해제
     globalShortcut.unregisterAll();
 });
