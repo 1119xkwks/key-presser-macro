@@ -8,6 +8,13 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const isDev = !app.isPackaged;
+
+// 개발 중에 발생하는 보안 경고(Insecure CSP 등) 로그를 숨깁니다.
+// 이 경고는 Next.js 개발 서버의 Fast Refresh 기능 때문에 발생하는 것으로 배포 시에는 나타나지 않습니다.
+if (isDev) {
+    process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+}
+
 let mainWindow;
 let macroInterval = null;
 let isMacroRunning = false;
