@@ -4,6 +4,29 @@
 
 # Key Presser Macro (키 프레서 매크로)
 
+**Key Presser Macro**는 단순한 반복 입력을 넘어, 게임과 같은 고성능 환경에서도 완벽하게 작동하도록 설계된 데스크탑 매크로 도구입니다. 세련된 다크 모드 UI와 함께 누구나 쉽게 자신만의 매크로를 설정하고 제어할 수 있습니다.
+
+### 📸 프로그램 미리보기
+
+<table width="100%">
+  <tr>
+    <td width="50%" align="center"><b>주기적 입력 모드 (PERIODIC)</b></td>
+    <td width="50%" align="center"><b>지속 누름 모드 (HOLD)</b></td>
+  </tr>
+  <tr>
+    <td><img src="public/screenshots/main_ui_periodic.png" alt="Main UI Periodic"></td>
+    <td><img src="public/screenshots/main_ui_hold.png" alt="Main UI Hold"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>편리한 키 검색 (AutoSelect)</b></td>
+    <td align="center"><b>단축키 검색 및 설정</b></td>
+  </tr>
+  <tr>
+    <td><img src="public/screenshots/autoselect_target.png" alt="AutoSelect Target"></td>
+    <td><img src="public/screenshots/autoselect_shortcut.png" alt="AutoSelect Shortcut"></td>
+  </tr>
+</table>
+
 키보드의 특정 키를 지속적으로 누르고 있거나, 설정한 주기에 맞춰 자동으로 입력해주는 간편한 매크로 프로그램입니다. Electron과 Next.js를 기반으로 제작되었습니다.
 
 ## 주요 기능
