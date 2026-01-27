@@ -48,7 +48,16 @@ yarn dev
 ```
 
 ### 실행 파일(.exe) 빌드
-프로그램을 단일 실행 파일로 빌드하려면 아래 명령어를 사용합니다. 빌드가 완료되면 `dist` 폴더 안에 실행 가능한 `.exe` 파일이 생성됩니다.
+프로그램을 단일 실행 파일로 빌드하려면 아래 명령어를 사용합니다. Windows 환경에서는 **관리자 권한으로 실행된 PowerShell** 사용을 권장합니다.
+빌드가 완료되면 `dist` 폴더 안에 실행 가능한 `.exe` 파일이 생성됩니다.
+
+#### 권장 빌드 명령어 (PowerShell 관리자 권한)
+코드 서명 과정을 건너뛰어 권한 에러를 방지합니다.
+```powershell
+$env:CSC_SKIP_SIGN="true"; npm run electron:build
+```
+
+#### 기본 빌드 명령어
 ```bash
 npm run electron:build
 # 또는
