@@ -47,6 +47,14 @@ npm run dev
 yarn dev
 ```
 
+### 실행 파일(.exe) 빌드
+프로그램을 단일 실행 파일로 빌드하려면 아래 명령어를 사용합니다. 빌드가 완료되면 `dist` 폴더 안에 실행 가능한 `.exe` 파일이 생성됩니다.
+```bash
+npm run electron:build
+# 또는
+yarn electron:build
+```
+
 ## 기술 스택
 - **Framework**: Next.js 16 (Turbopack)
 - **Desktop**: Electron

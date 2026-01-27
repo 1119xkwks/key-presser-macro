@@ -5,10 +5,26 @@
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "next build",
+    "next:build": "next build",
+    "electron:build": "next build && electron-builder",
     "electron:start": "electron .",
     "start": "next start",
     "lint": "eslint"
+  },
+  "build": {
+    "appId": "com.macro.keypresser",
+    "productName": "KeyPresserMacro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "out/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable"
+    }
   },
   "dependencies": {
     "electron-is-dev": "^3.0.1",
