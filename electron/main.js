@@ -210,11 +210,11 @@ function getVirtualKeyCode(key) {
     const mapping = {
         'a': 0x41, 'b': 0x42, 'c': 0x43, 'd': 0x44, 'e': 0x45, 'f': 0x46, 'g': 0x47, 'h': 0x48, 'i': 0x49, 'j': 0x4A, 'k': 0x4B, 'l': 0x4C, 'm': 0x4D, 'n': 0x4E, 'o': 0x4F, 'p': 0x50, 'q': 0x51, 'r': 0x52, 's': 0x53, 't': 0x54, 'u': 0x55, 'v': 0x56, 'w': 0x57, 'x': 0x58, 'y': 0x59, 'z': 0x5A,
         '0': 0x30, '1': 0x31, '2': 0x32, '3': 0x33, '4': 0x34, '5': 0x35, '6': 0x36, '7': 0x37, '8': 0x38, '9': 0x39,
-        '{ENTER}': 0x0D, ' ': 0x20, '{ESC}': 0x1B, '{BS}': 0x08, '{TAB}': 0x09, '{INS}': 0x2D, '{DEL}': 0x2E,
-        '{HOME}': 0x24, '{END}': 0x23, '{PGUP}': 0x21, '{PGDN}': 0x22,
-        '{UP}': 0x26, '{DOWN}': 0x28, '{LEFT}': 0x25, '{RIGHT}': 0x27,
-        '{F1}': 0x70, '{F2}': 0x71, '{F3}': 0x72, '{F4}': 0x73, '{F5}': 0x74, '{F6}': 0x75, '{F7}': 0x76, '{F8}': 0x77, '{F9}': 0x78, '{F10}': 0x79, '{F11}': 0x7A, '{F12}': 0x7B,
-        'shift': 0x10, 'ctrl': 0x11, 'alt': 0x12, '.': 0xBE
+        '{enter}': 0x0D, ' ': 0x20, '{esc}': 0x1B, '{bs}': 0x08, '{tab}': 0x09, '{ins}': 0x2D, '{del}': 0x2E,
+        '{home}': 0x24, '{end}': 0x23, '{pgup}': 0x21, '{pgdn}': 0x22,
+        '{up}': 0x26, '{down}': 0x28, '{left}': 0x25, '{right}': 0x27,
+        '{f1}': 0x70, '{f2}': 0x71, '{f3}': 0x72, '{f4}': 0x73, '{f5}': 0x74, '{f6}': 0x75, '{f7}': 0x76, '{f8}': 0x77, '{f9}': 0x78, '{f10}': 0x79, '{f11}': 0x7A, '{f12}': 0x7B,
+        'shift': 0x10, 'ctrl': 0x11, 'alt': 0x12, '.': 0xBE, 'plus': 0xBB
     };
     const k = key.toLowerCase();
     return mapping[k] || 0x41; // 기본값 A
@@ -272,17 +272,21 @@ function createWindow() {
     });
 }
 
+let loopTimeout = null;
+
 function startMacro(config) {
     if (isMacroRunning) return;
-
+    console.log('[MACRO] startMacro called');
     isMacroRunning = true;
     currentConfig = config;
+
+    // 메인 창에 상태 변경 알림
     if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send('macro-status-changed', true);
     }
 
     // 오버레이 표시 및 설정 업데이트
-    if (overlayWindow) {
+    if (overlayWindow && !overlayWindow.isDestroyed()) {
         overlayWindow.webContents.send('update-overlay-config', config);
         overlayWindow.showInactive();
 
@@ -295,23 +299,36 @@ function startMacro(config) {
         }, 1000);
     }
 
-    const interval = config.mode === 'HOLD' ? 30 : config.interval;
+    const interval = Math.max(20, config.interval);
 
-    macroInterval = setInterval(() => {
-        if (config.mode === 'HOLD') {
-            sendKeyLowLevel(config.targetKey, 'down');
-        } else {
+    if (config.mode === 'HOLD') {
+        console.log(`[MACRO] HOLD mode: initial KeyDown for [${config.targetKey}]`);
+        sendKeyLowLevel(config.targetKey, 'down');
+    }
+
+    const macroLoop = () => {
+        if (!isMacroRunning) return;
+
+        if (config.mode !== 'HOLD') {
             sendKeyLowLevel(config.targetKey, 'press');
+        } else {
+            sendKeyLowLevel(config.targetKey, 'down');
         }
-    }, interval);
+
+        loopTimeout = setTimeout(macroLoop, interval);
+    };
+
+    macroLoop();
 }
 
 function stopMacro() {
+    console.log('[MACRO] stopMacro called');
     if (!isMacroRunning) return;
 
-    if (macroInterval) {
-        clearInterval(macroInterval);
-        macroInterval = null;
+    isMacroRunning = false;
+    if (loopTimeout) {
+        clearTimeout(loopTimeout);
+        loopTimeout = null;
     }
 
     if (topMostReinforcer) {
@@ -340,13 +357,32 @@ function stopMacro() {
     }
 }
 
+let lastRegisteredShortcut = null;
+
 ipcMain.handle('update-macro-config', async (event, config) => {
     try {
-        // 기존 단축키 해제
+        console.log(`[IPC] update-macro-config (Shortcut: ${config.startStopShortcut})`);
+
+        // 단축키가 변경되지 않았다면 재등록하지 않음 (중요: 매크로 실행 중 끊김 방지)
+        if (lastRegisteredShortcut === config.startStopShortcut) {
+            console.log('[SHORTCUT] Key same as before, skipping re-registration.');
+            currentConfig = config;
+            if (overlayWindow && !overlayWindow.isDestroyed()) {
+                overlayWindow.webContents.send('update-overlay-config', config);
+            }
+            return { success: true };
+        }
+
+        if (isMacroRunning) {
+            console.log('[IPC] Macro is running, stopping it for shortcut change...');
+            stopMacro();
+        }
+
+        // 새 단축키 등록을 위해 기존 해제
         globalShortcut.unregisterAll();
         currentConfig = config;
+        lastRegisteredShortcut = config.startStopShortcut;
 
-        // OS가 단축키 해제를 처리할 시간을 아주 잠시 줌 (레이스 컨디션 방지)
         await new Promise(resolve => setTimeout(resolve, 50));
 
         // 오버레이가 이미 띄워져 있다면 실시간 업데이트
@@ -354,13 +390,47 @@ ipcMain.handle('update-macro-config', async (event, config) => {
             overlayWindow.webContents.send('update-overlay-config', config);
         }
 
-        const isRegistered = globalShortcut.register(config.startStopShortcut, () => {
+        const triggerMacro = () => {
+            // 중요: 등록 시점의 config가 아닌, 항상 최신 설정인 currentConfig를 참조해야 합니다. (클로저 문제 해결)
+            const activeConfig = currentConfig || config;
+            console.log(`[SHORT_DEBUG] Triggered. Current isMacroRunning: ${isMacroRunning}, Key: [${activeConfig.targetKey}]`);
+
             if (isMacroRunning) {
+                console.log('[SHORT_DEBUG] Attempting to stop...');
                 stopMacro();
             } else {
-                startMacro(config);
+                console.log('[SHORT_DEBUG] Attempting to start...');
+                startMacro(activeConfig);
             }
-        });
+        };
+
+        let isRegistered = false;
+        try {
+            isRegistered = globalShortcut.register(config.startStopShortcut, triggerMacro);
+        } catch (e) {
+            console.warn(`[SHORTCUT] Failed primary registration for ${config.startStopShortcut}:`, e.message);
+        }
+
+        // 보강 등록 로직: 주 등록 실패 시 또는 기호 조합인 경우 대체 키로 등록 시도
+        if (!isRegistered || config.startStopShortcut.includes('Plus') || config.startStopShortcut.includes('.')) {
+            const fallbacks = [];
+            if (config.startStopShortcut.includes('Plus')) {
+                fallbacks.push('+', 'Shift+=');
+            }
+            if (config.startStopShortcut.includes('.')) {
+                fallbacks.push('>');
+            }
+
+            for (const fallback of fallbacks) {
+                try {
+                    if (globalShortcut.register(fallback, triggerMacro)) {
+                        console.log(`[SHORTCUT] Registered via fallback: ${fallback}`);
+                        isRegistered = true;
+                        break;
+                    }
+                } catch (e) { }
+            }
+        }
 
         if (!isRegistered) {
             const errorMsg = `단축키 [${config.startStopShortcut}] 등록 실패. 다른 프로그램(카카오톡, 디스코드, 게임 등)에서 이미 사용 중인지 확인해 주세요.`;

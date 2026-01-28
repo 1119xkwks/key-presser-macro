@@ -20,7 +20,7 @@ export const useMacro = () => {
         mode: 'HOLD',
         interval: 100,
         repeatCount: 0,
-        startStopShortcut: 'shift+.',
+        startStopShortcut: 'Delete',
     });
 
     /**
