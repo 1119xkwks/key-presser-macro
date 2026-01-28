@@ -9,15 +9,31 @@ const { spawn } = require('child_process');
 
 const isDev = !app.isPackaged;
 
+// 오버레이 가시성 및 성능을 위한 커맨드 라인 스위치 추가
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.commandLine.appendSwitch('disable-background-timer-throttling');
+
 // 개발 중에 발생하는 보안 경고(Insecure CSP 등) 로그를 숨깁니다.
 // 이 경고는 Next.js 개발 서버의 Fast Refresh 기능 때문에 발생하는 것으로 배포 시에는 나타나지 않습니다.
 if (isDev) {
     process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 }
 
-// 오버레이 가시성 및 성능을 위한 커맨드 라인 스위치 추가
-app.commandLine.appendSwitch('disable-renderer-backgrounding');
-app.commandLine.appendSwitch('disable-background-timer-throttling');
+// 하드웨어 가속 관련 설정: 오버레이 투명도 문제를 방지하기 위해 필요한 경우만 주석 해제하세요.
+// app.disableHardwareAcceleration();
+
+// 싱글 인스턴스 락: 앱이 두 번 실행되는 것을 방지
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+    app.quit();
+} else {
+    app.on('second-instance', () => {
+        if (mainWindow) {
+            if (mainWindow.isMinimized()) mainWindow.restore();
+            mainWindow.focus();
+        }
+    });
+}
 
 let mainWindow;
 let overlayWindow;
@@ -25,6 +41,28 @@ let macroInterval = null;
 let topMostReinforcer = null; // 오버레이를 강제로 최상단에 유지하기 위한 타이머
 let isMacroRunning = false;
 let currentConfig = null;
+let psProcess = null; // PowerShell 프로세스 관리
+
+/**
+ * @function cleanupResources
+ * @description 모든 백그라운드 자원을 안전하게 정리합니다.
+ */
+function cleanupResources() {
+    console.log('[CLEANUP] Cleaning up all resources...');
+    stopMacro();
+
+    if (psProcess) {
+        try {
+            psProcess.stdin.end("exit\n"); // stdin 종료
+            psProcess.kill('SIGTERM');
+        } catch (e) { }
+        psProcess = null;
+    }
+
+    // 모든 단축키 해제
+    globalShortcut.unregisterAll();
+}
+
 
 /**
  * @function initOverlayWindow
@@ -34,14 +72,14 @@ function initOverlayWindow() {
     if (overlayWindow) return;
 
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-    const overlayWidth = 350;
-    const overlayHeight = 120;
+    const overlayWidth = 400;
+    const overlayHeight = 240; // 영역을 넉넉하게 확장
 
     overlayWindow = new BrowserWindow({
         width: overlayWidth,
         height: overlayHeight,
-        x: width - overlayWidth - 20,
-        y: height - overlayHeight - 20,
+        x: 20, // 화면 왼쪽에서 20px
+        y: 20, // 화면 상단에서 20px
         frame: false,
         transparent: true,
         alwaysOnTop: true,
@@ -49,8 +87,8 @@ function initOverlayWindow() {
         skipTaskbar: true,
         resizable: false,
         fullscreenable: false,
-        focusable: false,
-        type: 'toolbar', // 가시성 우선순위를 높이기 위해 툴바 타입으로 설정
+        focusable: true, // 버튼 클릭을 위해 우선 true로 설정
+        type: 'toolbar',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: false,
@@ -66,8 +104,8 @@ function initOverlayWindow() {
     overlayWindow.setAlwaysOnTop(true, 'screen-saver', 1);
     overlayWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
 
-    // 마우스 이벤트를 무시하여 게임 플레이에 지장이 없도록 설정
-    overlayWindow.setIgnoreMouseEvents(true);
+    // 마우스 이벤트를 허용하여 STOP 버튼을 클릭할 수 있도록 설정
+    overlayWindow.setIgnoreMouseEvents(false);
 
     const overlayUrl = isDev
         ? 'http://localhost:3000/overlay'
@@ -78,6 +116,10 @@ function initOverlayWindow() {
 
     overlayWindow.webContents.on('did-finish-load', () => {
         console.log('[OVERLAY] did-finish-load');
+        // 로딩 완료 후 마우스 이벤트 활성화 재확인
+        if (overlayWindow) {
+            overlayWindow.setIgnoreMouseEvents(false);
+        }
     });
 
     overlayWindow.on('close', (e) => {
@@ -93,8 +135,8 @@ function initOverlayWindow() {
     });
 }
 
-// PowerShell 프로세스 관리
-let psProcess = null;
+// PowerShell 프로세스가 이미 상단에서 선언되었으므로 중복 선언을 제거합니다.
+
 
 /**
  * @function initPowerShell
@@ -118,9 +160,13 @@ function initPowerShell() {
             public static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
             public static void SendKeys(byte[] vKeys) {
-                if (vKeys == null || vKeys.Length == 0) return;
+                KeyDown(vKeys);
+                Thread.Sleep(15);
+                KeyUp(vKeys);
+            }
 
-                // Press keys in order
+            public static void KeyDown(byte[] vKeys) {
+                if (vKeys == null || vKeys.Length == 0) return;
                 for (int i = 0; i < vKeys.Length; i++) {
                     byte vKey = vKeys[i];
                     uint dwFlags = 0;
@@ -128,10 +174,10 @@ function initPowerShell() {
                     byte scanCode = (byte)MapVirtualKey(vKey, 0);
                     keybd_event(vKey, scanCode, dwFlags, 0);
                 }
+            }
 
-                Thread.Sleep(15);
-
-                // Release keys in reverse order
+            public static void KeyUp(byte[] vKeys) {
+                if (vKeys == null || vKeys.Length == 0) return;
                 for (int i = vKeys.Length - 1; i >= 0; i--) {
                     byte vKey = vKeys[i];
                     uint dwFlags = 2; // KEYEVENTF_KEYUP
@@ -170,14 +216,20 @@ function getVirtualKeyCode(key) {
     return mapping[k] || 0x41; // 기본값 A
 }
 
-function sendKeyLowLevel(keyString) {
+function sendKeyLowLevel(keyString, type = 'press') {
     if (!psProcess) initPowerShell();
     // '+'로 구분된 키들을 배열로 변환 (예: "SHIFT+w+a")
     const keys = keyString.split('+').filter(k => k);
     const vKeys = keys.map(k => getVirtualKeyCode(k));
 
     if (vKeys.length > 0) {
-        psProcess.stdin.write(`[Win32Input]::SendKeys(@(${vKeys.join(',')}))\n`);
+        if (type === 'down') {
+            psProcess.stdin.write(`[Win32Input]::KeyDown(@(${vKeys.join(',')}))\n`);
+        } else if (type === 'up') {
+            psProcess.stdin.write(`[Win32Input]::KeyUp(@(${vKeys.join(',')}))\n`);
+        } else {
+            psProcess.stdin.write(`[Win32Input]::SendKeys(@(${vKeys.join(',')}))\n`);
+        }
     }
 }
 
@@ -209,7 +261,11 @@ function createWindow() {
         mainWindow.webContents.openDevTools();
     }
 
-    mainWindow.on('closed', () => (mainWindow = null));
+    mainWindow.on('closed', () => {
+        console.log('[MAIN] Window closed');
+        cleanupResources();
+        mainWindow = null;
+    });
 }
 
 function startMacro(config) {
@@ -217,7 +273,9 @@ function startMacro(config) {
 
     isMacroRunning = true;
     currentConfig = config;
-    mainWindow.webContents.send('macro-status-changed', true);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('macro-status-changed', true);
+    }
 
     // 오버레이 표시 및 설정 업데이트
     if (overlayWindow) {
@@ -233,10 +291,14 @@ function startMacro(config) {
         }, 1000);
     }
 
-    const interval = config.mode === 'HOLD' ? 50 : config.interval;
+    const interval = config.mode === 'HOLD' ? 30 : config.interval;
 
     macroInterval = setInterval(() => {
-        sendKeyLowLevel(config.targetKey);
+        if (config.mode === 'HOLD') {
+            sendKeyLowLevel(config.targetKey, 'down');
+        } else {
+            sendKeyLowLevel(config.targetKey, 'press');
+        }
     }, interval);
 }
 
@@ -254,21 +316,40 @@ function stopMacro() {
     }
 
     isMacroRunning = false;
-    mainWindow.webContents.send('macro-status-changed', false);
 
-    if (overlayWindow) {
+    // HOLD 모드였다면 눌려있던 키 떼기
+    if (currentConfig && currentConfig.mode === 'HOLD') {
+        sendKeyLowLevel(currentConfig.targetKey, 'up');
+    }
+
+    // 창이 아직 열려있을 때만 상태 변경 알림 전송
+    if (mainWindow && !mainWindow.isDestroyed()) {
+        try {
+            mainWindow.webContents.send('macro-status-changed', false);
+        } catch (e) {
+            console.error('[STOP_MACRO] Failed to send status:', e.message);
+        }
+    }
+
+    if (overlayWindow && !overlayWindow.isDestroyed()) {
         overlayWindow.hide();
     }
 }
 
-ipcMain.handle('update-macro-config', (event, config) => {
-    globalShortcut.unregisterAll();
-    currentConfig = config;
-    // 오버레이가 이미 띄워져 있다면 실시간 업데이트
-    if (overlayWindow) {
-        overlayWindow.webContents.send('update-overlay-config', config);
-    }
+ipcMain.handle('update-macro-config', async (event, config) => {
     try {
+        // 기존 단축키 해제
+        globalShortcut.unregisterAll();
+        currentConfig = config;
+
+        // OS가 단축키 해제를 처리할 시간을 아주 잠시 줌 (레이스 컨디션 방지)
+        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 오버레이가 이미 띄워져 있다면 실시간 업데이트
+        if (overlayWindow && !overlayWindow.isDestroyed()) {
+            overlayWindow.webContents.send('update-overlay-config', config);
+        }
+
         const isRegistered = globalShortcut.register(config.startStopShortcut, () => {
             if (isMacroRunning) {
                 stopMacro();
@@ -278,16 +359,23 @@ ipcMain.handle('update-macro-config', (event, config) => {
         });
 
         if (!isRegistered) {
-            console.error(`[SHORTCUT] Failed to register: ${config.startStopShortcut}`);
-            return { success: false, error: `단축키 등록 실패: ${config.startStopShortcut}. 이미 사용 중이거나 시스템에서 거부되었습니다.` };
+            const errorMsg = `단축키 [${config.startStopShortcut}] 등록 실패. 다른 프로그램(카카오톡, 디스코드, 게임 등)에서 이미 사용 중인지 확인해 주세요.`;
+            console.error(`[SHORTCUT] ${errorMsg}`);
+            return { success: false, error: errorMsg };
         }
 
         console.log(`[SHORTCUT] Successfully registered: ${config.startStopShortcut}`);
         return { success: true };
     } catch (error) {
         console.error(`[SHORTCUT] Error during registration: ${error.message}`);
-        return { success: false, error: error.message };
+        return { success: false, error: `단축키 오류: ${error.message}` };
     }
+});
+
+ipcMain.handle('stop-macro', () => {
+    console.log('[IPC] stop-macro requested from renderer');
+    stopMacro();
+    return { success: true };
 });
 
 app.on('ready', () => {
@@ -297,14 +385,13 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-    if (psProcess) psProcess.kill();
+    cleanupResources();
     if (process.platform !== 'darwin') {
-        app.quit();
+        app.exit(0); // quit() 대신 exit()을 사용하여 즉시 프로세스 종료
     }
 });
 
 app.on('will-quit', () => {
     app.isQuitting = true;
-    if (psProcess) psProcess.kill();
-    globalShortcut.unregisterAll();
+    cleanupResources();
 });

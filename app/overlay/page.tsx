@@ -15,10 +15,20 @@ export default function OverlayPage() {
     useEffect(() => {
         if (window.electronAPI) {
             window.electronAPI.onUpdateOverlayConfig((newConfig: MacroConfig) => {
+                console.log('[OVERLAY] Received config:', newConfig);
                 setConfig(newConfig);
             });
         }
     }, []);
+
+    const handleStopClick = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[OVERLAY] STOP button clicked');
+        if (window.electronAPI) {
+            await window.electronAPI.stopMacro();
+        }
+    };
 
     if (!config) return null;
 
@@ -38,8 +48,7 @@ export default function OverlayPage() {
                     {config.mode === 'PERIODIC' ? (
                         <p>
                             <span className="highlight">'{targetLabel}'</span> 키를
-                            <span className="highlight"> {config.interval.toLocaleString()}ms</span> 마다
-                            주기적으로 입력 중
+                            <span className="highlight"> {config.interval.toLocaleString()}ms</span> 마다 입력 중
                         </p>
                     ) : (
                         <p>
@@ -47,9 +56,19 @@ export default function OverlayPage() {
                             지속 누름 중
                         </p>
                     )}
+                </div>
+
+                <div className="overlay-footer">
                     <p className="sub-text">
-                        멈추려면 <span className="key-hint">{shortcutLabel}</span> 키를 누르세요
+                        <span className="key-hint">{shortcutLabel}</span> 키 또는 아래 버튼을 눌러 중단하세요
                     </p>
+                    <button
+                        className="overlay-stop-btn"
+                        onMouseDown={handleStopClick}
+                        onClick={handleStopClick}
+                    >
+                        STOP (매크로 중단)
+                    </button>
                 </div>
             </div>
         </div>

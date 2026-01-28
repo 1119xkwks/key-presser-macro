@@ -11,6 +11,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
      * @description 메인 프로세스에 매크로 설정을 전달합니다.
      */
     updateMacroConfig: (config) => ipcRenderer.invoke('update-macro-config', config),
+    stopMacro: () => ipcRenderer.invoke('stop-macro'),
 
     /**
      * @function onMacroStatusChanged

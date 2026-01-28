@@ -6,7 +6,8 @@
   "private": true,
   "main": "electron/main.js",
   "scripts": {
-    "dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev": "npm run clean && concurrently -k \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "clean": "powershell -Command \"try { $p = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -First 1; if ($p) { Stop-Process -Id $p -Force -ErrorAction SilentlyContinue } } catch {}; Get-Process | Where-Object { $_.Name -match 'electron' } | Stop-Process -Force -ErrorAction SilentlyContinue; if (Test-Path '.next/dev/lock') { Remove-Item '.next/dev/lock' -Force -ErrorAction SilentlyContinue }\"",
     "next:build": "next build",
     "electron:build": "next build && cross-env CSC_SKIP_SIGN=true electron-builder",
     "electron:start": "electron .",

@@ -186,13 +186,18 @@
 
 /* Overlay 관련 스타일 */
 .overlay-container {
-    @apply w-full h-full p-2 flex items-center justify-center overflow-hidden font-sans select-none;
+    @apply w-full h-full p-2 flex items-center justify-center overflow-hidden font-sans;
+    pointer-events: none;
+    /* 컨테이너 자체는 통과하도록 설정 */
 }
 
 .overlay-content {
-    @apply bg-zinc-900/60 backdrop-blur-md border-2 border-purple-500/50 rounded-2xl p-4 w-full h-full flex flex-col justify-center gap-2 shadow-2xl;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+    @apply bg-zinc-950/90 backdrop-blur-xl border-2 border-purple-500 rounded-2xl p-5 w-full h-full flex flex-col justify-center gap-2 shadow-2xl;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
     animation: border-pulse 2s infinite ease-in-out;
+    pointer-events: auto;
+    /* 컨텐츠 내부(버튼 포함)는 클릭 가능하도록 설정 */
+    user-select: none;
 }
 
 .overlay-status {
@@ -213,7 +218,7 @@
 }
 
 .overlay-title {
-    @apply text-[10px] font-black tracking-widest text-zinc-400 uppercase;
+    @apply text-[10px] font-black tracking-widest text-zinc-100 uppercase;
 }
 
 .overlay-message {
@@ -221,19 +226,30 @@
 }
 
 .overlay-message p {
-    @apply text-sm font-medium text-zinc-200 leading-tight;
+    @apply text-[16px] font-black text-white leading-tight;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-.overlay-message .sub-text {
-    @apply text-[11px] text-zinc-500 font-bold;
+.sub-text {
+    @apply text-[14px] text-zinc-300 font-bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-.overlay-message .highlight {
+.highlight {
     @apply text-purple-400 font-bold;
 }
 
-.overlay-message .key-hint {
-    @apply bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-700 text-zinc-300 mx-1;
+.key-hint {
+    @apply bg-zinc-800 px-2 py-0.5 rounded border border-zinc-600 text-zinc-100 mx-1 font-mono font-bold inline-block;
+}
+
+.overlay-footer {
+    @apply mt-auto pt-2 flex flex-col gap-2;
+}
+
+.overlay-stop-btn {
+    @apply w-full py-4 bg-red-500/10 border border-red-500/40 rounded-2xl text-red-500 text-[13px] font-black uppercase tracking-[0.15em] cursor-pointer transition-all hover:bg-red-500/20 hover:border-red-500/60;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
 }
 
 @keyframes spin {
