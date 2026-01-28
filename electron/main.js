@@ -53,9 +53,13 @@ function cleanupResources() {
 
     if (psProcess) {
         try {
-            psProcess.stdin.end("exit\n"); // stdin 종료
-            psProcess.kill('SIGTERM');
-        } catch (e) { }
+            const { execSync } = require('child_process');
+            // Windows에서 프로세스 트리 전체를 강제 종료 (/T: 트리 종료, /F: 강제 종료)
+            execSync(`taskkill /pid ${psProcess.pid} /t /f`, { stdio: 'ignore' });
+            console.log('[CLEANUP] PowerShell process tree terminated.');
+        } catch (e) {
+            try { psProcess.kill('SIGKILL'); } catch (err) { }
+        }
         psProcess = null;
     }
 
