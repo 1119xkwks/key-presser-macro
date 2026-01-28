@@ -16,11 +16,11 @@ export const useMacro = () => {
 
     // 초기 설정값
     const [config, setConfig] = useState<MacroConfig>({
-        targetKey: 'a',
-        mode: 'PERIODIC',
+        targetKey: 'w',
+        mode: 'HOLD',
         interval: 100,
         repeatCount: 0,
-        startStopShortcut: 'F2',
+        startStopShortcut: 'F3',
     });
 
     /**
