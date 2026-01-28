@@ -68,7 +68,6 @@ export default function Home() {
 
         {/* 설정 구역 */}
         <section className="config-section">
-          {/* 대상 키 설정 */}
           <AutoSelect
             label="Target Key (매크로 실행 키)"
             options={TARGET_KEYS}
@@ -76,6 +75,19 @@ export default function Home() {
             onChange={(val) => handleConfigChange({ targetKey: val })}
             placeholder="키 검색 (예: A, Enter...)"
           />
+
+          {/* Shift 옵션 */}
+          <div className="input-group">
+            <label className="checkbox-group">
+              <input
+                type="checkbox"
+                checked={config.useShift}
+                onChange={(e) => updateConfig({ useShift: e.target.checked })}
+              />
+              <div className="checkbox-custom" />
+              <span className="checkbox-label">Shift 누르고 있기</span>
+            </label>
+          </div>
 
           {/* 모드 선택 */}
           <div className="input-group">

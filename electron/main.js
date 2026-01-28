@@ -222,7 +222,6 @@ function getVirtualKeyCode(key) {
 
 function sendKeyLowLevel(keyString, type = 'press') {
     if (!psProcess) initPowerShell();
-    // '+'로 구분된 키들을 배열로 변환 (예: "SHIFT+w+a")
     const keys = keyString.split('+').filter(k => k);
     const vKeys = keys.map(k => getVirtualKeyCode(k));
 
@@ -272,25 +271,19 @@ function createWindow() {
     });
 }
 
-let loopTimeout = null;
-
 function startMacro(config) {
     if (isMacroRunning) return;
-    console.log('[MACRO] startMacro called');
+    console.log(`[MACRO] startMacro called. Key: ${config.targetKey}, useShift: ${config.useShift}`);
     isMacroRunning = true;
     currentConfig = config;
 
-    // 메인 창에 상태 변경 알림
     if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send('macro-status-changed', true);
     }
 
-    // 오버레이 표시 및 설정 업데이트
     if (overlayWindow && !overlayWindow.isDestroyed()) {
         overlayWindow.webContents.send('update-overlay-config', config);
         overlayWindow.showInactive();
-
-        // 일부 게임이 화면을 뺏는 경우를 대비해 1초마다 최상단 고정 강제
         if (topMostReinforcer) clearInterval(topMostReinforcer);
         topMostReinforcer = setInterval(() => {
             if (overlayWindow && !overlayWindow.isDestroyed()) {
@@ -301,18 +294,17 @@ function startMacro(config) {
 
     const interval = Math.max(20, config.interval);
 
-    if (config.mode === 'HOLD') {
-        console.log(`[MACRO] HOLD mode: initial KeyDown for [${config.targetKey}]`);
-        sendKeyLowLevel(config.targetKey, 'down');
-    }
-
     const macroLoop = () => {
         if (!isMacroRunning) return;
 
-        if (config.mode !== 'HOLD') {
-            sendKeyLowLevel(config.targetKey, 'press');
+        // Shift 옵션 처리
+        const finalKey = config.useShift ? `shift+${config.targetKey}` : config.targetKey;
+
+        if (config.mode === 'HOLD') {
+            // HOLD 모드는 KeyDown을 지속적으로 보내 메모장 등에서 반복 입력이 가능하게 함
+            sendKeyLowLevel(finalKey, 'down');
         } else {
-            sendKeyLowLevel(config.targetKey, 'down');
+            sendKeyLowLevel(finalKey, 'press');
         }
 
         loopTimeout = setTimeout(macroLoop, interval);
@@ -336,14 +328,14 @@ function stopMacro() {
         topMostReinforcer = null;
     }
 
-    isMacroRunning = false;
-
-    // HOLD 모드였다면 눌려있던 키 떼기
-    if (currentConfig && currentConfig.mode === 'HOLD') {
-        sendKeyLowLevel(currentConfig.targetKey, 'up');
+    // HOLD 모드였거나 Shift를 누르고 있었다면 키 떼기
+    if (currentConfig) {
+        const finalKey = currentConfig.useShift ? `shift+${currentConfig.targetKey}` : currentConfig.targetKey;
+        sendKeyLowLevel(finalKey, 'up');
+        // 안전을 위해 Shift 개별 해제 신호도 추가 전송
+        if (currentConfig.useShift) sendKeyLowLevel('shift', 'up');
     }
 
-    // 창이 아직 열려있을 때만 상태 변경 알림 전송
     if (mainWindow && !mainWindow.isDestroyed()) {
         try {
             mainWindow.webContents.send('macro-status-changed', false);
@@ -358,91 +350,64 @@ function stopMacro() {
 }
 
 let lastRegisteredShortcut = null;
+let lastRegisteredUseShift = null;
 
 ipcMain.handle('update-macro-config', async (event, config) => {
     try {
-        console.log(`[IPC] update-macro-config (Shortcut: ${config.startStopShortcut})`);
+        console.log(`[IPC] update-macro-config. Shortcut: ${config.startStopShortcut}, ShiftMode: ${config.useShift}`);
 
-        // 단축키가 변경되지 않았다면 재등록하지 않음 (중요: 매크로 실행 중 끊김 방지)
-        if (lastRegisteredShortcut === config.startStopShortcut) {
-            console.log('[SHORTCUT] Key same as before, skipping re-registration.');
+        // 단축키와 Shift 모드 둘 다 변경되지 않았다면 재등록 스킵
+        if (lastRegisteredShortcut === config.startStopShortcut && lastRegisteredUseShift === config.useShift) {
             currentConfig = config;
-            if (overlayWindow && !overlayWindow.isDestroyed()) {
-                overlayWindow.webContents.send('update-overlay-config', config);
-            }
             return { success: true };
         }
 
-        if (isMacroRunning) {
-            console.log('[IPC] Macro is running, stopping it for shortcut change...');
-            stopMacro();
-        }
-
-        // 새 단축키 등록을 위해 기존 해제
+        if (isMacroRunning) stopMacro();
         globalShortcut.unregisterAll();
+
         currentConfig = config;
         lastRegisteredShortcut = config.startStopShortcut;
+        lastRegisteredUseShift = config.useShift;
 
-        await new Promise(resolve => setTimeout(resolve, 50));
-
-        // 오버레이가 이미 띄워져 있다면 실시간 업데이트
+        // 오버레이 업데이트
         if (overlayWindow && !overlayWindow.isDestroyed()) {
             overlayWindow.webContents.send('update-overlay-config', config);
         }
 
         const triggerMacro = () => {
-            // 중요: 등록 시점의 config가 아닌, 항상 최신 설정인 currentConfig를 참조해야 합니다. (클로저 문제 해결)
             const activeConfig = currentConfig || config;
-            console.log(`[SHORT_DEBUG] Triggered. Current isMacroRunning: ${isMacroRunning}, Key: [${activeConfig.targetKey}]`);
-
-            if (isMacroRunning) {
-                console.log('[SHORT_DEBUG] Attempting to stop...');
-                stopMacro();
-            } else {
-                console.log('[SHORT_DEBUG] Attempting to start...');
-                startMacro(activeConfig);
-            }
+            if (isMacroRunning) stopMacro();
+            else startMacro(activeConfig);
         };
 
-        let isRegistered = false;
-        try {
-            isRegistered = globalShortcut.register(config.startStopShortcut, triggerMacro);
-        } catch (e) {
-            console.warn(`[SHORTCUT] Failed primary registration for ${config.startStopShortcut}:`, e.message);
+        // [근본 해결] 단축키 등록 로직
+        const fallbacks = [config.startStopShortcut];
+
+        // 매크로가 Shift를 누를 예정이거나 대상 키에 Shift가 포함된 경우 폴백 등록
+        const targetLow = config.targetKey.toLowerCase();
+        if (config.useShift || targetLow.includes('shift')) {
+            if (!config.startStopShortcut.startsWith('Shift+')) {
+                fallbacks.push(`Shift+${config.startStopShortcut}`);
+            }
         }
 
-        // 보강 등록 로직: 주 등록 실패 시 또는 기호 조합인 경우 대체 키로 등록 시도
-        if (!isRegistered || config.startStopShortcut.includes('Plus') || config.startStopShortcut.includes('.')) {
-            const fallbacks = [];
-            if (config.startStopShortcut.includes('Plus')) {
-                fallbacks.push('+', 'Shift+=');
-            }
-            if (config.startStopShortcut.includes('.')) {
-                fallbacks.push('>');
-            }
-
-            for (const fallback of fallbacks) {
-                try {
-                    if (globalShortcut.register(fallback, triggerMacro)) {
-                        console.log(`[SHORTCUT] Registered via fallback: ${fallback}`);
-                        isRegistered = true;
-                        break;
-                    }
-                } catch (e) { }
-            }
+        let isRegistered = false;
+        for (const fb of fallbacks) {
+            try {
+                if (globalShortcut.register(fb, triggerMacro)) {
+                    console.log(`[SHORTCUT] Registered: ${fb}`);
+                    isRegistered = true;
+                }
+            } catch (e) { }
         }
 
         if (!isRegistered) {
-            const errorMsg = `단축키 [${config.startStopShortcut}] 등록 실패. 다른 프로그램(카카오톡, 디스코드, 게임 등)에서 이미 사용 중인지 확인해 주세요.`;
-            console.error(`[SHORTCUT] ${errorMsg}`);
-            return { success: false, error: errorMsg };
+            return { success: false, error: "단축키 등록 실패" };
         }
-
-        console.log(`[SHORTCUT] Successfully registered: ${config.startStopShortcut}`);
         return { success: true };
     } catch (error) {
-        console.error(`[SHORTCUT] Error during registration: ${error.message}`);
-        return { success: false, error: `단축키 오류: ${error.message}` };
+        console.error(`[SHORTCUT] Error: ${error.message}`);
+        return { success: false, error: error.message };
     }
 });
 

@@ -21,6 +21,7 @@ export const useMacro = () => {
         interval: 100,
         repeatCount: 0,
         startStopShortcut: 'Delete',
+        useShift: false,
     });
 
     /**

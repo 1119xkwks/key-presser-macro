@@ -131,6 +131,46 @@
     @apply text-center text-[10px] text-zinc-600 uppercase tracking-[0.2em] font-bold;
 }
 
+/* 체크박스 스타일 */
+.checkbox-group {
+    @apply flex items-center gap-3 cursor-pointer select-none py-1;
+}
+
+.checkbox-group input {
+    @apply hidden;
+}
+
+.checkbox-custom {
+    @apply w-6 h-6 rounded-lg border-2 border-zinc-700 bg-zinc-900 flex items-center justify-center transition-all duration-200;
+}
+
+.checkbox-group:hover .checkbox-custom {
+    @apply border-zinc-500 bg-zinc-800;
+}
+
+.checkbox-group input:checked+.checkbox-custom {
+    @apply border-purple-500 bg-purple-600;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.checkbox-custom::after {
+    content: '';
+    @apply w-1.5 h-3 border-r-2 border-b-2 border-white rotate-45 opacity-0 transition-all duration-200;
+    margin-bottom: 2px;
+}
+
+.checkbox-group input:checked+.checkbox-custom::after {
+    @apply opacity-100;
+}
+
+.checkbox-label {
+    @apply text-sm font-bold text-zinc-400 mt-0.5 transition-colors;
+}
+
+.checkbox-group input:checked~.checkbox-label {
+    @apply text-zinc-100;
+}
+
 /* AutoSelect 컴포넌트 스타일 */
 .auto-select-container {
     @apply relative space-y-2;

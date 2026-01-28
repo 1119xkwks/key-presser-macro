@@ -16,6 +16,8 @@ export interface MacroConfig {
     repeatCount: number;
     /** 시작/중지 단축키 (예: 'F5', 'CommandOrControl+S') */
     startStopShortcut: string;
+    /** Shift 키를 함께 누를지 여부 */
+    useShift: boolean;
 }
 
 export interface MacroStatus {
