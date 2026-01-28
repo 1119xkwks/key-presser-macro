@@ -67,6 +67,9 @@ export const TARGET_KEYS: KeyOption[] = [
     { label: 'Shift + D', value: 'shift+d' },
     { label: 'Shift + D + S', value: 'shift+d+s' },
     { label: 'Shift + D + A', value: 'shift+d+a' },
+    // 기호
+    { label: '.', value: '.' },
+    { label: 'Shift + .', value: 'shift+.' },
 ];
 
 /**

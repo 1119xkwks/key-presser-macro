@@ -210,7 +210,7 @@ function getVirtualKeyCode(key) {
         '{HOME}': 0x24, '{END}': 0x23, '{PGUP}': 0x21, '{PGDN}': 0x22,
         '{UP}': 0x26, '{DOWN}': 0x28, '{LEFT}': 0x25, '{RIGHT}': 0x27,
         '{F1}': 0x70, '{F2}': 0x71, '{F3}': 0x72, '{F4}': 0x73, '{F5}': 0x74, '{F6}': 0x75, '{F7}': 0x76, '{F8}': 0x77, '{F9}': 0x78, '{F10}': 0x79, '{F11}': 0x7A, '{F12}': 0x7B,
-        'shift': 0x10, 'ctrl': 0x11, 'alt': 0x12
+        'shift': 0x10, 'ctrl': 0x11, 'alt': 0x12, '.': 0xBE
     };
     const k = key.toLowerCase();
     return mapping[k] || 0x41; // 기본값 A
