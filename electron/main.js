@@ -8,6 +8,7 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const isDev = !app.isPackaged;
+app.isQuitting = false;
 
 // 오버레이 가시성 및 성능을 위한 커맨드 라인 스위치 추가
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
@@ -42,6 +43,36 @@ let topMostReinforcer = null; // 오버레이를 강제로 최상단에 유지�
 let isMacroRunning = false;
 let currentConfig = null;
 let psProcess = null; // PowerShell 프로세스 관리
+
+/**
+ * @function killZombies
+ * @description 앱 실행 시 혹은 강제 종료되지 않은 기존 좀비 프로세스를 정리합니다.
+ */
+function killZombies() {
+    if (process.platform !== 'win32') return;
+    try {
+        const { execSync } = require('child_process');
+        const currentPid = process.pid;
+        const exeName = path.basename(process.execPath);
+
+        // 1. 동일한 이름의 다른 프로세스 종료 (내 PID 제외)
+        // 개발 중일 때는 'electron.exe'일 수 있으므로 주의가 필요하지만, 
+        // 보통 배포된 환경에서의 좀비 제거가 주 목적입니다.
+        if (!isDev) {
+            execSync(`taskkill /f /fi "pid ne ${currentPid}" /im "${exeName}"`, { stdio: 'ignore' });
+        }
+
+        // 2. 혹시 남아있을 수 있는 PowerShell 엔진 좀비 제거 
+        // (단, 모든 powershell을 죽이면 다른 작업에 방해가 되므로 주의가 필요함)
+        // 여기서는 매크로에서 사용한 특정한 형태의 PowerShell만 찾아 죽이는 것은 복잡하므로 
+        // 일단 메인 앱 프로세스 정리에 집중합니다.
+    } catch (e) {
+        // 프로세스가 없거나 권한이 없는 경우 조용히 넘어감
+    }
+}
+
+// 초기 실행 시 좀비 제거
+killZombies();
 
 /**
  * @function cleanupResources
@@ -127,7 +158,6 @@ function initOverlayWindow() {
     });
 
     overlayWindow.on('close', (e) => {
-        // 앱 종료 시가 아니면 창을 닫지 않고 숨기기만 함
         if (!app.isQuitting) {
             e.preventDefault();
             overlayWindow.hide();
@@ -266,7 +296,9 @@ function createWindow() {
 
     mainWindow.on('closed', () => {
         console.log('[MAIN] Window closed');
+        app.isQuitting = true;
         cleanupResources();
+        app.quit();
         mainWindow = null;
     });
 }
@@ -426,8 +458,13 @@ app.on('ready', () => {
 app.on('window-all-closed', () => {
     cleanupResources();
     if (process.platform !== 'darwin') {
-        app.exit(0); // quit() 대신 exit()을 사용하여 즉시 프로세스 종료
+        app.quit();
     }
+});
+
+app.on('before-quit', () => {
+    app.isQuitting = true;
+    cleanupResources();
 });
 
 app.on('will-quit', () => {
