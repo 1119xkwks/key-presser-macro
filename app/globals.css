@@ -160,9 +160,16 @@
 }
 
 .auto-select-dropdown {
-    @apply absolute z-50 w-full mt-2 max-h-60 overflow-y-auto bg-zinc-900 border border-zinc-700/50 rounded-2xl shadow-2xl py-2;
+    @apply absolute left-0 right-0 z-50 mt-2 max-h-48 overflow-y-auto bg-zinc-900 border border-zinc-700/50 rounded-2xl shadow-2xl py-2;
+    top: 100%;
     scrollbar-width: thin;
     scrollbar-color: #3f3f46 #18181b;
+}
+
+.auto-select-dropdown.up {
+    @apply mt-0 mb-2;
+    bottom: 100%;
+    top: auto;
 }
 
 .auto-select-option {

@@ -43,21 +43,28 @@ function initPowerShell() {
             [DllImport("user32.dll")]
             public static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
-            public static void SendKey(byte vKey) {
-                uint dwFlagsDown = 0;
-                uint dwFlagsUp = 2; // KEYEVENTF_KEYUP
+            public static void SendKeys(byte[] vKeys) {
+                if (vKeys == null || vKeys.Length == 0) return;
 
-                // Insert, Delete, Home, End, PageUp, PageDown, 방향키는 Extended Key 플래그 필요
-                if ((vKey >= 0x21 && vKey <= 0x2E)) {
-                    dwFlagsDown |= 1; // KEYEVENTF_EXTENDEDKEY
-                    dwFlagsUp |= 1;
+                // Press keys in order
+                for (int i = 0; i < vKeys.Length; i++) {
+                    byte vKey = vKeys[i];
+                    uint dwFlags = 0;
+                    if ((vKey >= 0x21 && vKey <= 0x2E)) dwFlags |= 1;
+                    byte scanCode = (byte)MapVirtualKey(vKey, 0);
+                    keybd_event(vKey, scanCode, dwFlags, 0);
                 }
 
-                byte scanCode = (byte)MapVirtualKey(vKey, 0);
+                Thread.Sleep(15);
 
-                keybd_event(vKey, scanCode, dwFlagsDown, 0); // Down
-                Thread.Sleep(15); // 다른 매크로 프로그램이 감지할 수 있도록 최소한의 누름 시간 유지
-                keybd_event(vKey, scanCode, dwFlagsUp, 0);   // Up
+                // Release keys in reverse order
+                for (int i = vKeys.Length - 1; i >= 0; i--) {
+                    byte vKey = vKeys[i];
+                    uint dwFlags = 2; // KEYEVENTF_KEYUP
+                    if ((vKey >= 0x21 && vKey <= 0x2E)) dwFlags |= 1;
+                    byte scanCode = (byte)MapVirtualKey(vKey, 0);
+                    keybd_event(vKey, scanCode, dwFlags, 0);
+                }
             }
         }
 "@
@@ -82,15 +89,22 @@ function getVirtualKeyCode(key) {
         '{ENTER}': 0x0D, ' ': 0x20, '{ESC}': 0x1B, '{BS}': 0x08, '{TAB}': 0x09, '{INS}': 0x2D, '{DEL}': 0x2E,
         '{HOME}': 0x24, '{END}': 0x23, '{PGUP}': 0x21, '{PGDN}': 0x22,
         '{UP}': 0x26, '{DOWN}': 0x28, '{LEFT}': 0x25, '{RIGHT}': 0x27,
-        '{F1}': 0x70, '{F2}': 0x71, '{F3}': 0x72, '{F4}': 0x73, '{F5}': 0x74, '{F6}': 0x75, '{F7}': 0x76, '{F8}': 0x77, '{F9}': 0x78, '{F10}': 0x79, '{F11}': 0x7A, '{F12}': 0x7B
+        '{F1}': 0x70, '{F2}': 0x71, '{F3}': 0x72, '{F4}': 0x73, '{F5}': 0x74, '{F6}': 0x75, '{F7}': 0x76, '{F8}': 0x77, '{F9}': 0x78, '{F10}': 0x79, '{F11}': 0x7A, '{F12}': 0x7B,
+        'shift': 0x10, 'ctrl': 0x11, 'alt': 0x12
     };
-    return mapping[key.toLowerCase()] || mapping[key] || 0x41; // 기본값 A
+    const k = key.toLowerCase();
+    return mapping[k] || 0x41; // 기본값 A
 }
 
-function sendKeyLowLevel(key) {
+function sendKeyLowLevel(keyString) {
     if (!psProcess) initPowerShell();
-    const vKey = getVirtualKeyCode(key);
-    psProcess.stdin.write(`[Win32Input]::SendKey(${vKey})\n`);
+    // '+'로 구분된 키들을 배열로 변환 (예: "SHIFT+w+a")
+    const keys = keyString.split('+').filter(k => k);
+    const vKeys = keys.map(k => getVirtualKeyCode(k));
+
+    if (vKeys.length > 0) {
+        psProcess.stdin.write(`[Win32Input]::SendKeys(@(${vKeys.join(',')}))\n`);
+    }
 }
 
 function createWindow() {

@@ -53,6 +53,20 @@ export const TARGET_KEYS: KeyOption[] = [
     { label: 'Num Lock', value: '{NUMLOCK}' },
     { label: 'Scroll Lock', value: '{SCROLLLOCK}' },
     { label: 'Print Screen', value: '{PRTSC}' },
+    // Shift 및 Shift 복합키
+    { label: 'Shift', value: 'shift' },
+    { label: 'Shift + W', value: 'shift+w' },
+    { label: 'Shift + W + A', value: 'shift+w+a' },
+    { label: 'Shift + W + S', value: 'shift+w+s' },
+    { label: 'Shift + W + S + A', value: 'shift+w+s+a' },
+    { label: 'Shift + W + S + D', value: 'shift+w+s+d' },
+    { label: 'Shift + W + D', value: 'shift+w+d' },
+    { label: 'Shift + A', value: 'shift+a' },
+    { label: 'Shift + A + S', value: 'shift+a+s' },
+    { label: 'Shift + A + D', value: 'shift+a+d' },
+    { label: 'Shift + D', value: 'shift+d' },
+    { label: 'Shift + D + S', value: 'shift+d+s' },
+    { label: 'Shift + D + A', value: 'shift+d+a' },
 ];
 
 /**
