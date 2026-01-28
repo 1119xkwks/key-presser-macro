@@ -3,7 +3,7 @@
  * @description 게임 호환성 및 성능 최적화 버전
  */
 
-const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
+const { app, BrowserWindow, ipcMain, globalShortcut, screen } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
 
@@ -15,9 +15,83 @@ if (isDev) {
     process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 }
 
+// 오버레이 가시성 및 성능을 위한 커맨드 라인 스위치 추가
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.commandLine.appendSwitch('disable-background-timer-throttling');
+
 let mainWindow;
+let overlayWindow;
 let macroInterval = null;
+let topMostReinforcer = null; // 오버레이를 강제로 최상단에 유지하기 위한 타이머
 let isMacroRunning = false;
+let currentConfig = null;
+
+/**
+ * @function initOverlayWindow
+ * @description 앱 시작 시 오버레이 창을 미리 생성하여 메모리에 유지합니다.
+ */
+function initOverlayWindow() {
+    if (overlayWindow) return;
+
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const overlayWidth = 350;
+    const overlayHeight = 120;
+
+    overlayWindow = new BrowserWindow({
+        width: overlayWidth,
+        height: overlayHeight,
+        x: width - overlayWidth - 20,
+        y: height - overlayHeight - 20,
+        frame: false,
+        transparent: true,
+        alwaysOnTop: true,
+        focusable: false,
+        skipTaskbar: true,
+        resizable: false,
+        fullscreenable: false,
+        focusable: false,
+        type: 'toolbar', // 가시성 우선순위를 높이기 위해 툴바 타입으로 설정
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: false,
+            contextIsolation: true,
+            backgroundThrottling: false,
+        },
+        show: false,
+        backgroundColor: '#00000000',
+        hasShadow: false,
+    });
+
+    // 가장 높은 고정 순위 설정 (화면 보호기 수준)
+    overlayWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+    overlayWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+
+    // 마우스 이벤트를 무시하여 게임 플레이에 지장이 없도록 설정
+    overlayWindow.setIgnoreMouseEvents(true);
+
+    const overlayUrl = isDev
+        ? 'http://localhost:3000/overlay'
+        : `file://${path.join(__dirname, '../out/overlay.html')}`;
+
+    console.log(`[OVERLAY] Initializing with URL: ${overlayUrl}`);
+    overlayWindow.loadURL(overlayUrl);
+
+    overlayWindow.webContents.on('did-finish-load', () => {
+        console.log('[OVERLAY] did-finish-load');
+    });
+
+    overlayWindow.on('close', (e) => {
+        // 앱 종료 시가 아니면 창을 닫지 않고 숨기기만 함
+        if (!app.isQuitting) {
+            e.preventDefault();
+            overlayWindow.hide();
+        }
+    });
+
+    overlayWindow.on('closed', () => {
+        overlayWindow = null;
+    });
+}
 
 // PowerShell 프로세스 관리
 let psProcess = null;
@@ -142,7 +216,22 @@ function startMacro(config) {
     if (isMacroRunning) return;
 
     isMacroRunning = true;
+    currentConfig = config;
     mainWindow.webContents.send('macro-status-changed', true);
+
+    // 오버레이 표시 및 설정 업데이트
+    if (overlayWindow) {
+        overlayWindow.webContents.send('update-overlay-config', config);
+        overlayWindow.showInactive();
+
+        // 일부 게임이 화면을 뺏는 경우를 대비해 1초마다 최상단 고정 강제
+        if (topMostReinforcer) clearInterval(topMostReinforcer);
+        topMostReinforcer = setInterval(() => {
+            if (overlayWindow && !overlayWindow.isDestroyed()) {
+                overlayWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+            }
+        }, 1000);
+    }
 
     const interval = config.mode === 'HOLD' ? 50 : config.interval;
 
@@ -159,28 +248,51 @@ function stopMacro() {
         macroInterval = null;
     }
 
+    if (topMostReinforcer) {
+        clearInterval(topMostReinforcer);
+        topMostReinforcer = null;
+    }
+
     isMacroRunning = false;
     mainWindow.webContents.send('macro-status-changed', false);
+
+    if (overlayWindow) {
+        overlayWindow.hide();
+    }
 }
 
 ipcMain.handle('update-macro-config', (event, config) => {
     globalShortcut.unregisterAll();
+    currentConfig = config;
+    // 오버레이가 이미 띄워져 있다면 실시간 업데이트
+    if (overlayWindow) {
+        overlayWindow.webContents.send('update-overlay-config', config);
+    }
     try {
-        globalShortcut.register(config.startStopShortcut, () => {
+        const isRegistered = globalShortcut.register(config.startStopShortcut, () => {
             if (isMacroRunning) {
                 stopMacro();
             } else {
                 startMacro(config);
             }
         });
+
+        if (!isRegistered) {
+            console.error(`[SHORTCUT] Failed to register: ${config.startStopShortcut}`);
+            return { success: false, error: `단축키 등록 실패: ${config.startStopShortcut}. 이미 사용 중이거나 시스템에서 거부되었습니다.` };
+        }
+
+        console.log(`[SHORTCUT] Successfully registered: ${config.startStopShortcut}`);
         return { success: true };
     } catch (error) {
+        console.error(`[SHORTCUT] Error during registration: ${error.message}`);
         return { success: false, error: error.message };
     }
 });
 
 app.on('ready', () => {
     initPowerShell();
+    initOverlayWindow();
     createWindow();
 });
 
@@ -192,6 +304,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
+    app.isQuitting = true;
     if (psProcess) psProcess.kill();
     globalShortcut.unregisterAll();
 });

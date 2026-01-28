@@ -17,4 +17,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
      * @description 매크로 실행 상태 변경 이벤트를 수신합니다.
      */
     onMacroStatusChanged: (callback) => ipcRenderer.on('macro-status-changed', (event, value) => callback(value)),
+
+    /**
+     * @function onUpdateOverlayConfig
+     * @description 오버레이 창 전용 설정 업데이트 이벤트를 수신합니다.
+     */
+    onUpdateOverlayConfig: (callback) => ipcRenderer.on('update-overlay-config', (event, config) => callback(config)),
 });

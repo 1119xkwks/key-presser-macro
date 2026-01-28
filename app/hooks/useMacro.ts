@@ -41,9 +41,12 @@ export const useMacro = () => {
         }
     }, [config]);
 
-    // 메인 프로세스로부터 상태 변경 이벤트 수신
+    // 앱 시작 시 및 메인 프로세스 상태 변화 감지
     useEffect(() => {
         if (window.electronAPI) {
+            // 초기 설정 전달 (단축키 등록 등)
+            window.electronAPI.updateMacroConfig(config);
+
             window.electronAPI.onMacroStatusChanged((status: boolean) => {
                 setIsRunning(status);
             });
