@@ -47,11 +47,13 @@ export default function OverlayPage() {
                 <div className="overlay-message">
                     {config.mode === 'PERIODIC' ? (
                         <p>
+                            {config.useShift && <><span className="highlight">'Shift'</span> + </>}
                             <span className="highlight">'{targetLabel}'</span> 키를
                             <span className="highlight"> {config.interval.toLocaleString()}ms</span> 마다 입력 중
                         </p>
                     ) : (
                         <p>
+                            {config.useShift && <><span className="highlight">'Shift'</span> + </>}
                             <span className="highlight">'{targetLabel}'</span> 키를
                             지속 누름 중
                         </p>
