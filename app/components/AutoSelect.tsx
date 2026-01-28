@@ -144,6 +144,21 @@ export const AutoSelect: React.FC<AutoSelectProps> = ({
                     className="auto-select-input"
                     value={isOpen ? searchTerm : selectedOption?.label || ''}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => {
+                        // F1 ~ F12 키를 직접 눌렀을 때의 처리 (검색어로 입력하여 필터링)
+                        if (e.key.match(/^F(1[0-2]|[1-9])$/)) {
+                            e.preventDefault();
+                            setSearchTerm(e.key);
+                            setIsOpen(true);
+                        }
+
+                        // Shift 키를 직접 눌렀을 때의 처리 (검색어로 입력하여 복합키 필터링)
+                        if (e.key === 'Shift') {
+                            e.preventDefault();
+                            setSearchTerm('Shift');
+                            setIsOpen(true);
+                        }
+                    }}
                     onFocus={() => {
                         setIsOpen(true);
                         setSearchTerm('');
