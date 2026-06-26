@@ -404,8 +404,9 @@ function stopMacro() {
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 960,
-        height: 840,
+        height: 720,
         minWidth: 600,
+        minHeight: 100,
         resizable: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
