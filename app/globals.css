@@ -1,234 +1,474 @@
-/* app/globals.css */
+/* app/globals.css — v2 Claude Design */
 @import "tailwindcss";
 
-@theme {
-    --animate-fade-in: fade-in 2s ease-in-out;
-
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+/* ── JetBrains Mono (키보드 전용) ─────────────────────── */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains_Mono/static/JetBrainsMono-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
 }
 
-.container {
-    @apply min-h-screen bg-zinc-950 p-8 text-zinc-100 flex flex-col items-center;
+/* ── 로컬 폰트 (Noto Sans KR 가변 폰트 + 고정 웨이트 폴백) ── */
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('/fonts/Noto_Sans_KR/static/NotoSansKR-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
-.header {
-    @apply mb-12 text-center;
+/* ── 글로벌 기본 ──────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-.header h1 {
-    @apply text-4xl font-black tracking-tighter mb-2 bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent;
-    animation: fade-in 2s ease-in-out;
+html, body {
+    @apply m-0 h-full bg-[#eceef1] text-[#1c2024];
+    font-family: 'Noto Sans KR', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 500;
 }
 
-.header p {
-    @apply text-zinc-500 font-medium;
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+    background: #c7ccd3;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: #aab1ba; background-clip: content-box; }
+
+/* ── 애니메이션 ────────────────────────────────── */
+@keyframes kp-pulse  { 0%, 100% { opacity: 1; } 50% { opacity: 0.28; } }
+@keyframes kp-fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kp-blink  { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes slide-in  { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+/* ════════════════════════════════════════════════
+   메인 앱 레이아웃 (v2)
+════════════════════════════════════════════════ */
+
+/* 앱 래퍼 */
+.v2-app {
+    @apply min-h-screen flex flex-col bg-[#eceef1];
 }
 
-.main-content {
-    @apply w-full max-w-md space-y-6;
+/* ── 상단 헤더 ──────────────────────────────────── */
+.v2-header {
+    @apply flex items-center justify-between flex-wrap gap-3
+           bg-white border-b border-[#e4e7eb]
+           py-2 px-4 min-h-14
+           shrink-0 sticky top-0 z-10;
 }
 
-.status-card {
-    @apply p-4 rounded-2xl border transition-all duration-300 bg-zinc-900 border-zinc-800;
+.v2-header-controls {
+    @apply flex items-center flex-wrap gap-3;
 }
 
-.status-card.running {
-    @apply bg-green-500/10 border-green-500/50;
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+/* 시작/중지 버튼 */
+.v2-run-btn {
+    @apply flex items-center justify-center gap-2
+           min-w-[100px] h-9 px-4
+           border-0 rounded-[10px]
+           font-[inherit] text-sm font-bold text-white
+           bg-[#ea580c] cursor-pointer transition-all duration-[120ms]
+           shadow-[0_3px_10px_rgba(234,88,12,0.3)];
+}
+.v2-run-btn:hover { @apply bg-[#c2410c]; }
+.v2-run-btn.running {
+    @apply bg-[#dc2626] shadow-[0_3px_10px_rgba(220,38,38,0.32)];
+}
+.v2-run-btn.running:hover { @apply bg-[#b91c1c]; }
+.v2-run-btn.disabled {
+    @apply bg-[#cbd0d6] cursor-not-allowed shadow-none;
 }
 
-.status-info {
-    @apply flex items-center justify-between;
+/* 구분선 */
+.v2-divider {
+    @apply w-px h-[28px] bg-[#e8eaee] shrink-0;
 }
 
-.label {
-    @apply text-sm font-bold uppercase tracking-widest text-zinc-400;
+/* 상태 뱃지 */
+.v2-status-badge {
+    @apply flex items-center gap-2
+           py-[4px] px-3 rounded-lg
+           bg-[#f1f3f5] border border-[#e2e6ea] text-[#6b7480];
+}
+.v2-status-badge.running {
+    @apply bg-[#ecfdf5] border-[#a7f3d0] text-[#047857];
 }
 
-.indicator-group {
-    @apply flex items-center gap-2;
+.v2-status-dot {
+    @apply w-2 h-2 rounded-full bg-[#9aa1ab] inline-block shrink-0;
+}
+.v2-status-badge.running .v2-status-dot {
+    @apply bg-[#10b981];
+    animation: kp-blink 1s infinite;
 }
 
-.dot {
-    @apply w-2 h-2 rounded-full bg-red-500;
+.v2-status-text {
+    @apply text-xs font-bold tracking-[0.02em];
 }
 
-.dot.active {
-    @apply bg-green-500 animate-pulse;
+/* 레이블 */
+.v2-label {
+    @apply text-[10px] font-bold tracking-[0.08em] text-[#9aa1ab] whitespace-nowrap;
 }
 
-.text {
-    @apply font-mono text-lg text-red-500;
+/* 모드 토글 */
+.v2-mode-toggle {
+    @apply flex gap-1 bg-[#f1f3f5] rounded-[10px] p-[4px] w-[160px];
+}
+.v2-mode-btn {
+    @apply flex-1 text-center text-xs font-bold rounded-lg
+           cursor-pointer transition-all duration-[120ms] tracking-[0.02em]
+           border-0 font-[inherit] bg-transparent text-[#8a929c];
+    line-height: 28px;
+}
+.v2-mode-btn.active {
+    @apply bg-white text-[#1c2024] shadow-[0_1px_2px_rgba(16,24,40,0.14)];
 }
 
-.text.active {
-    @apply text-green-500;
+/* 인터벌 입력 */
+.v2-interval-input {
+    @apply w-[70px] h-8 border border-[#dfe2e7] rounded-lg
+           px-[10px] font-[inherit] text-sm font-semibold text-[#1c2024]
+           outline-none bg-white;
+}
+.v2-interval-input:focus { @apply border-[#ea580c]; }
+
+.v2-unit {
+    @apply text-xs text-[#8a929c] font-semibold;
 }
 
-.error-box {
-    @apply p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-500 text-sm animate-bounce;
+/* Shift 토글 */
+.v2-shift-toggle {
+    @apply flex items-center gap-2 cursor-pointer select-none;
+}
+.v2-shift-box {
+    @apply flex items-center justify-center
+           w-5 h-5 rounded-md
+           bg-white transition-all duration-[120ms] shrink-0
+           border-[1.5px] border-[#cdd2da];
+}
+.v2-shift-box.checked {
+    @apply bg-[#ea580c] border-[#ea580c];
+}
+.v2-shift-label {
+    @apply text-sm font-semibold text-[#3a424c] whitespace-nowrap;
 }
 
-.config-section {
-    @apply bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 space-y-6;
+/* 설정 버튼 */
+.v2-settings-btn {
+    @apply flex items-center gap-2
+           h-9 px-[14px]
+           border border-[#e0e3e8] bg-white rounded-[10px]
+           cursor-pointer font-[inherit] text-sm font-semibold text-[#3a424c]
+           shrink-0 transition-all duration-[120ms];
+}
+.v2-settings-btn:hover { @apply bg-[#f5f6f8] border-[#d2d6dd]; }
+
+/* ── 메인 스크롤 영역 ──────────────────────────── */
+.v2-main {
+    @apply flex flex-col gap-3
+           py-[14px] px-4
+           flex-1 max-w-[960px] w-full mx-auto;
 }
 
-.input-group {
-    @apply space-y-2;
+/* 충돌/경고 알림 */
+.v2-warning {
+    @apply flex items-center gap-2
+           py-[10px] px-3
+           bg-[#fef2f2] border border-[#fecaca] rounded-[10px];
+    animation: kp-fade 0.2s;
+}
+.v2-warning svg { @apply shrink-0; }
+.v2-warning span {
+    @apply text-sm font-semibold text-[#b91c1c];
 }
 
-.input-group label {
-    @apply text-xs font-bold text-zinc-500 uppercase;
+/* 키보드 카드 */
+.v2-keyboard-card {
+    @apply bg-white border border-[#e4e7eb] rounded-[14px]
+           pt-3 px-[14px] pb-[14px]
+           shadow-[0_1px_3px_rgba(16,24,40,0.05)];
 }
 
-.input-group input,
-.input-group select {
-    @apply w-full bg-zinc-900 border border-zinc-700/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all font-mono text-zinc-100 shadow-inner;
+.v2-keyboard-card-header {
+    @apply flex items-center flex-wrap gap-2 mb-2;
 }
 
-.input-group select {
-    @apply appearance-none cursor-pointer hover:border-zinc-500 hover:bg-zinc-800/80;
-    /* 커스텀 화살표 아이콘 */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1.25rem center;
-    background-size: 1.2em;
+.v2-card-label {
+    @apply text-[10px] font-bold tracking-[0.08em] whitespace-nowrap;
+}
+.v2-card-label.target   { @apply text-[#ea580c]; }
+.v2-card-label.shortcut { @apply text-[#2563eb]; }
+
+.v2-key-badge {
+    @apply inline-flex items-center justify-center
+           min-w-[36px] h-[28px] px-[10px]
+           rounded-lg text-sm font-bold whitespace-nowrap;
+}
+.v2-key-badge.target {
+    @apply bg-[#fff7ed] text-[#c2410c] border-[1.5px] border-[#fdba74];
+}
+.v2-key-badge.shortcut {
+    @apply bg-[#eff6ff] text-[#1d4ed8] border-[1.5px] border-[#93c5fd];
 }
 
-/* 셀렉트 박스 옵션 배경색 보정 */
-.input-group select option {
-    @apply bg-zinc-900 text-zinc-100;
+.v2-shift-hint {
+    @apply text-xs font-semibold text-[#ea580c] ml-0.5;
 }
 
-.mode-toggle {
-    @apply grid grid-cols-2 gap-3;
+.v2-card-hint {
+    @apply ml-auto text-xs text-[#9aa1ab] font-medium whitespace-nowrap;
 }
 
-.mode-toggle button {
-    @apply py-4 rounded-2xl text-sm font-bold transition-all bg-zinc-900 border border-zinc-800 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300;
+/* SVG 키보드 컨테이너 */
+.keyboard-svg-host {
+    @apply w-full pt-1;
+}
+.keyboard-svg-host svg {
+    @apply w-full h-auto block select-none;
 }
 
-.mode-toggle button.active {
-    @apply bg-linear-to-br from-purple-600 to-pink-600 text-white border-transparent;
-    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+/* ════════════════════════════════════════════════
+   설정 패널 (사이드바)
+════════════════════════════════════════════════ */
+
+.settings-backdrop {
+    @apply fixed inset-0 z-40 bg-[rgba(17,24,39,0.38)]
+           opacity-0 pointer-events-none transition-opacity duration-[280ms];
+}
+.settings-backdrop.visible {
+    @apply opacity-100 pointer-events-auto;
 }
 
-.shortcut-input {
-    @apply w-full bg-zinc-900 border-2 border-dashed border-zinc-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all font-mono text-center;
+.settings-panel {
+    @apply fixed top-0 right-0 bottom-0 z-50
+           w-[372px] bg-[#fafbfc] border-l border-[#e4e7eb]
+           flex flex-col translate-x-full;
+    box-shadow: -12px 0 32px rgba(17, 24, 39, 0.16);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.settings-panel.open { @apply translate-x-0; }
+
+.settings-panel-header {
+    @apply flex items-center justify-between
+           h-14 px-[18px]
+           border-b border-[#e8eaee] bg-white shrink-0;
 }
 
-.footer-info {
-    @apply text-center text-[10px] text-zinc-600 uppercase tracking-[0.2em] font-bold;
+.settings-panel-title {
+    @apply text-base font-bold text-[#1c2024];
 }
 
-/* 체크박스 스타일 */
-.checkbox-group {
-    @apply flex items-center gap-3 cursor-pointer select-none py-1;
+.settings-close-btn {
+    @apply flex items-center justify-center
+           w-8 h-8 border-0 bg-transparent rounded-lg
+           cursor-pointer text-[#5b6470] transition-colors duration-[120ms];
+}
+.settings-close-btn:hover { @apply bg-[#f1f3f5]; }
+
+.settings-panel-body {
+    @apply flex-1 overflow-y-auto py-5 px-[18px] flex flex-col gap-6;
 }
 
-.checkbox-group input {
-    @apply hidden;
+.settings-section {
+    @apply flex flex-col gap-3;
 }
 
-.checkbox-custom {
-    @apply w-6 h-6 rounded-lg border-2 border-zinc-700 bg-zinc-900 flex items-center justify-center transition-all duration-200;
+.settings-section-label {
+    @apply text-[10px] font-bold tracking-[0.07em] text-[#9aa1ab] uppercase;
 }
 
-.checkbox-group:hover .checkbox-custom {
-    @apply border-zinc-500 bg-zinc-800;
+.settings-section-desc {
+    @apply m-0 text-xs leading-relaxed text-[#6b7480];
 }
 
-.checkbox-group input:checked+.checkbox-custom {
-    @apply border-purple-500 bg-purple-600;
-    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+.settings-divider { @apply h-px bg-[#e8eaee]; }
+
+/* 파일 선택 버튼 */
+.settings-file-btn {
+    @apply flex items-center justify-center gap-2
+           h-10 bg-white rounded-[10px]
+           cursor-pointer font-[inherit] text-sm font-semibold text-[#3a424c]
+           transition-all duration-[120ms]
+           border-[1.5px] border-dashed border-[#cdd2da];
+}
+.settings-file-btn:hover {
+    @apply bg-[#fff8f1] text-[#c2410c] border-[#fb923c];
 }
 
-.checkbox-custom::after {
-    content: '';
-    @apply w-1.5 h-3 border-r-2 border-b-2 border-white rotate-45 opacity-0 transition-all duration-200;
-    margin-bottom: 2px;
+/* 파일 상태 표시 */
+.settings-file-status {
+    @apply flex flex-col rounded-[10px] py-[10px] px-3 gap-0.5;
+    animation: kp-fade 0.2s;
 }
+.settings-file-status.valid   { @apply bg-[#ecfdf5] border border-[#a7f3d0] text-[#047857]; }
+.settings-file-status.invalid { @apply bg-[#fef2f2] border border-[#fecaca] text-[#b91c1c]; }
 
-.checkbox-group input:checked+.checkbox-custom::after {
-    @apply opacity-100;
+.settings-file-name { @apply text-xs font-semibold break-all; }
+.settings-file-msg  { @apply text-xs; }
+
+/* 적용 버튼 */
+.settings-apply-btn {
+    @apply h-10 border-0 rounded-[10px]
+           font-[inherit] text-sm font-bold
+           bg-[#eceef1] text-[#aab0b8] cursor-not-allowed
+           transition-all duration-[120ms];
 }
-
-.checkbox-label {
-    @apply text-sm font-bold text-zinc-400 mt-0.5 transition-colors;
+.settings-apply-btn.active {
+    @apply bg-[#ea580c] text-white cursor-pointer
+           shadow-[0_3px_10px_rgba(234,88,12,0.28)];
 }
+.settings-apply-btn.active:hover { @apply bg-[#c2410c]; }
 
-.checkbox-group input:checked~.checkbox-label {
-    @apply text-zinc-100;
+/* 내려받기 버튼 */
+.settings-export-btn {
+    @apply flex items-center justify-center gap-2
+           h-10 border border-[#e0e3e8] bg-white rounded-[10px]
+           cursor-pointer font-[inherit] text-sm font-semibold text-[#3a424c]
+           transition-all duration-[120ms];
 }
+.settings-export-btn:hover { @apply bg-[#f5f6f8] border-[#d2d6dd]; }
 
-/* AutoSelect 컴포넌트 스타일 */
-.auto-select-container {
-    @apply relative space-y-2;
+/* 초기화 버튼 */
+.settings-reset-btn {
+    @apply flex items-center justify-center gap-2
+           h-10 border border-[#fecaca] bg-white rounded-[10px]
+           cursor-pointer font-[inherit] text-sm font-semibold text-[#dc2626]
+           transition-all duration-[120ms];
 }
+.settings-reset-btn:hover { @apply bg-[#fef2f2] border-[#fca5a5]; }
 
-.auto-select-label {
-    @apply text-xs font-bold text-zinc-500 uppercase;
-}
+/* ════════════════════════════════════════════════
+   오버레이 (v1 유지 — 변경 금지)
+════════════════════════════════════════════════ */
 
-.auto-select-input-wrapper {
-    @apply relative;
-}
-
-.auto-select-input {
-    @apply w-full bg-zinc-900 border border-zinc-700/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all font-mono text-zinc-100 shadow-inner cursor-text;
-}
-
-.auto-select-arrow {
-    @apply absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 transition-transform duration-200 pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.auto-select-arrow.open {
-    @apply rotate-180;
-}
-
-.auto-select-dropdown {
-    @apply absolute left-0 right-0 z-50 mt-2 max-h-48 overflow-y-auto bg-zinc-900 border border-zinc-700/50 rounded-2xl shadow-2xl py-2;
-    top: 100%;
-    scrollbar-width: thin;
-    scrollbar-color: #3f3f46 #18181b;
-}
-
-.auto-select-dropdown.up {
-    @apply mt-0 mb-2;
-    bottom: 100%;
-    top: auto;
-}
-
-.auto-select-option {
-    @apply px-5 py-3 cursor-pointer transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white;
-}
-
-.auto-select-option.selected {
-    @apply bg-purple-600/20 text-purple-400 font-bold;
-}
-
-.auto-select-no-results {
-    @apply px-5 py-3 text-zinc-500 text-sm italic;
-}
-
-/* Overlay 관련 스타일 */
 .overlay-container {
     @apply w-full h-full p-2 flex items-center justify-center overflow-hidden font-sans;
     pointer-events: none;
-    /* 컨테이너 자체는 통과하도록 설정 */
 }
 
 .overlay-content {
@@ -236,82 +476,51 @@
     box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
     animation: border-pulse 2s infinite ease-in-out;
     pointer-events: auto;
-    /* 컨텐츠 내부(버튼 포함)는 클릭 가능하도록 설정 */
     user-select: none;
 }
 
-.overlay-status {
-    @apply flex items-center gap-2;
-}
+.overlay-status { @apply flex items-center gap-2; }
 
 .overlay-spinner {
     @apply w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full;
     animation: spin 1s linear infinite;
 }
 
-.overlay-dot {
-    @apply w-2 h-2 rounded-full bg-red-500;
-}
+.overlay-dot    { @apply w-2 h-2 rounded-full bg-red-500; }
+.overlay-dot.active { @apply bg-green-500 animate-pulse; }
 
-.overlay-dot.active {
-    @apply bg-green-500 animate-pulse;
-}
+.overlay-title { @apply text-[10px] font-black tracking-widest text-zinc-100 uppercase; }
 
-.overlay-title {
-    @apply text-[10px] font-black tracking-widest text-zinc-100 uppercase;
-}
-
-.overlay-message {
-    @apply space-y-1;
-}
-
+.overlay-message { @apply space-y-1; }
 .overlay-message p {
-    @apply text-[16px] font-black text-white leading-tight;
+    @apply text-base font-black text-white leading-tight;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .sub-text {
-    @apply text-[14px] text-zinc-300 font-bold;
+    @apply text-sm text-zinc-300 font-bold;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-.highlight {
-    @apply text-purple-400 font-bold;
-}
+.highlight { @apply text-purple-400 font-bold; }
 
 .key-hint {
     @apply bg-zinc-800 px-2 py-0.5 rounded border border-zinc-600 text-zinc-100 mx-1 font-mono font-bold inline-block;
 }
 
-.overlay-footer {
-    @apply mt-auto pt-2 flex flex-col gap-2;
-}
+.overlay-footer { @apply mt-auto pt-2 flex flex-col gap-2; }
 
 .overlay-stop-btn {
-    @apply w-full py-4 bg-red-500/10 border border-red-500/40 rounded-2xl text-red-500 text-[13px] font-black uppercase tracking-[0.15em] cursor-pointer transition-all hover:bg-red-500/20 hover:border-red-500/60;
+    @apply w-full py-4 bg-red-500/10 border border-red-500/40 rounded-2xl text-red-500 text-sm font-black uppercase tracking-[0.15em] cursor-pointer transition-all hover:bg-red-500/20 hover:border-red-500/60;
     text-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
 @keyframes border-pulse {
-
-    0%,
-    100% {
-        border-color: rgba(168, 85, 247, 0.5);
-        box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
-    }
-
-    50% {
-        border-color: rgba(236, 72, 153, 0.8);
-        box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
-    }
+    0%, 100% { border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+    50%       { border-color: rgba(236, 72, 153, 0.8); box-shadow: 0 0 30px rgba(236, 72, 153, 0.4); }
 }

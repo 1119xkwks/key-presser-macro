@@ -1,0 +1,1019 @@
+<?xml version="1.0"?>
+
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:ns1="http://sozi.baierouge.fr" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg2403" xml:space="preserve" viewBox="0 0 1488.2 500" version="1.0">
+
+
+  <namedview id="base" bordercolor="#666666" guidetolerance="10.0" pagecolor="#ffffff" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" showgrid="false" showguides="true">
+    <guide id="guide3777" position="544.05722,450.63325" orientation="0,1"></guide>
+    <guide id="guide4553" position="70.342752,525.37243" orientation="1,0"></guide>
+    <guide id="guide4555" position="107.71234,362.70481" orientation="0,1"></guide>
+    <guide id="guide4557" position="111.00966,304.45222" orientation="0,1"></guide>
+    <guide id="guide4559" position="875.88744,242.8703" orientation="0,1"></guide>
+    <guide id="guide4561" position="115.40608,433.04757" orientation="0,1"></guide>
+    <guide id="guide4563" position="98.919495,416.56098" orientation="0,1"></guide>
+    <guide id="guide4565" position="186.84793,346.21823" orientation="0,1"></guide>
+    <guide id="guide4567" position="138.48729,329.73165" orientation="0,1"></guide>
+    <guide id="guide4569" position="135.18998,286.86653" orientation="0,1"></guide>
+    <guide id="guide4571" position="134.09087,270.37995" orientation="0,1"></guide>
+    <guide id="guide4573" position="171.46046,226.41573" orientation="0,1"></guide>
+    <guide id="guide4575" position="145.08193,211.02826" orientation="0,1"></guide>
+    <guide id="guide4577" position="205.53273,183.55062" orientation="0,1"></guide>
+    <guide id="guide4579" position="209.92915,168.16314" orientation="0,1"></guide>
+    <guide id="guide4581" position="107.71234,152.77566" orientation="0,1"></guide>
+    <guide id="guide4583" position="180.2533,126.39713" orientation="0,1"></guide>
+    <guide id="guide4585" position="154.97388,111.00966" orientation="0,1"></guide>
+    <guide id="guide4587" position="191.24436,94.523073" orientation="0,1"></guide>
+  </namedview>
+  <g id="g2412" transform="matrix(1.25 0 0 -1.25 0 1052.4)">
+
+
+
+
+<path id="path2426" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m780.52 768.19h144.2v49.703h-144.2v-49.703z"></path>
+
+
+
+
+<path id="path2428" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m760.63 768.19v49.703h-191.44v-49.703h186.5 4.9422z"></path>
+
+
+
+
+<path id="path2430" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m549.3 768.19v49.703h-191.44v-49.703h180.13 11.308z"></path>
+
+
+
+
+<path id="path2432" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m337.97 768.19v49.703h-191.44v-49.703h173.76 17.673z"></path>
+
+
+
+
+<path data-key="Escape" id="path2434" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m99.298 768.19v49.703h-49.725v-49.703h24.863 24.862z"></path>
+
+
+
+
+<path data-key="Escape" id="path2764" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m52.061 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F2" id="path2772" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m196.26 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F3" id="path2774" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m243.5 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F4" id="path2776" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m290.74 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F1" id="path2778" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m149.02 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F6" id="path2788" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m407.59 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F7" id="path2790" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m454.83 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F8" id="path2792" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m502.06 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F5" id="path2794" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m360.35 770.67h44.751v44.733h-44.751v-44.733z"></path>
+
+
+
+
+<path data-key="F9" id="path2800" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m571.68 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F12" id="path2802" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m713.39 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="F11" id="path2804" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m666.15 770.67h44.75v44.733h-44.75v-44.733z"></path>
+
+
+
+
+<path data-key="F10" id="path2806" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m618.92 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="PrintScreen" id="path2820" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m783 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="ScrollLock" id="path2822" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m830.24 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="Pause" id="path2824" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path id="path2826" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m944.61 509.74h191.44v238.57h-191.44v-238.57z"></path>
+
+
+
+
+<path id="path2828" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m924.72 651.39v96.92h-144.2v-96.92h144.2z"></path>
+
+
+
+
+<path id="path2830" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m924.72 509.74v49.703h-47.239v47.217h-49.724v-47.217h-47.238v-49.703h144.2z"></path>
+
+
+
+
+<path id="path2832" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m443.83 509.74h316.8"></path>
+
+
+
+
+<path id="path2834" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m760.63 748.31h-711.05v-238.57h355.53"></path>
+
+
+
+
+<path id="path2836" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m405.1 509.74h38.726"></path>
+
+
+
+
+<path id="path2838" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m760.63 748.31v-238.57"></path>
+
+
+
+
+<path data-key="Numpad0" id="path2840" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 512.22h91.989v44.732h-91.989v-44.732z"></path>
+
+
+
+
+<path data-key="NumpadEnter" id="path2842" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1088.8 512.22h44.752v91.95h-44.752v-91.95z"></path>
+
+
+
+
+<path data-key="NumpadAdd" id="path2844" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1088.8 606.66h44.752v91.95h-44.752v-91.95z"></path>
+
+
+
+
+<path data-key="NumpadDecimal" id="path2846" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 512.22h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad1" id="path2848" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad2" id="path2850" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad3" id="path2852" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad6" id="path2854" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="Numpad5" id="path2856" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="Numpad4" id="path2858" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="NumpadSubtract" id="path2860" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1088.8 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="NumLock" id="path2862" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="NumpadDivide" id="path2864" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="NumpadMultiply" id="path2866" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad9" id="path2868" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad8" id="path2870" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Numpad7" id="path2872" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Delete" id="path2874" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m783 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="End" id="path2876" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m830.24 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="PageDown" id="path2878" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="PageUp" id="path2880" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Home" id="path2882" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m830.24 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Insert" id="path2884" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m783 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="ArrowUp" id="path2886" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m830.24 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="ArrowLeft" id="path2888" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m783 512.22h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="ArrowDown" id="path2890" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m830.24 512.22h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="ArrowRight" id="path2892" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 512.22h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Space" id="path2894" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m223.61 512.22h305.8v44.732h-305.8v-44.732z"></path>
+
+
+
+
+<path data-key="AltRight" id="path2896" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m531.9 556.95h54.697v-44.732h-54.697v44.732z"></path>
+
+
+
+
+<path id="path2898" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m589.08 556.95h54.696v-44.732h-54.696v44.732z"></path>
+
+
+
+
+<path id="path2900" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m646.26 556.95h54.696v-44.732h-54.696v44.732z"></path>
+
+
+
+
+<path data-key="ControlRight" id="path2902" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m703.45 556.95h54.696v-44.732h-54.696v44.732z"></path>
+
+
+
+
+<path data-key="AltLeft" id="path2904" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m166.43 556.95h54.696v-44.732h-54.696v44.732z"></path>
+
+
+
+
+<path data-key="MetaLeft" id="path2906" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m109.24 556.95h54.697v-44.732h-54.697v44.732z"></path>
+
+
+
+
+<path data-key="ControlLeft" id="path2908" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m52.061 556.95h54.696v-44.732h-54.696v44.732z"></path>
+
+
+
+
+<path data-key="ShiftRight" id="path2910" style="stroke:#231f20;stroke-width:1.2824;fill:none" d="m757.99 559.59h-125.27v44.435h125.27v-44.435z"></path>
+
+
+
+
+<path data-key="ShiftLeft" id="path2914" style="stroke:#231f20;stroke-width:1.2909;fill:none" d="m52.308 604.08h105.51v-44.704h-105.51v44.704z"></path>
+
+
+
+
+<path data-key="CapsLock" id="path2916" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m52.061 651.39v-44.733h79.558v44.733h-79.558z"></path>
+
+
+
+
+<path data-key="Tab" id="path2918" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m52.061 698.61h67.127v-44.732h-67.127v44.732z"></path>
+
+
+
+
+<path data-key="KeyZ" id="path2920" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m160.44 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Slash" id="path2926" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m585.58 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Period" id="path2928" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m538.35 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Comma" id="path2930" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m491.11 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyM" id="path2932" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m443.87 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyN" id="path2934" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m396.63 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyB" id="path2936" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m349.39 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyV" id="path2938" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m302.16 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyC" id="path2940" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m254.92 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyX" id="path2942" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m207.68 559.44h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Enter" id="path2944" style="stroke:#231f20;stroke-width:1.2887;fill:none" d="m653.74 606.68h103.93v44.383h-103.93v-44.383z"></path>
+
+
+
+
+<path data-key="Quote" id="path2946" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m606.48 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="Semicolon" id="path2948" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m559.25 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyL" id="path2950" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m512.01 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyK" id="path2952" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m464.77 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyJ" id="path2954" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m417.53 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyH" id="path2956" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m370.29 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyG" id="path2958" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m323.06 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyF" id="path2960" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m275.82 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyD" id="path2962" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m228.58 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyS" id="path2964" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m181.34 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="KeyA" id="path2966" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m134.1 606.66h44.752v44.733h-44.752v-44.733z"></path>
+
+
+
+
+<path data-key="BracketRight" id="path2968" style="stroke:#231f20;stroke-width:1.2824;fill:none" d="m641.29 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="BracketLeft" id="path2970" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m594.05 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyP" id="path2972" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m546.81 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyO" id="path2974" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m499.58 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyI" id="path2976" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m452.34 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyU" id="path2978" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m405.1 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyY" id="path2980" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m357.86 653.87h44.751v44.732h-44.751v-44.732z"></path>
+
+
+
+
+<path data-key="KeyT" id="path2982" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m310.63 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyR" id="path2984" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m263.39 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyE" id="path2986" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m216.15 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyW" id="path2988" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m168.91 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="KeyQ" id="path2990" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m121.67 653.87h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Backspace" id="path2992" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m666.15 701.09h91.989v44.732h-91.989v-44.732z"></path>
+
+
+
+
+<path data-key="Equal" id="path2994" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m618.92 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Minus" id="path2996" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m571.68 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit0" id="path2998" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m524.44 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit9" id="path3000" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m477.2 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit8" id="path3002" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m429.96 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit7" id="path3004" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m382.72 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit6" id="path3006" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m335.49 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit5" id="path3008" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m288.25 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit4" id="path3010" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m241.01 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit3" id="path3012" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m193.77 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit2" id="path3014" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m146.54 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Digit1" id="path3016" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m99.298 701.09h44.752v44.732h-44.752v-44.732z"></path>
+
+
+
+
+<path data-key="Backquote" id="path3018" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m52.061 701.09h44.752v44.732h-44.752v-44.732z"></path><text id="text4549" style="font-size:40px;font-family:Bitstream Vera Sans;fill:#000000" xml:space="preserve" transform="matrix(.8 0 0 -.8 0 841.89)" y="46.069431" x="70.342751"></text>
+<text id="text4789" style="font-size:12px;font-family:Bitstream Vera Sans;fill:#000000;line-height:100%;font-weight:bold" xml:space="preserve" transform="matrix(.8 0 0 -.8 0 841.89)" y="195.73209" x="513.71924"></text>
+
+
+
+
+
+<path data-key="Backslash" id="path4817" style="stroke:#231f20;stroke-width:1.2824;fill:none" d="m688.82 654.02h68.879v44.429h-68.879v-44.429z"></path>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-1-1-5" data-key="F4" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="295.93591" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-02-2-7" data-key="F3" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="248.45456" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-4-2-0" data-key="F2" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="200.53357" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-47-2-1" data-key="F1" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="153.0522" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-47-2-1-9" data-key="Escape" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="56.2742" xml:space="preserve"></text>
+</g>
+  <g id="layer1" style="opacity:.5"><text id="text4609" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="70.342751"><tspan id="tspan4615" x="70.342751" y="49.366745">Esc</tspan></text>
+<text id="text4617" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="190.14525"><tspan id="tspan4619" x="190.14525" y="49.366745">F1</tspan></text>
+<text id="text4621" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366749" x="249.49695"><tspan id="tspan4623" x="249.49695" y="49.366749">F2</tspan></text>
+<text id="text4625" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-802.43408" x="247.51855"><tspan id="tspan4627" x="247.51855" y="-802.43408">F3</tspan></text>
+<text id="text4629" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.091969" x="368.74988"><tspan id="tspan4631" x="368.74988" y="49.091969">F4</tspan></text>
+<text id="text4633" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366749" x="457.22787"><tspan id="tspan4635" x="457.22787" y="49.366749">F5</tspan></text>
+<text id="text4637" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366749" x="515.20569"><tspan id="tspan4639" x="515.20569" y="49.366749">F6</tspan></text>
+<text id="text4641" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366749" x="574.00787"><tspan id="tspan4643" x="574.00787" y="49.366749">F7</tspan></text>
+<text id="text4645" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="633.35956"><tspan id="tspan4647" x="633.35956" y="49.366745">F8</tspan></text>
+<text id="text4649" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.091969" x="721.56274"><tspan id="tspan4651" x="721.56274" y="49.091969">F9</tspan></text>
+<text id="text4653" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.641521" x="780.91449"><tspan id="tspan4655" x="780.91449" y="49.641521">F10</tspan></text>
+<text id="text4657" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="838.89227"><tspan id="tspan4659" x="838.89227" y="49.366745">F11</tspan></text>
+<text id="text4661" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="898.24396"><tspan id="tspan4663" x="898.24396" y="49.366745">F12</tspan></text>
+<text id="text4665" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="983.42645"><tspan id="tspan4667" x="983.42645" y="49.366745">PrtSc</tspan></text>
+<text id="text4669" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="1045.6428"><tspan id="tspan4671" x="1045.6428" y="49.366745">ScrLk</tspan></text>
+<text id="text4673" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="1103.9485"><tspan id="tspan4675" x="1103.9485" y="49.366745">Pause</tspan></text>
+<text id="text4677" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="70.617531"><tspan id="tspan4679" x="70.617531" y="137.2952">~</tspan></text>
+<text id="text4681" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="131.06833"><tspan id="tspan4683" x="131.06833" y="137.2952">!</tspan></text>
+<text id="text4685" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="189.5957"><tspan id="tspan4687" x="189.5957" y="137.2952">@</tspan></text>
+<text id="text4689" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.56996" x="249.49695"><tspan id="tspan4691" x="249.49695" y="137.56996">#</tspan></text>
+<text id="text4693" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="308.02432"><tspan id="tspan4695" x="308.02432" y="137.2952">$</tspan></text>
+<text id="text4697" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="366.55167"><tspan id="tspan4699" x="366.55167" y="137.2952">%</tspan></text>
+<text id="text4701" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="425.07904"><tspan id="tspan4703" x="425.07904" y="137.2952">^</tspan></text>
+<text id="text4705" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.56996" x="485.52985"><tspan id="tspan4707" x="485.52985" y="137.56996">&amp;</tspan></text>
+<text id="text4709" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="544.88153"><tspan id="tspan4711" x="544.88153" y="137.2952">*</tspan></text>
+<text id="text4713" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="602.85938"><tspan id="tspan4715" x="602.85938" y="137.2952">(</tspan></text>
+<text id="text4717" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="662.76062"><tspan id="tspan4719" x="662.76062" y="137.2952">)</tspan></text>
+<text id="text4721" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="721.28796"><tspan id="tspan4723" x="721.28796" dy="-0.77718496 0.77718496 0 0 0 0 0 0 -2.3315549" y="137.2952">_</tspan></text>
+<text id="text4725" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="780.09015"><tspan id="tspan4727" x="780.09015" y="137.2952">+</tspan></text>
+<text id="text4729" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="839.16705"><tspan id="tspan4731" x="839.16705" y="137.2952">Backspace</tspan></text>
+<text id="text4733" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.56995" x="985.79474"><tspan id="tspan4735" x="985.79474" y="137.56995">Insert</tspan></text>
+<text id="text4737" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.29521" x="1044.8866"><tspan id="tspan4739" x="1044.8866" y="137.29521">Home</tspan></text>
+<text id="text4741" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.0204" x="1097.6007"><tspan id="tspan4743" x="1097.6007" y="137.0204">PageUp</tspan></text>
+<text id="text4745" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="1191.4304"><tspan id="tspan4747" x="1191.4304" y="137.2952">Num</tspan></text>
+<text id="text4749" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-733.21399" x="1000.4059"><tspan id="tspan4751" x="1000.4059" y="-733.21399">/</tspan></text>
+<text id="text4753" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="1309.3094"><tspan id="tspan4755" x="1309.3094" y="137.2952">*</tspan></text>
+<text id="text4757" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="137.2952" x="1368.6611"><tspan id="tspan4759" x="1368.6611" y="137.2952">-</tspan></text>
+<text id="text4761" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.34351" x="70.335236"><tspan id="tspan4763" x="70.335236" y="195.34351">Tab</tspan></text>
+<text id="text4765" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="158.93433"><tspan id="tspan4767" x="158.93433" y="195.73209">Q</tspan></text>
+<text id="text4769" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="218.82538"><tspan id="tspan4771" x="218.82538" y="195.73209">W</tspan></text>
+<text id="text4773" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="277.45502"><tspan id="tspan4775" x="277.45502" y="195.73209">E</tspan></text>
+<text id="text4777" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="337.68686"><tspan id="tspan4779" x="337.68686" y="195.73209">R</tspan></text>
+<text id="text4781" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="196.12068" x="396.36432"><tspan id="tspan4783" x="396.36432" y="196.12068">T</tspan></text>
+<text id="text4785" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="453.48743"><tspan id="tspan4787" x="453.48743" y="195.73209">Y</tspan></text>
+<text id="text4793" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.34351" x="512.55347"><tspan id="tspan4795" x="512.55347" y="195.34351">U</tspan></text>
+<text id="text4797" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="571.23096"><tspan id="tspan4799" x="571.23096" y="195.73209">I</tspan></text>
+<text id="text4801" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="632.23999"><tspan id="tspan4803" x="632.23999" y="195.73209">O</tspan></text>
+<text id="text4805" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="689.75165"><tspan id="tspan4807" x="689.75165" y="195.73209">P</tspan></text>
+<text id="text4809" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="750.76068"><tspan id="tspan4811" x="750.76068" dy="-1.5543699 1.5543699 0 0 0 0 0 0 -1.9429624" y="195.73209">{</tspan></text>
+<text id="text4813" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="808.27234"><tspan id="tspan4815" x="808.27234" dy="-1.5543699 1.5543699 0 0 0 0 0 0 -2.3315549" y="195.73209">}</tspan></text>
+<text id="text4819" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="866.56122"><tspan id="tspan4821" x="866.56122" dy="-1.1657774 1.1657774 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.3315549" y="195.73209">|</tspan></text>
+<text id="text4823" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.34354" x="982.90967"><tspan id="tspan4825" x="982.90967" y="195.34354">Delete</tspan></text>
+<text id="text4827" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="194.9549" x="1052.4673"><tspan id="tspan4829" x="1052.4673" y="194.9549">End</tspan></text>
+<text id="text4831" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.7321" x="1097.6799"><tspan id="tspan4833" x="1097.6799" y="195.7321">PageDn</tspan></text>
+<text id="text4835" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="1191.8131"><tspan id="tspan4837" x="1191.8131" y="195.73209">7</tspan></text>
+<text id="text4841" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.34351" x="1250.1021"><tspan id="tspan4843" x="1250.1021" y="195.34351">8</tspan></text>
+<text id="text4845" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="195.73209" x="1309.168"><tspan id="tspan4847" x="1309.168" y="195.73209">9</tspan></text>
+<text id="text4851" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="213.21875" x="1368.2261"><tspan id="tspan4853" x="1368.2261" y="213.21875">+</tspan></text>
+<text id="text4855" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="70.723831"><tspan id="tspan4857" x="70.723831" y="257.1297">Caps Lock</tspan></text>
+<text id="text4859" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="174.86661"><tspan id="tspan4861" x="174.86661" y="257.1297">A</tspan></text>
+<text id="text4863" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="233.93266"><tspan id="tspan4865" x="233.93266" y="257.1297">S</tspan></text>
+<text id="text4867" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="293.38733"><tspan id="tspan4869" x="293.38733" y="257.1297">D</tspan></text>
+<text id="text4871" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="256.74112" x="352.06479"><tspan id="tspan4873" x="352.06479" y="256.74112">F</tspan></text>
+<text id="text4875" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="410.74225"><tspan id="tspan4877" x="410.74225" y="257.1297">G</tspan></text>
+<text id="text4879" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="470.1969"><tspan id="tspan4881" x="470.1969" y="257.1297">H</tspan></text>
+<text id="text4883" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="529.26294"><tspan id="tspan4885" x="529.26294" dy="-1.9429624" y="257.1297">J</tspan></text>
+<text id="text4887" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="588.71759"><tspan id="tspan4889" x="588.71759" y="257.1297">K</tspan></text>
+<text id="text4891" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="647.78363"><tspan id="tspan4893" x="647.78363" y="257.1297">L</tspan></text>
+<text id="text4895" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="706.84973"><tspan id="tspan4897" x="706.84973" dy="-1.9429624" y="257.1297">:</tspan></text>
+<text id="text4899" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="256.74112" x="766.69293"><tspan id="tspan4901" x="766.69293" y="256.74112">&#34;</tspan></text>
+<text id="text4905" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="257.1297" x="825.17615"><tspan id="tspan4907" x="825.17615" y="257.1297">Enter</tspan></text>
+<text id="text4909" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="256.82291" x="1192.2548"><tspan id="tspan4911" x="1192.2548" y="256.82291">4</tspan></text>
+<text id="text4913" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="256.82291" x="1250.5073"><tspan id="tspan4915" x="1250.5073" y="256.82291">5</tspan></text>
+<text id="text4917" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="256.82291" x="1310.9581"><tspan id="tspan4919" x="1310.9581" y="256.82291">6</tspan></text>
+<text id="text4921" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="315.62506" x="70.342751"><tspan id="tspan4923" x="70.342751" y="315.62506">Shift</tspan></text>
+<text id="text4925" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="166.60623"><tspan id="tspan4927" x="166.60623" y="-588.73029">Z</tspan></text>
+<text id="text4929" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="214.52727"><tspan id="tspan4931" x="214.52727" y="-588.73029">X</tspan></text>
+<text id="text4933" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.51044" x="262.22842"><tspan id="tspan4935" x="262.22842" y="-588.51044">C</tspan></text>
+<text id="text4937" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="309.92963"><tspan id="tspan4939" x="309.92963" y="-588.73029">V</tspan></text>
+<text id="text4941" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="355.87222"><tspan id="tspan4943" x="355.87222" y="-588.73029">B</tspan></text>
+<text id="text4945" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="403.35358"><tspan id="tspan4947" x="403.35358" y="-588.73029">N</tspan></text>
+<text id="text4949" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.95007" x="450.17548"><tspan id="tspan4951" x="450.17548" y="-588.95007">M</tspan></text>
+<text id="text4953" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="497.21719"><tspan id="tspan4955" x="497.21719" y="-588.73029">&lt;</tspan></text>
+<text id="text4957" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.73029" x="545.13757"><tspan id="tspan4959" x="545.13757" y="-588.73029">&gt;</tspan></text>
+<text id="text4961" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-589.60956" x="591.07983"><tspan id="tspan4963" x="591.07983" y="-589.60956">?</tspan></text>
+<text id="text4965" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="316.19577" x="800.50049"><tspan id="tspan4967" x="800.50049" y="316.19577">Shift</tspan></text>
+<text id="text4969" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.93317" x="847.76105"><tspan id="tspan4971" x="847.76105" y="-588.93317">↑</tspan></text>
+<text id="text4973" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="316.19577" x="1192.5903"><tspan id="tspan4975" x="1192.5903" y="316.19577">1</tspan></text>
+<text id="text4979" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="316.19577" x="1252.8221"><tspan id="tspan4981" x="1252.8221" y="316.19577">2</tspan></text>
+<text id="text4983" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-588.93317" x="1049.1997"><tspan id="tspan4985" x="1049.1997" y="-588.93317">3</tspan></text>
+<text id="text4989" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="347.28317" x="1367.7611"><tspan id="tspan4991" x="1367.7611" y="347.28317">Enter</tspan></text>
+<text id="text4993" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.31885" x="1194.1447"><tspan id="tspan4995" x="1194.1447" y="373.31885">0</tspan></text>
+<text id="text4997" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="1310.7224"><tspan id="tspan4999" x="1310.7224" y="373.70746">.</tspan></text>
+<text id="text5005" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.31885" x="988.19067"><tspan id="tspan5007" x="988.19067" y="373.31885">←</tspan></text>
+<text id="text5009" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-543.23468" x="848.11774"><tspan id="tspan5011" x="848.11774" y="-543.23468">↓</tspan></text>
+<text id="text5013" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-542.92377" x="905.57623"><tspan id="tspan5015" x="905.57623" y="-542.92377">→</tspan></text>
+<text id="text5017" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="374.09604" x="70.335236"><tspan id="tspan5019" x="70.335236" y="374.09604">Ctrl</tspan></text>
+<text id="text5021" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="143.77922"><tspan id="tspan5023" x="143.77922" y="373.70746">WinKey</tspan></text>
+<text id="text5025" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="215.28023"><tspan id="tspan5027" x="215.28023" y="373.70746">Alt</tspan></text>
+<text id="text5029" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="673.81934"><tspan id="tspan5031" x="673.81934" y="373.70746">AltGr</tspan></text>
+<text id="text5033" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="887.14564"><tspan id="tspan5035" x="887.14564" y="373.70746">Ctrl</tspan></text>
+</g>
+  <g id="layer2">
+
+<text id="text3543" data-key="KeyM" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="563.60437" xml:space="preserve"><tspan id="tspan4327" y="347.21185" x="563.60437">ㅡ</tspan></text>
+
+
+<text id="text3543-0" data-key="Tab" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="70.342751" xml:space="preserve"></text>
+
+
+<text id="text3543-2" data-key="ShiftLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="70.342751" xml:space="preserve"></text>
+
+
+<text id="text3543-7" data-key="KeyA" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="174.86661" xml:space="preserve"><tspan id="tspan4327-76" y="288.95926" x="174.86661">ㅁ</tspan></text>
+
+
+<text id="text3543-23" data-key="KeyS" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="234.30766" xml:space="preserve"><tspan id="tspan4327-1" y="288.95926" x="234.30766">ㄴ</tspan></text>
+
+
+<text id="text3543-22" data-key="KeyZ" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="208.63278" xml:space="preserve"><tspan id="tspan4327-99" y="347.21185" x="208.63278">ㅋ</tspan></text>
+
+
+<text id="text3543-8" data-key="KeyX" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="268.38409" xml:space="preserve"><tspan id="tspan4327-3" y="347.21185" x="268.38409">ㅌ</tspan></text>
+
+
+<text id="text3543-5" data-key="KeyD" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="294.55734" xml:space="preserve"><tspan id="tspan4327-2" y="288.95926" x="294.55734">ㅇ</tspan></text>
+
+
+<text id="text3543-58" data-key="KeyC" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="328.56552" xml:space="preserve"><tspan id="tspan4327-5" y="347.21185" x="328.56552">ㅊ</tspan></text>
+
+
+<text id="text3543-75" data-key="KeyF" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="353.2348" xml:space="preserve"><tspan id="tspan4327-4" y="288.95926" x="353.2348">ㄹ</tspan></text>
+
+
+<text id="text3543-59" data-key="KeyV" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="387.44205" xml:space="preserve"><tspan id="tspan4327-23" y="347.21185" x="387.44205">ㅍ</tspan></text>
+
+
+<text id="text3543-04" data-key="KeyG" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="411.49225" xml:space="preserve"><tspan id="tspan4327-6" y="288.95926" x="411.49225">ㅎ</tspan></text>
+
+
+<text id="text3543-27" data-key="KeyB" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="446.01028" xml:space="preserve"><tspan id="tspan4327-63" y="347.21185" x="446.01028">ㅠ</tspan></text>
+
+
+<text id="text3543-9" data-key="KeyH" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="471.36691" xml:space="preserve"><tspan id="tspan4327-34" y="288.95926" x="471.36691">ㅗ</tspan></text>
+
+
+<text id="text3543-53" data-key="KeyJ" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="529.26294" xml:space="preserve"><tspan id="tspan4327-21" y="288.95926" x="529.26294">ㅓ</tspan></text>
+
+
+<text id="text3543-80" data-key="KeyN" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="505.36197" xml:space="preserve"><tspan id="tspan4327-79" y="347.21185" x="505.36197">ㅜ</tspan></text>
+
+
+<text id="text3543-81" data-key="KeyK" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="590.146" xml:space="preserve"><tspan id="tspan4327-36" y="288.95926" x="590.146">ㅏ</tspan></text>
+
+
+<text id="text3543-3" data-key="KeyL" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="648.95361" xml:space="preserve"><tspan id="tspan4327-75" y="288.95926" x="648.95361">ㅣ</tspan></text>
+
+
+<text id="text3543-78" data-key="Comma" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="621.9715" xml:space="preserve"><tspan id="tspan4327-0" y="347.21185" x="621.9715">,</tspan></text>
+
+
+<text id="text3543-52" data-key="Period" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="682.14197" xml:space="preserve"><tspan id="tspan4327-64" y="347.21185" x="682.14197">.</tspan></text>
+
+
+<text id="text3543-99" data-key="Semicolon" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="707.29974" xml:space="preserve"><tspan id="tspan4327-04" y="288.95926" x="707.29974">;</tspan></text>
+
+
+<text id="text3543-89" data-key="Slash" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="738.36981" xml:space="preserve"><tspan id="tspan4327-10" y="347.21185" x="738.36981">/</tspan></text>
+
+
+<text id="text3543-594" data-key="Quote" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="767.65295" xml:space="preserve"><tspan id="tspan4327-11" y="288.95926" x="767.65295">&#39;</tspan></text>
+
+
+<text id="text3543-225" data-key="ShiftRight" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="800.87549" xml:space="preserve"></text>
+
+
+<text id="text3543-74" data-key="Enter" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="826.34613" xml:space="preserve"></text>
+
+
+<text id="text3543-6" data-key="ArrowUp" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="1044.3833" xml:space="preserve"></text>
+
+
+<text id="text3543-68" data-key="Numpad4" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="1192.6748" xml:space="preserve"><tspan id="tspan4327-29" y="288.95926" x="1192.6748">←</tspan></text>
+
+
+<text id="text3543-278" data-key="Numpad1" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="1193.8654" xml:space="preserve"><tspan id="tspan4327-13" y="347.21185" x="1193.8654">End</tspan></text>
+
+
+<text id="text3543-530" data-key="Numpad5" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="1251.2874" xml:space="preserve"></text>
+
+
+<text id="text3543-76" data-key="Numpad2" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="1253.4221" xml:space="preserve"><tspan id="tspan4327-47" y="347.21185" x="1253.4221">↓</tspan></text>
+
+
+<text id="text3543-1" data-key="Numpad6" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="1311.6631" xml:space="preserve"><tspan id="tspan4327-18" y="288.95926" x="1311.6631">→</tspan></text>
+
+
+<text id="text3543-71" data-key="Numpad3" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="331.83685" x="1312.1447" xml:space="preserve"><tspan id="tspan4327-343" y="347.21185" x="1312.1447">PgDn</tspan></text>
+
+
+<text id="text3543-7-2" data-key="KeyQ" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="159.68433" xml:space="preserve"><tspan id="tspan4327-76-1" y="228.50847" x="159.68433">ㅂ</tspan></text>
+
+
+<text id="text3543-23-7" data-key="KeyW" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="219.12538" xml:space="preserve"><tspan id="tspan4327-1-2" y="228.50847" x="219.12538">ㅈ</tspan></text>
+
+
+<text id="text3543-5-0" data-key="KeyE" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="278.62503" xml:space="preserve"><tspan id="tspan4327-2-8" y="228.50847" x="278.62503">ㄷ</tspan></text>
+
+
+<text id="text3543-75-3" data-key="KeyR" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="338.85687" xml:space="preserve"><tspan id="tspan4327-4-7" y="228.50847" x="338.85687">ㄱ</tspan></text>
+
+
+<text id="text3543-04-6" data-key="KeyT" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="396.48431" xml:space="preserve"><tspan id="tspan4327-6-6" y="228.50847" x="396.48431">ㅅ</tspan></text>
+
+
+<text id="text3543-9-7" data-key="KeyY" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="453.45743" xml:space="preserve"><tspan id="tspan4327-34-0" y="228.50847" x="453.45743">ㅛ</tspan></text>
+
+
+<text id="text3543-53-6" data-key="KeyU" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="513.64844" xml:space="preserve"><tspan id="tspan4327-21-1" y="228.50847" x="513.64844">ㅕ</tspan></text>
+
+
+<text id="text3543-81-7" data-key="KeyI" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="572.40094" xml:space="preserve"><tspan id="tspan4327-36-9" y="228.50847" x="572.40094">ㅑ</tspan></text>
+
+
+<text id="text3543-3-4" data-key="KeyO" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="632.98999" xml:space="preserve"><tspan id="tspan4327-75-5" y="228.50847" x="632.98999">ㅐ</tspan></text>
+
+
+<text id="text3543-99-5" data-key="KeyP" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="690.92163" xml:space="preserve"><tspan id="tspan4327-04-1" y="228.50847" x="690.92163">ㅔ</tspan></text>
+
+
+<text id="text3543-594-8" data-key="BracketLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="752.08069" xml:space="preserve"><tspan id="tspan4327-11-6" y="228.50847" x="752.08069">[</tspan></text>
+
+
+<text id="text3543-74-9" data-key="BracketRight" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="808.27234" xml:space="preserve"><tspan id="tspan4327-8-4" y="228.50847" x="808.27234">]</tspan></text>
+
+
+<text id="text3543-74-9-4" data-key="Backslash" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="866.2312" xml:space="preserve"><tspan id="tspan4327-8-4-7" y="228.50847" x="866.2312">\</tspan></text>
+
+
+<text id="text3543-7-2-7" data-key="Digit1" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="132.34332" xml:space="preserve"><tspan id="tspan4327-76-1-3" y="169.15677" x="132.34332">1</tspan></text>
+
+
+<text id="text3543-23-7-9" data-key="Digit2" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="190.19571" xml:space="preserve"><tspan id="tspan4327-1-2-8" y="169.15677" x="190.19571">2</tspan></text>
+
+
+<text id="text3543-5-0-4" data-key="Digit3" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="250.14195" xml:space="preserve"><tspan id="tspan4327-2-8-8" y="169.15677" x="250.14195">3</tspan></text>
+
+
+<text id="text3543-75-3-4" data-key="Digit4" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="308.44434" xml:space="preserve"><tspan id="tspan4327-4-7-5" y="169.15677" x="308.44434">4</tspan></text>
+
+
+<text id="text3543-04-6-1" data-key="Digit5" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="367.33167" xml:space="preserve"><tspan id="tspan4327-6-6-8" y="169.15677" x="367.33167">5</tspan></text>
+
+
+<text id="text3543-9-7-5" data-key="Digit6" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="425.78403" xml:space="preserve"><tspan id="tspan4327-34-0-5" y="169.15677" x="425.78403">6</tspan></text>
+
+
+<text id="text3543-53-6-7" data-key="Digit7" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="486.24985" xml:space="preserve"><tspan id="tspan4327-21-1-4" y="169.15677" x="486.24985">7</tspan></text>
+
+
+<text id="text3543-81-7-2" data-key="Digit8" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="545.52655" xml:space="preserve"><tspan id="tspan4327-36-9-7" y="169.15677" x="545.52655">8</tspan></text>
+
+
+<text id="text3543-3-4-5" data-key="Digit9" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="603.42938" xml:space="preserve"><tspan id="tspan4327-75-5-4" y="169.15677" x="603.42938">9</tspan></text>
+
+
+<text id="text3543-99-5-0" data-key="Digit0" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="663.33063" xml:space="preserve"><tspan id="tspan4327-04-1-6" y="169.15677" x="663.33063">0</tspan></text>
+
+
+<text id="text3543-594-8-8" data-key="Minus" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="721.55798" xml:space="preserve"><tspan id="tspan4327-11-6-7" y="169.15677" x="721.55798">-</tspan></text>
+
+
+<text id="text3543-74-9-3" data-key="Equal" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="780.79517" xml:space="preserve"><tspan id="tspan4327-8-4-74" y="169.15677" x="780.79517">=</tspan></text>
+
+
+<text id="text3543-74-9-4-7" data-key="Backspace" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="840.33704" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-1" data-key="Insert" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="984.22369" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-5" data-key="Home" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1043.6229" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0" data-key="PageUp" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1101.7874" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-1-1" data-key="Delete" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="984.22369" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-5-9" data-key="End" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1043.6229" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5" data-key="PageDown" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1101.7874" xml:space="preserve"></text>
+<g id="g5380" transform="translate(1.4324 -146.18)">
+
+<text id="text3543-74-9-4-7-1-1-1" data-key="PrintScreen" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="982.79126"></text>
+
+
+<text id="text3543-74-9-4-7-5-9-0" data-key="ScrollLock" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1042.1904"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-0" data-key="Pause" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1100.3549"></text>
+</g>
+
+<text id="text3543-74-9-4-7-1-1-5" data-key="Numpad7" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1192.6748" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-9-6-4" y="228.50847" x="1192.6748">Home</tspan></text>
+
+
+<text id="text3543-74-9-4-7-5-9-4" data-key="Numpad8" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1252.074" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-90-4-3" y="228.50847" x="1252.074">↑</tspan></text>
+
+
+<text id="text3543-74-9-4-7-0-5-7" data-key="Numpad9" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1310.2384" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-0-6-0" y="228.50847" x="1310.2384">PgUp</tspan></text>
+
+
+<text id="text3543-74-9-4-7-1-1-9" data-key="NumLock" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1192.6748" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-5-9-7" data-key="NumpadDivide" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1252.074" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-90-4-2" y="169.15677" x="1252.074">/</tspan></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1" data-key="NumpadMultiply" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1310.2384" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-0-6-5" y="169.15677" x="1310.2384">*</tspan></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0" data-key="NumpadSubtract" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="1368.9312" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-0-6-5-9" y="169.15677" x="1368.9312">-</tspan></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-0" data-key="NumpadAdd" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="273.58426" x="1368.9312" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-0-6-5-9-6" y="288.95926" x="1368.9312">+</tspan></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-1" data-key="F12" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="899.41394" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-02" data-key="F11" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="840.06226" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-4" data-key="F10" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="782.08447" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-47" data-key="F9" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="722.73273" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-1-1" data-key="F8" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="634.52954" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-02-2" data-key="F7" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="575.17786" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-4-2" data-key="F6" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="516.37567" xml:space="preserve"></text>
+
+
+<text id="text3543-74-9-4-7-0-5-1-0-47-2" data-key="F5" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="66.952431" x="458.39789" xml:space="preserve"></text>
+
+
+<text id="text3543-2-6" data-key="ControlLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="70.342751" xml:space="preserve"></text>
+
+
+<text id="text3543-2-8" data-key="MetaLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="144.07922" xml:space="preserve"></text>
+
+
+<text id="text3543-2-2" data-key="AltLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="215.28023" xml:space="preserve"></text>
+
+
+<text id="text3543-2-5" data-key="Space" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="286.57394" xml:space="preserve"></text>
+
+
+<text id="text3543-2-4" data-key="AltRight" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="673.81934" xml:space="preserve"><tspan id="tspan4327-7-5" y="404.36533" x="673.81934">한영</tspan></text>
+
+
+
+<text id="text-fn" style="font-size:15px;font-family:Ubuntu;fill:#231f20;fill-opacity:0.5;font-weight:500;line-height:102.49999762%" y="373.70746" x="745.29" xml:space="preserve"><tspan y="373.70746" x="745.29">Fn</tspan></text>
+<text id="text3543-2-7" data-key="ControlRight" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="887.92567" xml:space="preserve"><tspan id="tspan4327-7-17" y="404.36533" x="887.92567">한자</tspan></text>
+
+
+<text id="text3543-278-5" data-key="ArrowLeft" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="988.84808" xml:space="preserve"></text>
+
+
+<text id="text3543-76-6" data-key="ArrowDown" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="1048.4049" xml:space="preserve"></text>
+
+
+<text id="text3543-71-5" data-key="ArrowRight" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="1107.1274" xml:space="preserve"></text>
+
+
+<text id="text3543-71-5-3" data-key="Numpad0" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="1194.7146" xml:space="preserve"><tspan id="tspan4327-343-1-4" y="404.36533" x="1194.7146">Ins</tspan></text>
+
+
+<text id="text3543-71-5-33" data-key="NumpadDecimal" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="1311.4424" xml:space="preserve"><tspan id="tspan4327-343-1-5" y="404.36533" x="1311.4424">Del</tspan></text>
+
+
+<text id="text3543-71-5-6" data-key="NumpadEnter" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="388.99033" x="1368.9312" xml:space="preserve"></text>
+
+
+<text id="text3543-7-2-7-2" data-key="Backquote" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="153.78177" x="70.342751" xml:space="preserve"><tspan id="tspan4327-76-1-3-6" y="169.15677" x="70.342751">`</tspan></text>
+</g>
+<metadata><RDF><Work><format>image/svg+xml</format><type></type><license></license><publisher><Agent><title>Openclipart</title></Agent></publisher><title>Keyboard Mappings Outline</title><date>2012-08-19T08:16:38</date><description>Keyboard Template for defining key mappings</description><source>https://openclipart.org/detail/171814/keyboard-mappings-outline-by-todd-partridge---gen2ly-171814</source><creator><Agent><title>Todd Partridge - Gen2ly</title></Agent></creator><subject><Bag><li>keyboard</li><li>mappings</li><li>outline</li></Bag></subject></Work><License><permits></permits><permits></permits><permits></permits></License></RDF></metadata></svg>

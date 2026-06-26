@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</helmet>
+<div style="min-height:100vh;box-sizing:border-box;padding:40px 48px;background:#f4f3ef;font-family:'Noto Sans KR',sans-serif;color:#1c1b19">
+  <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:4px">
+    <h1 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-0.01em">키보드 매핑 SVG</h1>
+    <span style="font-size:14px;color:#8a8578;font-weight:500">한글 두벌식 · 각 키 data-key 로 제어</span>
+  </div>
+  <p style="margin:0 0 24px;font-size:14px;line-height:1.6;color:#6b665b;max-width:760px">실제 키를 누르거나 화면의 키를 클릭하면 해당 <code style="font-family:'JetBrains Mono',monospace;background:#e7e5dd;padding:1px 5px;border-radius:3px;font-size:12px">data-key</code> 요소가 강조됩니다. 값은 <code style="font-family:'JetBrains Mono',monospace;background:#e7e5dd;padding:1px 5px;border-radius:3px;font-size:12px">KeyboardEvent.code</code> 와 동일합니다.</p>
+
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e2dfd6;border-radius:10px;padding:10px 16px;min-width:200px">
+      <span style="font-size:12px;color:#9a948663;color:#9a9486;font-weight:500">마지막 키</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;color:{{ accent }}">{{ lastCode }}</span>
+      <span style="font-size:15px;color:#1c1b19;font-weight:500">{{ lastLegend }}</span>
+    </div>
+    <button onClick="{{ clearAll }}" style="font-family:inherit;font-size:13px;font-weight:500;color:#6b665b;background:#fff;border:1px solid #e2dfd6;border-radius:8px;padding:9px 16px;cursor:pointer">전체 해제</button>
+  </div>
+
+  <div style="background:#fff;border:1px solid #e2dfd6;border-radius:14px;padding:22px;overflow-x:auto;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+    <div ref="{{ holder }}" style="min-width:760px"></div>
+  </div>
+
+  <p style="margin:22px 0 0;font-size:12.5px;line-height:1.7;color:#9a9486;font-family:'JetBrains Mono',monospace">svg.querySelectorAll('[data-key="KeyQ"]')  →  키캡 path + 라벨 text</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:640},&quot;highlightColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#d97706&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showReference&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { lastCode: '—', lastLegend: '', locked: {} };
+  holder = React.createRef();
+
+  legendOf(code){
+    const t = this.svg && this.svg.querySelector('text[data-key="'+CSS.escape(code)+'"]');
+    if(!t) return '';
+    const sp = [...t.querySelectorAll('tspan')].map(s=>s.textContent).filter(Boolean);
+    return sp.join(' ');
+  }
+  paths(code){ return this.svg ? this.svg.querySelectorAll('path[data-key="'+CSS.escape(code)+'"]') : []; }
+
+  paint(code, on){
+    const col = this.props.highlightColor || '#d97706';
+    this.paths(code).forEach(p=>{ p.style.fill = on ? col : 'none'; p.style.stroke = on ? col : '#231f20'; });
+  }
+  setActive(code, on){
+    if(this.state.locked[code]) { if(!on) return; } // keep locked ones lit
+    this.paint(code, on);
+  }
+  toggleLock(code){
+    const locked = {...this.state.locked};
+    if(locked[code]){ delete locked[code]; this.paint(code,false); }
+    else { locked[code]=true; this.paint(code,true); }
+    this.setState({ locked, lastCode: code, lastLegend: this.legendOf(code) });
+  }
+  clearAll(){
+    if(this.svg) this.svg.querySelectorAll('path[data-key]').forEach(p=>{ p.style.fill='none'; p.style.stroke='#231f20'; });
+    this.setState({ locked:{}, lastCode:'—', lastLegend:'' });
+  }
+
+  async componentDidMount(){
+    let txt = await (await fetch('keyboard-korean.svg')).text();
+    txt = txt.replace(/<metadata>[\s\S]*?<\/metadata>/,'');
+    this.holder.current.innerHTML = txt;
+    const svg = this.holder.current.querySelector('svg');
+    svg.style.width='100%'; svg.style.height='auto'; svg.style.userSelect='none';
+    svg.querySelectorAll('path[data-key]').forEach(p=>{ p.style.transition='fill .08s, stroke .08s'; p.style.cursor='pointer'; });
+    this.svg = svg;
+    this.applyReference();
+
+    // click any key (delegate)
+    svg.addEventListener('pointerdown', e=>{
+      const el = e.target.closest('[data-key]'); if(!el) return;
+      this.toggleLock(el.getAttribute('data-key'));
+    });
+    // physical keyboard
+    this._kd = e=>{
+      if(['Tab','Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault();
+      this.setActive(e.code, true);
+      this.setState({ lastCode: e.code, lastLegend: this.legendOf(e.code) });
+    };
+    this._ku = e=> this.setActive(e.code, false);
+    window.addEventListener('keydown', this._kd);
+    window.addEventListener('keyup', this._ku);
+  }
+  componentDidUpdate(prev){
+    if(prev.showReference !== this.props.showReference) this.applyReference();
+    if(prev.highlightColor !== this.props.highlightColor){
+      // recolor any currently-lit keys
+      Object.keys(this.state.locked).forEach(c=>this.paint(c,true));
+    }
+  }
+  applyReference(){
+    if(!this.svg) return;
+    const ref = this.svg.querySelector('#layer1');
+    if(ref) ref.style.display = (this.props.showReference===false) ? 'none' : '';
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown',this._kd); window.removeEventListener('keyup',this._ku); }
+
+  renderVals(){
+    return {
+      holder: this.holder,
+      lastCode: this.state.lastCode,
+      lastLegend: this.state.lastLegend,
+      accent: this.props.highlightColor || '#d97706',
+      clearAll: ()=>this.clearAll(),
+    };
+  }
+}
+</script>
+</body>
+</html>

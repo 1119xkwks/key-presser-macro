@@ -1,105 +1,108 @@
 /**
  * @file constants/keys.ts
- * @description 매크로에서 사용할 수 있는 모든 키보드 키 옵션들을 정의합니다.
+ * @description v2: Web KeyboardEvent.code 형식 기반 키 목록 정의.
+ * SVG의 data-key 속성과 동일한 코드 체계를 사용합니다.
  */
 
 /**
  * @interface KeyOption
- * @description 셀렉트 박스에서 사용할 키 옵션 구조
+ * @description 키보드 키 하나의 메타 정보
  */
 export interface KeyOption {
+    /** 사용자에게 표시할 이름 */
     label: string;
+    /** Web KeyboardEvent.code — SVG data-key 와 일치 */
     value: string;
+    /** Electron globalShortcut Accelerator 형식 */
+    accelerator: string;
+    /** Win32 Virtual Key Code */
+    vkCode: number;
 }
 
-/**
- * @description PowerShell SendKeys 형식을 따르는 대상 키 목록입니다.
- */
+/** 모든 매크로 대상 키 목록 */
 export const TARGET_KEYS: KeyOption[] = [
-    // 알파벳
-    ...Array.from({ length: 26 }, (_, i) => ({
-        label: String.fromCharCode(65 + i),
-        value: String.fromCharCode(97 + i),
-    })),
-    // 숫자
+    // 알파벳 A–Z
+    ...Array.from({ length: 26 }, (_, i) => {
+        const ch = String.fromCharCode(65 + i);
+        return { label: ch, value: `Key${ch}`, accelerator: ch, vkCode: 0x41 + i };
+    }),
+    // 숫자 0–9
     ...Array.from({ length: 10 }, (_, i) => ({
-        label: `Number ${i}`,
-        value: `${i}`,
+        label: `${i}`, value: `Digit${i}`, accelerator: `${i}`, vkCode: 0x30 + i,
     })),
-    // 기능키 (F1 ~ F12)
+    // 기능키 F1–F12
     ...Array.from({ length: 12 }, (_, i) => ({
-        label: `F${i + 1}`,
-        value: `{F${i + 1}}`,
+        label: `F${i + 1}`, value: `F${i + 1}`, accelerator: `F${i + 1}`, vkCode: 0x70 + i,
     })),
-    // 특수 키
-    { label: 'Enter', value: '{ENTER}' },
-    { label: 'Space', value: ' ' },
-    { label: 'Escape', value: '{ESC}' },
-    { label: 'Backspace', value: '{BS}' },
-    { label: 'Tab', value: '{TAB}' },
-    { label: 'Insert', value: '{INS}' },
-    { label: 'Delete', value: '{DEL}' },
-    { label: 'Home', value: '{HOME}' },
-    { label: 'End', value: '{END}' },
-    { label: 'Page Up', value: '{PGUP}' },
-    { label: 'Page Down', value: '{PGDN}' },
+    // 특수키
+    { label: 'Enter',        value: 'Enter',       accelerator: 'Return',      vkCode: 0x0D },
+    { label: 'Space',        value: 'Space',        accelerator: 'Space',       vkCode: 0x20 },
+    { label: 'Escape',       value: 'Escape',       accelerator: 'Escape',      vkCode: 0x1B },
+    { label: 'Backspace',    value: 'Backspace',    accelerator: 'Backspace',   vkCode: 0x08 },
+    { label: 'Tab',          value: 'Tab',          accelerator: 'Tab',         vkCode: 0x09 },
+    { label: 'Insert',       value: 'Insert',       accelerator: 'Insert',      vkCode: 0x2D },
+    { label: 'Delete',       value: 'Delete',       accelerator: 'Delete',      vkCode: 0x2E },
+    { label: 'Home',         value: 'Home',         accelerator: 'Home',        vkCode: 0x24 },
+    { label: 'End',          value: 'End',          accelerator: 'End',         vkCode: 0x23 },
+    { label: 'Page Up',      value: 'PageUp',       accelerator: 'PageUp',      vkCode: 0x21 },
+    { label: 'Page Down',    value: 'PageDown',     accelerator: 'PageDown',    vkCode: 0x22 },
     // 방향키
-    { label: 'Arrow Up', value: '{UP}' },
-    { label: 'Arrow Down', value: '{DOWN}' },
-    { label: 'Arrow Left', value: '{LEFT}' },
-    { label: 'Arrow Right', value: '{RIGHT}' },
-    // 기타 제어
-    { label: 'Caps Lock', value: '{CAPSLOCK}' },
-    { label: 'Num Lock', value: '{NUMLOCK}' },
-    { label: 'Scroll Lock', value: '{SCROLLLOCK}' },
-    { label: 'Print Screen', value: '{PRTSC}' },
+    { label: '↑',            value: 'ArrowUp',      accelerator: 'Up',          vkCode: 0x26 },
+    { label: '↓',            value: 'ArrowDown',    accelerator: 'Down',        vkCode: 0x28 },
+    { label: '←',            value: 'ArrowLeft',    accelerator: 'Left',        vkCode: 0x25 },
+    { label: '→',            value: 'ArrowRight',   accelerator: 'Right',       vkCode: 0x27 },
+    // 제어키
+    { label: 'Caps Lock',    value: 'CapsLock',     accelerator: 'CapsLock',    vkCode: 0x14 },
+    { label: 'Num Lock',     value: 'NumLock',      accelerator: 'Numlock',     vkCode: 0x90 },
+    { label: 'Scroll Lock',  value: 'ScrollLock',   accelerator: 'Scrolllock',  vkCode: 0x91 },
+    { label: 'Print Screen', value: 'PrintScreen',  accelerator: 'PrintScreen', vkCode: 0x2C },
+    { label: 'Pause',        value: 'Pause',        accelerator: 'Pause',       vkCode: 0x13 },
     // 기호
-    { label: '+', value: 'Plus' },
+    { label: '-',  value: 'Minus',        accelerator: '-',   vkCode: 0xBD },
+    { label: '=',  value: 'Equal',        accelerator: '=',   vkCode: 0xBB },
+    { label: '[',  value: 'BracketLeft',  accelerator: '[',   vkCode: 0xDB },
+    { label: ']',  value: 'BracketRight', accelerator: ']',   vkCode: 0xDD },
+    { label: '\\', value: 'Backslash',    accelerator: '\\',  vkCode: 0xDC },
+    { label: ';',  value: 'Semicolon',    accelerator: ';',   vkCode: 0xBA },
+    { label: "'",  value: 'Quote',        accelerator: "'",   vkCode: 0xDE },
+    { label: ',',  value: 'Comma',        accelerator: ',',   vkCode: 0xBC },
+    { label: '.',  value: 'Period',       accelerator: '.',   vkCode: 0xBE },
+    { label: '/',  value: 'Slash',        accelerator: '/',   vkCode: 0xBF },
+    { label: '`',  value: 'Backquote',    accelerator: '`',   vkCode: 0xC0 },
+    // 넘패드
+    ...Array.from({ length: 10 }, (_, i) => ({
+        label: `Num ${i}`, value: `Numpad${i}`, accelerator: `num${i}`, vkCode: 0x60 + i,
+    })),
+    { label: 'Num +',     value: 'NumpadAdd',      accelerator: 'numadd',  vkCode: 0x6B },
+    { label: 'Num -',     value: 'NumpadSubtract', accelerator: 'numsub',  vkCode: 0x6D },
+    { label: 'Num *',     value: 'NumpadMultiply', accelerator: 'nummult', vkCode: 0x6A },
+    { label: 'Num /',     value: 'NumpadDivide',   accelerator: 'numdiv',  vkCode: 0x6F },
+    { label: 'Num .',     value: 'NumpadDecimal',  accelerator: 'numdec',  vkCode: 0x6E },
+    { label: 'Num Enter', value: 'NumpadEnter',    accelerator: 'Return',  vkCode: 0x0D },
 ];
 
 /**
- * @description Electron Accelerator 형식을 따르는 시작/중지 단축키 목록입니다.
- * TARGET_KEYS와 동일한 키 목록을 제공하며, 추가적인 조합키를 포함합니다.
+ * @description 단축키로 사용 가능한 키 목록 (Target Key 목록과 동일).
+ * Modifier 단독키(Shift, Ctrl, Alt, Meta)는 globalShortcut에 단독 등록이 불가하므로 제외됩니다.
  */
-export const SHORTCUT_KEYS: KeyOption[] = [
-    // TARGET_KEYS의 기본 키들을 Electron Accelerator 형식에 맞게 변환하여 포함
-    ...TARGET_KEYS.map(key => ({
-        label: key.label,
-        // PowerShell 형식({F1})을 Electron 형식(F1)으로 변환하고,
-        // shift+w 같은 소문자 조합을 Shift+W와 같은 표준 Accelerator 형식으로 변환
-        value: key.value
-            .replace(/[{}]/g, '')
-            .replace('shift+', 'Shift+')
-            .replace('ctrl+', 'Control+')
-            .replace('alt+', 'Alt+')
-            .replace('BS', 'Backspace')
-            .replace('INS', 'Insert')
-            .replace('DEL', 'Delete')
-            .replace('PGUP', 'PageUp')
-            .replace('PGDN', 'PageDown')
-            .replace('PRTSC', 'PrintScreen')
-            .replace('UP', 'Up')
-            .replace('DOWN', 'Down')
-            .replace('LEFT', 'Left')
-            .replace('RIGHT', 'Right')
-            .split('+')
-            .map(part => part.length === 1 ? part.toUpperCase() : part)
-            .join('+')
-    })),
-    // 조합키 (Ctrl+)
-    { label: 'Ctrl+S', value: 'CommandOrControl+S' },
-    { label: 'Ctrl+Q', value: 'CommandOrControl+Q' },
-    { label: 'Ctrl+E', value: 'CommandOrControl+E' },
-    { label: 'Ctrl+R', value: 'CommandOrControl+R' },
-    { label: 'Ctrl+Space', value: 'CommandOrControl+Space' },
-    // 조합키 (Alt+)
-    { label: 'Alt+A', value: 'Alt+A' },
-    { label: 'Alt+S', value: 'Alt+S' },
-    { label: 'Alt+D', value: 'Alt+D' },
-    { label: 'Alt+F', value: 'Alt+F' },
-    { label: 'Alt+X', value: 'Alt+X' },
-    { label: 'Alt+Z', value: 'Alt+Z' },
-    // 방향키 조합
-    { label: 'Ctrl+Up', value: 'CommandOrControl+Up' },
-    { label: 'Ctrl+Down', value: 'CommandOrControl+Down' },
-];
+export const SHORTCUT_KEYS: KeyOption[] = TARGET_KEYS;
+
+/** Web code로 KeyOption을 찾습니다. */
+export function findKeyByCode(code: string): KeyOption | undefined {
+    return TARGET_KEYS.find(k => k.value === code);
+}
+
+/** Web code로 표시 이름을 반환합니다. */
+export function getKeyLabel(code: string): string {
+    return findKeyByCode(code)?.label ?? code;
+}
+
+/** Web code로 Electron Accelerator를 반환합니다. */
+export function getKeyAccelerator(code: string): string {
+    return findKeyByCode(code)?.accelerator ?? code;
+}
+
+/** Web code로 Win32 VK Code를 반환합니다. */
+export function getKeyVkCode(code: string): number {
+    return findKeyByCode(code)?.vkCode ?? 0x41;
+}
