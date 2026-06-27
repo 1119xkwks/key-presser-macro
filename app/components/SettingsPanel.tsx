@@ -6,6 +6,7 @@
  */
 
 import { useState, useRef } from 'react';
+import { toast } from 'sonner';
 import { MacroConfig } from '@/app/types/macro';
 
 interface Props {
@@ -94,6 +95,7 @@ export function SettingsPanel({ isOpen, onClose, currentConfig, isRunning, onApp
             await window.electronAPI.stopMacro();
         }
         onApplyConfig(pendingConfig.current);
+        toast.success('설정이 적용되었습니다.', { description: fileState.fileName });
     };
 
     /**
@@ -110,6 +112,7 @@ export function SettingsPanel({ isOpen, onClose, currentConfig, isRunning, onApp
         a.click();
         a.remove();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
+        toast.success('설정 파일이 저장되었습니다.', { description: 'key-presser-macro.json' });
     };
 
     const handleReset = () => {
@@ -118,6 +121,7 @@ export function SettingsPanel({ isOpen, onClose, currentConfig, isRunning, onApp
         if (fileInputRef.current) fileInputRef.current.value = '';
         onReset();
         onClose();
+        toast.success('설정이 초기화되었습니다.', { description: '기본값으로 되돌렸습니다.' });
     };
 
     return (
