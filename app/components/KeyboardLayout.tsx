@@ -91,11 +91,12 @@ export function KeyboardLayout({
         const svgEl = host.querySelector<SVGSVGElement>('svg');
         if (!svgEl) return;
 
-        // 모든 키 초기화
+        // 모든 키 초기화 (isRunning이면 커서를 not-allowed로)
         svgEl.querySelectorAll<SVGPathElement>('path[data-key]').forEach((p) => {
             p.style.fill = 'none';
             p.style.stroke = '#231f20';
             p.style.animation = '';
+            p.style.cursor = isRunning ? 'not-allowed' : 'pointer';
         });
 
         // 텍스트 복원
@@ -200,6 +201,8 @@ export function KeyboardLayout({
         const color = role === 'target' ? TARGET_COLOR : SHORTCUT_COLOR;
 
         const handlePointerDown = (e: PointerEvent) => {
+            // running 중에는 키 선택 차단
+            if (isRunning) return;
             const el = (e.target as Element).closest<SVGPathElement>('path[data-key]');
             if (!el) return;
             onKeySelect(el.getAttribute('data-key') ?? '');
@@ -208,6 +211,11 @@ export function KeyboardLayout({
         const handlePointerOver = (e: PointerEvent) => {
             const el = (e.target as Element).closest<SVGPathElement>('path[data-key]');
             if (!el) return;
+            // running 중에는 hover 하이라이트 없이 커서만 not-allowed
+            if (isRunning) {
+                el.style.cursor = 'not-allowed';
+                return;
+            }
             const code = el.getAttribute('data-key') ?? '';
             const selected = role === 'target' ? targetKey : shortcutKey;
             if (code === selected) return;
@@ -231,7 +239,7 @@ export function KeyboardLayout({
             host.removeEventListener('pointerover', handlePointerOver);
             host.removeEventListener('pointerout', handlePointerOut);
         };
-    }, [role, targetKey, shortcutKey, onKeySelect, paint]);
+    }, [role, targetKey, shortcutKey, isRunning, onKeySelect, paint]);
 
     return <div ref={containerRef} className="keyboard-svg-host" />;
 }

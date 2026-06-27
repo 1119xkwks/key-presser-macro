@@ -89,8 +89,8 @@ export default function Home() {
                         {(['HOLD', 'PERIODIC'] as MacroMode[]).map((m) => (
                             <button
                                 key={m}
-                                className={`v2-mode-btn ${config.mode === m ? 'active' : ''}`}
-                                onClick={() => updateConfig({ mode: m })}
+                                className={`v2-mode-btn ${config.mode === m ? 'active' : ''} ${isRunning ? 'locked' : ''}`}
+                                onClick={() => { if (!isRunning) updateConfig({ mode: m }); }}
                             >
                                 {m}
                             </button>
@@ -158,7 +158,9 @@ export default function Home() {
                             {getKeyLabel(config.targetKey)}
                             {config.useShift && <span className="v2-shift-hint"> + Shift</span>}
                         </span>
-                        <span className="v2-card-hint">마우스로 클릭해 키를 지정</span>
+                        <span className="v2-card-hint">
+                            {isRunning ? 'STOP 후 키 변경이 가능합니다' : '마우스로 클릭해 키를 지정'}
+                        </span>
                     </div>
                     <KeyboardLayout
                         role="target"
@@ -175,7 +177,9 @@ export default function Home() {
                     <div className="v2-keyboard-card-header">
                         <span className="v2-card-label shortcut">START / STOP SHORTCUT · 시작·중지 단축키</span>
                         <span className="v2-key-badge shortcut">{getKeyLabel(config.startStopShortcut)}</span>
-                        <span className="v2-card-hint">이 키를 누르면 매크로가 토글됩니다</span>
+                        <span className="v2-card-hint">
+                            {isRunning ? 'STOP 후 키 변경이 가능합니다' : '이 키를 누르면 매크로가 토글됩니다'}
+                        </span>
                     </div>
                     <KeyboardLayout
                         role="shortcut"
@@ -193,6 +197,7 @@ export default function Home() {
                 isOpen={settingsOpen}
                 onClose={() => setSettingsOpen(false)}
                 currentConfig={config}
+                isRunning={isRunning}
                 onApplyConfig={(newConfig) => updateConfig(newConfig)}
                 onReset={resetConfig}
             />

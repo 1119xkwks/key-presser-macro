@@ -12,6 +12,8 @@ interface Props {
     isOpen: boolean;
     onClose: () => void;
     currentConfig: MacroConfig;
+    /** 현재 매크로 실행 중 여부 — 버튼 문구 및 중지 동작에 사용 */
+    isRunning: boolean;
     onApplyConfig: (config: MacroConfig) => void;
     onReset: () => void;
 }
@@ -37,7 +39,7 @@ function validateConfig(obj: Record<string, unknown>): MacroConfig | null {
     return obj as unknown as MacroConfig;
 }
 
-export function SettingsPanel({ isOpen, onClose, currentConfig, onApplyConfig, onReset }: Props) {
+export function SettingsPanel({ isOpen, onClose, currentConfig, isRunning, onApplyConfig, onReset }: Props) {
     const [fileState, setFileState] = useState<FileState>({
         hasFile: false, fileName: '', isValid: false, errorMsg: '',
     });
@@ -83,14 +85,15 @@ export function SettingsPanel({ isOpen, onClose, currentConfig, onApplyConfig, o
 
     /**
      * @function handleApply
-     * @description 유효한 설정 파일을 적용하고 앱을 재실행합니다.
+     * @description 유효한 설정 파일을 적용합니다.
+     * 매크로가 실행 중이면 먼저 중지한 뒤 적용합니다.
      */
     const handleApply = async () => {
         if (!fileState.isValid || !pendingConfig.current) return;
-        onApplyConfig(pendingConfig.current);
-        if (window.electronAPI?.relaunchApp) {
-            await window.electronAPI.relaunchApp();
+        if (isRunning && window.electronAPI?.stopMacro) {
+            await window.electronAPI.stopMacro();
         }
+        onApplyConfig(pendingConfig.current);
     };
 
     /**
@@ -178,7 +181,7 @@ export function SettingsPanel({ isOpen, onClose, currentConfig, onApplyConfig, o
                             onClick={handleApply}
                             disabled={!fileState.isValid}
                         >
-                            설정 적용 후 재실행
+                            {isRunning ? '중단 후 적용' : '적용'}
                         </button>
                     </section>
 

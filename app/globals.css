@@ -248,6 +248,9 @@ html, body {
 .v2-mode-btn.active {
     @apply bg-white text-[#1c2024] shadow-[0_1px_2px_rgba(16,24,40,0.14)];
 }
+.v2-mode-btn.locked {
+    cursor: not-allowed;
+}
 
 /* 인터벌 입력 */
 .v2-interval-input {
