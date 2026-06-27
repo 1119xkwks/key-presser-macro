@@ -404,7 +404,7 @@ function stopMacro() {
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 960,
-        height: 720,
+        height: 760,
         minWidth: 600,
         minHeight: 100,
         resizable: true,
