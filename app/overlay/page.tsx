@@ -13,6 +13,12 @@ export default function OverlayPage() {
     const [config, setConfig] = useState<MacroConfig | null>(null);
 
     useEffect(() => {
+        // Electron transparent 창에서 html/body 배경이 흰색으로 보이는 것을 방지
+        document.documentElement.style.background = 'transparent';
+        document.body.style.background = 'transparent';
+    }, []);
+
+    useEffect(() => {
         if (window.electronAPI) {
             window.electronAPI.onUpdateOverlayConfig((newConfig: MacroConfig) => {
                 console.log('[OVERLAY] Received config:', newConfig);
