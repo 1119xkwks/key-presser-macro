@@ -533,11 +533,9 @@ ipcMain.handle('relaunch-app', () => {
     app.quit();
 });
 
-/** keyboard-korean.svg 내용을 렌더러에 전달합니다. */
+/** keyboard-korean-with-mouse-key.svg 내용을 렌더러에 전달합니다. */
 ipcMain.handle('get-keyboard-svg', () => {
-    const svgPath = isDev
-        ? path.join(__dirname, '../docs/inline_svgs/keyboard-korean.svg')
-        : path.join(__dirname, '../out/keyboard-korean.svg');
+    const svgPath = path.join(__dirname, '../out/keyboard-korean-with-mouse-key.svg');
     try {
         return fs.readFileSync(svgPath, 'utf-8');
     } catch (e) {

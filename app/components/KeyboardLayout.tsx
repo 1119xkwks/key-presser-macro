@@ -141,7 +141,7 @@ export function KeyboardLayout({
             } else {
                 // 브라우저 개발 환경 fallback
                 try {
-                    const res = await fetch('./keyboard-korean.svg');
+                    const res = await fetch('./keyboard-korean-with-mouse-key.svg');
                     svgText = await res.text();
                 } catch { /* SVG 없이 빈 상태로 유지 */ }
             }

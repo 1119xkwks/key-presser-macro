@@ -34,7 +34,7 @@
 
 ### 키보드 SVG 시각화
 
-- **SVG 소스**: `docs/inline_svgs/keyboard-korean.svg`를 기반으로 inline SVG로 렌더링한다.
+- **SVG 소스**: `public/keyboard-korean-with-mouse-key.svg`를 기반으로 inline SVG로 렌더링한다 (마우스 키 포함).
 - **키 선택 방식**: v1의 AutoSelect 검색 드롭다운을 **완전히 제거**하고, SVG 키보드 클릭으로만 키를 선택한다.
 - **인터랙티브 동작**: 키 상태에 따라 SVG 위에서 하이라이트(음영 처리)를 적용한다.
   - 기본: 회색 키 배경

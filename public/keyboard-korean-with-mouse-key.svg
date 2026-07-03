@@ -131,6 +131,10 @@
 
 <path data-key="Pause" id="path2824" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 770.67h44.752v44.733h-44.752v-44.733z"></path>
 
+<path id="mouse-slot-1" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 770.67h44.752v44.733h-44.752v-44.733z"></path>
+<path id="mouse-slot-2" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 770.67h44.752v44.733h-44.752v-44.733z"></path>
+<path id="mouse-slot-3" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 770.67h44.752v44.733h-44.752v-44.733z"></path>
+
 
 
 
