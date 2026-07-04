@@ -7,6 +7,7 @@
  */
 
 import { useEffect, useRef, useCallback } from 'react';
+import { MOUSE_KEY_CODES, isMouseKeyCode } from '@/app/constants/keys';
 
 /** 하이라이트 색상 */
 const TARGET_COLOR = '#ea580c';  // 오렌지
@@ -98,6 +99,17 @@ export function KeyboardLayout({
             p.style.animation = '';
             p.style.cursor = isRunning ? 'not-allowed' : 'pointer';
         });
+
+        // Shortcut 역할에서는 마우스 키를 disabled 처리 (회색 채움 + not-allowed 커서)
+        if (role === 'shortcut') {
+            MOUSE_KEY_CODES.forEach((c) => {
+                const p = svgEl.querySelector<SVGPathElement>(`path[data-key="${c}"]`);
+                if (p) {
+                    p.style.fill = 'rgba(0,0,0,0.07)';
+                    p.style.cursor = 'not-allowed';
+                }
+            });
+        }
 
         // 텍스트 복원
         restoreTexts(whiteTexts.current);
@@ -205,18 +217,26 @@ export function KeyboardLayout({
             if (isRunning) return;
             const el = (e.target as Element).closest<SVGPathElement>('path[data-key]');
             if (!el) return;
-            onKeySelect(el.getAttribute('data-key') ?? '');
+            const code = el.getAttribute('data-key') ?? '';
+            // Shortcut 역할에서는 마우스 키 선택 불가 (globalShortcut은 키보드 전용)
+            if (role === 'shortcut' && isMouseKeyCode(code)) return;
+            onKeySelect(code);
         };
 
         const handlePointerOver = (e: PointerEvent) => {
             const el = (e.target as Element).closest<SVGPathElement>('path[data-key]');
             if (!el) return;
+            const code = el.getAttribute('data-key') ?? '';
+            // Shortcut 역할의 마우스 키는 disabled — hover 하이라이트 없음
+            if (role === 'shortcut' && isMouseKeyCode(code)) {
+                el.style.cursor = 'not-allowed';
+                return;
+            }
             // running 중에는 hover 하이라이트 없이 커서만 not-allowed
             if (isRunning) {
                 el.style.cursor = 'not-allowed';
                 return;
             }
-            const code = el.getAttribute('data-key') ?? '';
             const selected = role === 'target' ? targetKey : shortcutKey;
             if (code === selected) return;
             el.dataset.hovered = '1';
@@ -241,5 +261,5 @@ export function KeyboardLayout({
         };
     }, [role, targetKey, shortcutKey, isRunning, onKeySelect, paint]);
 
-    return <div ref={containerRef} className="keyboard-svg-host" />;
+    return <div ref={containerRef} className={`keyboard-svg-host role-${role}`} />;
 }

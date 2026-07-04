@@ -40,6 +40,9 @@
 | 방향키 | Arrow Up/Down/Left/Right |
 | 제어키 | Caps Lock, Num Lock, Scroll Lock, Print Screen |
 | 기호 | `+` (Plus) |
+| 마우스 | 좌클릭(MouseLeft), 휠클릭(MouseMiddle), 우클릭(MouseRight) — Target 전용 |
+
+**마우스 클릭 지원**: `mouse_event` WinAPI로 좌·휠·우클릭을 Target Key로 전송할 수 있다 (`sendMouseLowLevel()`, `sendMouseWithShift()`). 클릭은 현재 커서 위치에서 발생하며 HOLD/PERIODIC/Shift 조합 모두 지원한다. 단, `globalShortcut`이 키보드 전용이므로 마우스 버튼은 Start/Stop 단축키로 사용할 수 없다 (Shortcut 키보드 SVG에서는 disabled 표시). HOLD+좌클릭 조합은 드래그 오동작 위험이 있어 UI에 상시 경고와 toast를 표시한다.
 
 ---
 
@@ -386,4 +389,5 @@ URL.revokeObjectURL(url);
 | 키 선택 UI | AutoSelect 드롭다운 | 키보드 inline SVG 시각화로 완전 대체 (AutoSelect 제거) |
 | 설정 지속성 | 앱 재시작 시 초기화 | `key-presser-macro.json` + localStorage + cookie 3중 저장·복원 |
 | 설정 파일 관리 | 없음 | 파일 선택→유효성→적용 후 재실행 / 현재 설정 다운로드 |
+| 마우스 클릭 | 없음 | 좌·휠·우클릭 Target Key 지원 (현재 커서 위치, 단축키로는 불가) |
 | 나머지 기능 | — | v1과 동일 유지 |

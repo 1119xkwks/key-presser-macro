@@ -7,11 +7,19 @@
  */
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { useMacro } from '@/app/hooks/useMacro';
 import { MacroMode } from '@/app/types/macro';
-import { getKeyLabel } from '@/app/constants/keys';
+import { getKeyLabel, isMouseKeyCode } from '@/app/constants/keys';
 import { KeyboardLayout } from '@/app/components/KeyboardLayout';
 import { SettingsPanel } from '@/app/components/SettingsPanel';
+
+/** HOLD + 좌클릭 드래그 위험 toast를 표시합니다. */
+function warnHoldLeftClick() {
+    toast.warning('HOLD 모드 + 좌클릭 조합 주의', {
+        description: '좌클릭을 누른 상태로 마우스를 움직이면 의도치 않은 드래그가 발생할 수 있습니다.',
+    });
+}
 
 export default function Home() {
     const { config, isRunning, error, updateConfig, resetConfig } = useMacro();
@@ -19,6 +27,8 @@ export default function Home() {
     const [settingsOpen, setSettingsOpen] = useState(false);
 
     const isConflict = config.targetKey === config.startStopShortcut;
+    /** HOLD 모드 + 좌클릭 Target 조합 여부 — 드래그 오동작 위험 */
+    const isHoldLeftClickRisk = config.mode === 'HOLD' && config.targetKey === 'MouseLeft';
 
     /** Target Key 선택 (SVG 클릭) */
     const handleTargetKeySelect = (code: string) => {
@@ -28,10 +38,17 @@ export default function Home() {
         }
         setWarning(null);
         updateConfig({ targetKey: code });
+        // HOLD 모드에서 좌클릭을 선택하는 순간 드래그 위험 toast 표시
+        if (config.mode === 'HOLD' && code === 'MouseLeft') warnHoldLeftClick();
     };
 
     /** Shortcut Key 선택 (SVG 클릭) */
     const handleShortcutKeySelect = (code: string) => {
+        // 마우스 키는 단축키로 사용 불가 (Electron globalShortcut은 키보드 전용) — 방어 가드
+        if (isMouseKeyCode(code)) {
+            setWarning('마우스 버튼은 시작/중지 단축키로 사용할 수 없습니다. 키보드 키를 지정하세요.');
+            return;
+        }
         if (code === config.targetKey) {
             setWarning(`단축키와 Target Key가 동일합니다. 서로 다른 키를 지정하세요.`);
             return;
@@ -90,7 +107,12 @@ export default function Home() {
                             <button
                                 key={m}
                                 className={`v2-mode-btn ${config.mode === m ? 'active' : ''} ${isRunning ? 'locked' : ''}`}
-                                onClick={() => { if (!isRunning) updateConfig({ mode: m }); }}
+                                onClick={() => {
+                                    if (isRunning) return;
+                                    updateConfig({ mode: m });
+                                    // 좌클릭 Target 상태에서 HOLD로 전환하는 순간 드래그 위험 toast 표시
+                                    if (m === 'HOLD' && config.targetKey === 'MouseLeft') warnHoldLeftClick();
+                                }}
                             >
                                 {m}
                             </button>
@@ -158,6 +180,12 @@ export default function Home() {
                             {getKeyLabel(config.targetKey)}
                             {config.useShift && <span className="v2-shift-hint"> + Shift</span>}
                         </span>
+                        {/* HOLD + 좌클릭 조합 상시 위험 안내 */}
+                        {isHoldLeftClickRisk && (
+                            <span className="v2-hold-mouse-warning">
+                                ⚠ HOLD + 좌클릭: 마우스 이동 시 드래그 오동작 위험
+                            </span>
+                        )}
                         <span className="v2-card-hint">
                             {isRunning ? 'STOP 후 키 변경이 가능합니다' : '마우스로 클릭해 키를 지정'}
                         </span>

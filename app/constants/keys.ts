@@ -79,13 +79,25 @@ export const TARGET_KEYS: KeyOption[] = [
     { label: 'Num /',     value: 'NumpadDivide',   accelerator: 'numdiv',  vkCode: 0x6F },
     { label: 'Num .',     value: 'NumpadDecimal',  accelerator: 'numdec',  vkCode: 0x6E },
     { label: 'Num Enter', value: 'NumpadEnter',    accelerator: 'Return',  vkCode: 0x0D },
+    // 마우스 버튼 (Target 전용 — accelerator 없음, 단축키 사용 불가)
+    { label: '좌클릭', value: 'MouseLeft',   accelerator: '', vkCode: 0x01 },
+    { label: '휠클릭', value: 'MouseMiddle', accelerator: '', vkCode: 0x04 },
+    { label: '우클릭', value: 'MouseRight',  accelerator: '', vkCode: 0x02 },
 ];
 
+/** 마우스 키 코드 목록 — Target Key 전용 (Electron globalShortcut은 키보드 전용) */
+export const MOUSE_KEY_CODES = ['MouseLeft', 'MouseMiddle', 'MouseRight'];
+
+/** 해당 Web code가 마우스 키인지 여부 */
+export function isMouseKeyCode(code: string): boolean {
+    return MOUSE_KEY_CODES.includes(code);
+}
+
 /**
- * @description 단축키로 사용 가능한 키 목록 (Target Key 목록과 동일).
+ * @description 단축키로 사용 가능한 키 목록 (Target Key 목록에서 마우스 버튼 제외).
  * Modifier 단독키(Shift, Ctrl, Alt, Meta)는 globalShortcut에 단독 등록이 불가하므로 제외됩니다.
  */
-export const SHORTCUT_KEYS: KeyOption[] = TARGET_KEYS;
+export const SHORTCUT_KEYS: KeyOption[] = TARGET_KEYS.filter(k => !isMouseKeyCode(k.value));
 
 /** Web code로 KeyOption을 찾습니다. */
 export function findKeyByCode(code: string): KeyOption | undefined {

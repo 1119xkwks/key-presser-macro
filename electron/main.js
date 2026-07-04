@@ -112,6 +112,25 @@ function getVirtualKeyCode(webCode) {
 }
 
 // ──────────────────────────────────────────────
+// 마우스 코드 → mouse_event 플래그 변환
+// ──────────────────────────────────────────────
+
+/** MOUSEEVENTF_* 플래그 (user32 mouse_event) */
+const MOUSE_CODE_TO_FLAGS = {
+    MouseLeft:   { down: 0x0002, up: 0x0004 }, // LEFTDOWN / LEFTUP
+    MouseRight:  { down: 0x0008, up: 0x0010 }, // RIGHTDOWN / RIGHTUP
+    MouseMiddle: { down: 0x0020, up: 0x0040 }, // MIDDLEDOWN / MIDDLEUP
+};
+
+/**
+ * @function isMouseCode
+ * @description 해당 코드가 마우스 버튼 코드인지 여부를 반환합니다.
+ */
+function isMouseCode(code) {
+    return Object.prototype.hasOwnProperty.call(MOUSE_CODE_TO_FLAGS, code);
+}
+
+// ──────────────────────────────────────────────
 // Web code → Electron Accelerator 변환
 // ──────────────────────────────────────────────
 
@@ -167,6 +186,51 @@ function sendKeyWithShift(targetCode, type = 'press') {
     } else {
         psProcess.stdin.write(`[Win32Input]::KeyDown(@(${vkShift},${vkTarget}))\n`);
         psProcess.stdin.write(`[Win32Input]::KeyUp(@(${vkShift},${vkTarget}))\n`);
+    }
+}
+
+// ──────────────────────────────────────────────
+// 마우스 클릭 전송 (현재 커서 위치에서 클릭)
+// ──────────────────────────────────────────────
+
+/**
+ * @function sendMouseLowLevel
+ * @description 마우스 버튼 이벤트를 전송합니다. 클릭은 현재 커서 위치에서 발생합니다.
+ * @param {string} mouseCode - 'MouseLeft' | 'MouseMiddle' | 'MouseRight'
+ * @param {string} type - 'down' | 'up' | 'press'
+ */
+function sendMouseLowLevel(mouseCode, type = 'press') {
+    if (!psProcess) initPowerShell();
+    const flags = MOUSE_CODE_TO_FLAGS[mouseCode];
+    if (!flags) return;
+    if (type === 'down') {
+        psProcess.stdin.write(`[Win32Input]::MouseDown(${flags.down})\n`);
+    } else if (type === 'up') {
+        psProcess.stdin.write(`[Win32Input]::MouseUp(${flags.up})\n`);
+    } else {
+        psProcess.stdin.write(`[Win32Input]::MouseClick(${flags.down},${flags.up})\n`);
+    }
+}
+
+/**
+ * @function sendMouseWithShift
+ * @description Shift를 누른 채 마우스 버튼 이벤트를 전송합니다 (Shift down → 마우스 → Shift up).
+ */
+function sendMouseWithShift(mouseCode, type = 'press') {
+    if (!psProcess) initPowerShell();
+    const vkShift = 0x10;
+    const flags = MOUSE_CODE_TO_FLAGS[mouseCode];
+    if (!flags) return;
+    if (type === 'down') {
+        psProcess.stdin.write(`[Win32Input]::KeyDown(@(${vkShift}))\n`);
+        psProcess.stdin.write(`[Win32Input]::MouseDown(${flags.down})\n`);
+    } else if (type === 'up') {
+        psProcess.stdin.write(`[Win32Input]::MouseUp(${flags.up})\n`);
+        psProcess.stdin.write(`[Win32Input]::KeyUp(@(${vkShift}))\n`);
+    } else {
+        psProcess.stdin.write(`[Win32Input]::KeyDown(@(${vkShift}))\n`);
+        psProcess.stdin.write(`[Win32Input]::MouseClick(${flags.down},${flags.up})\n`);
+        psProcess.stdin.write(`[Win32Input]::KeyUp(@(${vkShift}))\n`);
     }
 }
 
@@ -287,6 +351,26 @@ function initPowerShell() {
             [DllImport("user32.dll")]
             public static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
+            [DllImport("user32.dll")]
+            public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+
+            // 마우스 버튼 down (현재 커서 위치)
+            public static void MouseDown(uint downFlag) {
+                mouse_event(downFlag, 0, 0, 0, 0);
+            }
+
+            // 마우스 버튼 up (현재 커서 위치)
+            public static void MouseUp(uint upFlag) {
+                mouse_event(upFlag, 0, 0, 0, 0);
+            }
+
+            // 마우스 클릭 (down → 15ms → up, 키보드 SendKeys와 동일 타이밍)
+            public static void MouseClick(uint downFlag, uint upFlag) {
+                mouse_event(downFlag, 0, 0, 0, 0);
+                Thread.Sleep(15);
+                mouse_event(upFlag, 0, 0, 0, 0);
+            }
+
             public static void SendKeys(byte[] vKeys) {
                 KeyDown(vKeys);
                 Thread.Sleep(15);
@@ -353,16 +437,22 @@ function startMacro(config) {
 
     const interval = Math.max(20, config.interval);
 
+    const isMouse = isMouseCode(config.targetKey);
+
     const macroLoop = () => {
         if (!isMacroRunning) return;
         if (!psProcess) initPowerShell();
 
-        if (config.mode === 'HOLD') {
-            if (config.useShift) sendKeyWithShift(config.targetKey, 'down');
-            else sendKeyLowLevel(config.targetKey, 'down');
+        const type = config.mode === 'HOLD' ? 'down' : 'press';
+
+        if (isMouse) {
+            // 마우스 버튼: 현재 커서 위치에서 클릭/누름
+            if (config.useShift) sendMouseWithShift(config.targetKey, type);
+            else sendMouseLowLevel(config.targetKey, type);
         } else {
-            if (config.useShift) sendKeyWithShift(config.targetKey, 'press');
-            else sendKeyLowLevel(config.targetKey, 'press');
+            // 키보드 키
+            if (config.useShift) sendKeyWithShift(config.targetKey, type);
+            else sendKeyLowLevel(config.targetKey, type);
         }
 
         loopTimeout = setTimeout(macroLoop, interval);
@@ -380,7 +470,11 @@ function stopMacro() {
     if (topMostReinforcer) { clearInterval(topMostReinforcer); topMostReinforcer = null; }
 
     if (currentConfig) {
-        if (currentConfig.useShift) {
+        if (isMouseCode(currentConfig.targetKey)) {
+            // 마우스 버튼 고착 방지: up 전송 (+ Shift 사용 시 Shift도 해제)
+            sendMouseLowLevel(currentConfig.targetKey, 'up');
+            if (currentConfig.useShift) sendKeyLowLevel('ShiftLeft', 'up');
+        } else if (currentConfig.useShift) {
             sendKeyWithShift(currentConfig.targetKey, 'up');
             sendKeyLowLevel('ShiftLeft', 'up'); // Shift 고착 방지
         } else {
@@ -459,6 +553,11 @@ let lastRegisteredUseShift = null;
 ipcMain.handle('update-macro-config', async (event, config) => {
     try {
         console.log(`[IPC] update-macro-config. shortcut=${config.startStopShortcut}, shift=${config.useShift}`);
+
+        // 마우스 버튼은 시작/중지 단축키로 등록 불가 (globalShortcut은 키보드 전용)
+        if (isMouseCode(config.startStopShortcut)) {
+            return { success: false, error: '마우스 버튼은 시작/중지 단축키로 사용할 수 없습니다.' };
+        }
 
         if (lastRegisteredShortcut === config.startStopShortcut && lastRegisteredUseShift === config.useShift) {
             currentConfig = config;

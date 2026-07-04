@@ -8,6 +8,7 @@
 import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 import { MacroConfig } from '@/app/types/macro';
+import { isMouseKeyCode } from '@/app/constants/keys';
 
 interface Props {
     isOpen: boolean;
@@ -37,6 +38,8 @@ function validateConfig(obj: Record<string, unknown>): MacroConfig | null {
     if (obj.mode !== 'HOLD' && obj.mode !== 'PERIODIC') return null;
     if (typeof obj.targetKey !== 'string') return null;
     if (typeof obj.startStopShortcut !== 'string') return null;
+    // 마우스 버튼은 시작/중지 단축키로 사용 불가 (globalShortcut은 키보드 전용)
+    if (isMouseKeyCode(obj.startStopShortcut)) return null;
     return obj as unknown as MacroConfig;
 }
 

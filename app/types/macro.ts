@@ -6,7 +6,10 @@
 export type MacroMode = 'HOLD' | 'PERIODIC';
 
 export interface MacroConfig {
-    /** 매크로를 실행할 키 (예: 'A', 'Enter') */
+    /**
+     * 매크로를 실행할 키 (Web KeyboardEvent.code, 예: 'KeyA', 'Enter').
+     * 마우스 버튼도 허용: 'MouseLeft' | 'MouseMiddle' | 'MouseRight' (Target 전용)
+     */
     targetKey: string;
     /** 매크로 모드: HOLD (계속 누름), PERIODIC (주기적 입력) */
     mode: MacroMode;

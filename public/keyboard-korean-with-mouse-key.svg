@@ -131,9 +131,9 @@
 
 <path data-key="Pause" id="path2824" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m877.48 770.67h44.752v44.733h-44.752v-44.733z"></path>
 
-<path id="mouse-slot-1" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 770.67h44.752v44.733h-44.752v-44.733z"></path>
-<path id="mouse-slot-2" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 770.67h44.752v44.733h-44.752v-44.733z"></path>
-<path id="mouse-slot-3" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 770.67h44.752v44.733h-44.752v-44.733z"></path>
+<path data-key="MouseLeft" id="mouse-slot-1" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m947.09 770.67h44.752v44.733h-44.752v-44.733z"></path>
+<path data-key="MouseMiddle" id="mouse-slot-2" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m994.33 770.67h44.752v44.733h-44.752v-44.733z"></path>
+<path data-key="MouseRight" id="mouse-slot-3" style="stroke:#231f20;stroke-width:1.2825;fill:none" d="m1041.6 770.67h44.752v44.733h-44.752v-44.733z"></path>
 
 
 
@@ -627,7 +627,7 @@
 
 <text id="text3543-74-9-4-7-0-5-1-0-47-2-1-9" data-key="Escape" style="font-size:12px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" transform="scale(1,-1)" y="-788.32782" x="56.2742" xml:space="preserve"></text>
 </g>
-  <g id="layer1" style="opacity:.5"><text id="text4609" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="70.342751"><tspan id="tspan4615" x="70.342751" y="49.366745">Esc</tspan></text>
+  <g id="layer1" style="opacity:.7"><text id="text4609" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="70.342751"><tspan id="tspan4615" x="70.342751" y="49.366745">Esc</tspan></text>
 <text id="text4617" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="190.14525"><tspan id="tspan4619" x="190.14525" y="49.366745">F1</tspan></text>
 <text id="text4621" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366749" x="249.49695"><tspan id="tspan4623" x="249.49695" y="49.366749">F2</tspan></text>
 <text id="text4625" style="font-size:12px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" transform="matrix(1.25 0 0 1.25 0 1052.4)" y="-802.43408" x="247.51855"><tspan id="tspan4627" x="247.51855" y="-802.43408">F3</tspan></text>
@@ -728,6 +728,9 @@
 <text id="text5025" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="215.28023"><tspan id="tspan5027" x="215.28023" y="373.70746">Alt</tspan></text>
 <text id="text5029" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="673.81934"><tspan id="tspan5031" x="673.81934" y="373.70746">AltGr</tspan></text>
 <text id="text5033" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="373.70746" x="887.14564"><tspan id="tspan5035" x="887.14564" y="373.70746">Ctrl</tspan></text>
+<text id="text-mouse-slot-1-en" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="1192.6748"><tspan id="tspan-mouse-slot-1-en" x="1192.6748" y="49.366745">LClk</tspan></text>
+<text id="text-mouse-slot-2-en" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="1252.074"><tspan id="tspan-mouse-slot-2-en" x="1252.074" y="49.366745">MClk</tspan></text>
+<text id="text-mouse-slot-3-en" style="font-size:15px;font-family:Ubuntu;fill:#000000;line-height:100%;font-weight:500" xml:space="preserve" y="49.366745" x="1310.2384"><tspan id="tspan-mouse-slot-3-en" x="1310.2384" y="49.366745">RClk</tspan></text>
 </g>
   <g id="layer2">
 
@@ -930,6 +933,10 @@
 
 
 <text id="text3543-74-9-4-7-0-5-0" data-key="Pause" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1100.3549"></text>
+
+<text id="text-mouse-slot-1-ko" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1192.6748"><tspan id="tspan-mouse-slot-1-ko" y="228.50847" x="1192.6748">좌클릭</tspan></text>
+<text id="text-mouse-slot-2-ko" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1252.074"><tspan id="tspan-mouse-slot-2-ko" y="228.50847" x="1252.074">휠클릭</tspan></text>
+<text id="text-mouse-slot-3-ko" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" xml:space="preserve" y="213.13347" x="1310.2384"><tspan id="tspan-mouse-slot-3-ko" y="228.50847" x="1310.2384">우클릭</tspan></text>
 </g>
 
 <text id="text3543-74-9-4-7-1-1-5" data-key="Numpad7" style="font-size:15px;font-family:Ubuntu;fill:#000000;font-weight:500;line-height:102.49999762%" y="213.13347" x="1192.6748" xml:space="preserve"><tspan id="tspan4327-8-4-7-4-9-6-4" y="228.50847" x="1192.6748">Home</tspan></text>

@@ -355,6 +355,17 @@ html, body {
     @apply w-full h-auto block select-none;
 }
 
+/* Shortcut 역할 키보드의 마우스 키 라벨 — 단축키로 사용 불가하므로 흐리게 (disabled) */
+.keyboard-svg-host.role-shortcut svg [id^="text-mouse-slot-"],
+.keyboard-svg-host.role-shortcut svg [id^="tspan-mouse-slot-"] {
+    opacity: 0.35;
+}
+
+/* HOLD + 좌클릭 조합 상시 위험 안내 (Target Key 카드 헤더) */
+.v2-hold-mouse-warning {
+    @apply ml-3 text-xs font-bold text-amber-600 bg-amber-50 border border-amber-300 rounded-md px-2 py-0.5 whitespace-nowrap;
+}
+
 /* ════════════════════════════════════════════════
    설정 패널 (사이드바)
 ════════════════════════════════════════════════ */
