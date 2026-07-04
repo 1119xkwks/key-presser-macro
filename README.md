@@ -22,7 +22,7 @@
 
 **메인 화면**
 
-![메인 화면](docs/screenshots/v2/main-page.png)
+![메인 화면](docs/screenshots/v2/main-page-v2.1.png)
 
 **지속 누름 실행 중 (게임 화면) — 좌측 상단에 오버레이 창이 표시됩니다**
 
