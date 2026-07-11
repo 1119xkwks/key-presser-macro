@@ -439,6 +439,17 @@ function startMacro(config) {
 
     const isMouse = isMouseCode(config.targetKey);
 
+    // HOLD 모드 + 마우스 버튼: down 이벤트를 반복 전송하면 OS가 매번
+    // "현재 커서 위치에서 새 클릭 시작"으로 해석하여 드래그(텍스트 선택 등)가
+    // interval마다 끊긴다. 따라서 시작 시 down을 한 번만 보내고 누른 상태를 유지한다.
+    // (버튼 해제는 stopMacro()의 up 전송이 담당)
+    if (isMouse && config.mode === 'HOLD') {
+        if (!psProcess) initPowerShell();
+        if (config.useShift) sendMouseWithShift(config.targetKey, 'down');
+        else sendMouseLowLevel(config.targetKey, 'down');
+        return;
+    }
+
     const macroLoop = () => {
         if (!isMacroRunning) return;
         if (!psProcess) initPowerShell();
