@@ -281,7 +281,7 @@ function initOverlayWindow() {
     if (overlayWindow) return;
 
     const overlayWidth = 400;
-    const overlayHeight = 240;
+    const overlayHeight = 204;
 
     overlayWindow = new BrowserWindow({
         width: overlayWidth,

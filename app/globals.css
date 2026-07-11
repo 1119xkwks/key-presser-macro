@@ -520,9 +520,11 @@ html, body {
 
 .key-hint {
     @apply bg-zinc-800 px-2 py-0.5 rounded border border-zinc-600 text-zinc-100 mx-1 font-mono font-bold inline-block;
+    /* 배지의 py/border가 줄 박스를 부풀려 위쪽 간격이 커 보이는 것을 방지 (14px + py 4px + border 2px = 20px, 줄 높이와 동일) */
+    @apply leading-none;
 }
 
-.overlay-footer { @apply mt-auto pt-2 flex flex-col gap-2; }
+.overlay-footer { @apply flex flex-col gap-2; }
 
 .overlay-stop-btn {
     @apply w-full py-4 bg-red-500/10 border border-red-500/40 rounded-2xl text-red-500 text-sm font-black uppercase tracking-[0.15em] cursor-pointer transition-all hover:bg-red-500/20 hover:border-red-500/60;
