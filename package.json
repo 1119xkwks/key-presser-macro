@@ -32,10 +32,12 @@
     }
   },
   "dependencies": {
+    "@radix-ui/react-popover": "^1.1.19",
     "electron-is-dev": "^3.0.1",
     "next": "16.1.5",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-number-format": "^5.4.5",
     "sass": "^1.97.3",
     "sonner": "^2.0.7"
   },

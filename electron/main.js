@@ -7,6 +7,7 @@ const { app, BrowserWindow, ipcMain, globalShortcut, screen } = require('electro
 const path = require('path');
 const fs = require('fs');
 const { spawn } = require('child_process');
+const { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX } = require('./constants');
 
 const isDev = !app.isPackaged;
 app.isQuitting = false;
@@ -435,7 +436,8 @@ function startMacro(config) {
         }, 1000);
     }
 
-    const interval = Math.max(20, config.interval);
+    // 인터벌 범위 클램프 — UI(app/page.tsx)와 동일 기준 (electron/constants.js 공유 상수)
+    const interval = Math.min(Math.max(INTERVAL_INPUT_MIN, config.interval), INTERVAL_INPUT_MAX);
 
     const isMouse = isMouseCode(config.targetKey);
 

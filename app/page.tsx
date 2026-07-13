@@ -7,12 +7,18 @@
  */
 
 import { useState } from 'react';
+import { NumericFormat } from 'react-number-format';
+import * as Popover from '@radix-ui/react-popover';
 import { toast } from 'sonner';
 import { useMacro } from '@/app/hooks/useMacro';
 import { MacroMode } from '@/app/types/macro';
 import { getKeyLabel, isMouseKeyCode } from '@/app/constants/keys';
+import { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX } from '@/electron/constants';
 import { KeyboardLayout } from '@/app/components/KeyboardLayout';
 import { SettingsPanel } from '@/app/components/SettingsPanel';
+
+/** 인터벌 안내 문구용 ms 값 #,### 포맷 (예: 3600000 → "3,600,000") */
+const formatMs = (ms: number) => ms.toLocaleString('ko-KR');
 
 /** HOLD + 좌클릭 드래그 위험 toast를 표시합니다. */
 function warnHoldLeftClick() {
@@ -25,6 +31,8 @@ export default function Home() {
     const { config, isRunning, error, updateConfig, resetConfig } = useMacro();
     const [warning, setWarning] = useState<string | null>(null);
     const [settingsOpen, setSettingsOpen] = useState(false);
+    /** 인터벌 인풋 포커스 여부 — 포커스 중에만 범위 안내 popover를 표시 */
+    const [intervalFocused, setIntervalFocused] = useState(false);
 
     const isConflict = config.targetKey === config.startStopShortcut;
     /** HOLD 모드 + 좌클릭 Target 조합 여부 — 드래그 오동작 위험 */
@@ -124,13 +132,46 @@ export default function Home() {
                         <>
                             <div className="v2-divider" />
                             <span className="v2-label">인터벌</span>
-                            <input
-                                className="v2-interval-input"
-                                type="number"
-                                min={20}
-                                value={config.interval}
-                                onChange={(e) => updateConfig({ interval: Math.max(20, Number(e.target.value)) })}
-                            />
+                            {/* 포커스 중에만 열리는 범위 안내 popover — 포커스 상태로 직접 제어 */}
+                            <Popover.Root open={intervalFocused && !isRunning}>
+                                <Popover.Anchor asChild>
+                                    <span className="v2-interval-anchor">
+                                        <NumericFormat
+                                            className="v2-interval-input"
+                                            value={config.interval}
+                                            thousandSeparator=","
+                                            allowNegative={false}
+                                            decimalScale={0}
+                                            disabled={isRunning}
+                                            // 최대값 초과는 타이핑 단계에서 차단 (입력 중간값은 항상 최종값 이하이므로 실시간 검사 가능)
+                                            isAllowed={({ floatValue }) => floatValue === undefined || floatValue <= INTERVAL_INPUT_MAX}
+                                            // 입력 중에는 그대로 반영 — 최소값을 여기서 클램프하면 '3600' 입력 중 '3'이 보정되는 문제가 생긴다
+                                            onValueChange={({ floatValue }) => updateConfig({ interval: floatValue ?? 0 })}
+                                            onFocus={() => setIntervalFocused(true)}
+                                            // 최소값 보정은 포커스가 빠질 때 한 번만 수행 (빈 값도 최소값으로 채워짐)
+                                            onBlur={() => {
+                                                setIntervalFocused(false);
+                                                updateConfig({ interval: Math.max(INTERVAL_INPUT_MIN, config.interval) });
+                                            }}
+                                        />
+                                    </span>
+                                </Popover.Anchor>
+                                <Popover.Portal>
+                                    <Popover.Content
+                                        className={`v2-interval-popover ${config.interval < INTERVAL_INPUT_MIN ? 'below-min' : ''}`}
+                                        side="top"
+                                        sideOffset={8}
+                                        // popover가 인풋의 포커스를 빼앗지 않도록 자동 포커스 차단
+                                        onOpenAutoFocus={(e) => e.preventDefault()}
+                                        onCloseAutoFocus={(e) => e.preventDefault()}
+                                    >
+                                        {config.interval < INTERVAL_INPUT_MIN
+                                            ? `최소 ${formatMs(INTERVAL_INPUT_MIN)}ms — 포커스 해제 시 자동 보정됩니다`
+                                            : `입력 범위: ${formatMs(INTERVAL_INPUT_MIN)} ~ ${formatMs(INTERVAL_INPUT_MAX)} ms`}
+                                        <Popover.Arrow className="v2-interval-popover-arrow" />
+                                    </Popover.Content>
+                                </Popover.Portal>
+                            </Popover.Root>
                             <span className="v2-unit">ms</span>
                         </>
                     )}

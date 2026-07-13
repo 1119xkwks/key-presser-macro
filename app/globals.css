@@ -254,11 +254,43 @@ html, body {
 
 /* 인터벌 입력 */
 .v2-interval-input {
-    @apply w-[70px] h-8 border border-[#dfe2e7] rounded-lg
-           px-[10px] font-[inherit] text-sm font-semibold text-[#1c2024]
+    @apply w-[80px] h-8 border border-[#dfe2e7] rounded-lg
+           px-[10px] font-[inherit] text-right text-xs font-semibold text-[#1c2024]
            outline-none bg-white;
 }
 .v2-interval-input:focus { @apply border-[#ea580c]; }
+/* 매크로 실행 중에는 인터벌 수정 불가 — 흐리게 처리 */
+.v2-interval-input:disabled { @apply bg-[#f3f4f6] text-[#8a929c] cursor-not-allowed; }
+
+/* 인터벌 popover 앵커 — Radix Anchor가 ref를 잡을 수 있도록 인풋을 감싸는 래퍼 */
+.v2-interval-anchor {
+    @apply inline-flex;
+}
+
+/* 인터벌 범위 안내 popover (포커스 중에만 표시)
+   z-index: sticky 헤더(.v2-header, z-10)보다 위에 떠야 잘리지 않는다.
+   Radix가 Content의 computed z-index를 popper 래퍼에 복사하므로 여기 지정하면 적용된다. */
+.v2-interval-popover {
+    @apply z-[100] rounded-lg bg-[#1c2024] text-white text-xs font-semibold
+           px-3 py-[6px] select-none;
+    animation: popover-in 0.15s ease-out;
+    /* 다중 파라미터 shadow는 @apply 대신 표준 CSS 사용 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+/* 최소값 미만 입력 중 — 보정 예고 문구를 오렌지로 강조 */
+.v2-interval-popover.below-min {
+    @apply bg-[#ea580c];
+}
+.v2-interval-popover-arrow {
+    fill: #1c2024;
+}
+.v2-interval-popover.below-min .v2-interval-popover-arrow {
+    fill: #ea580c;
+}
+@keyframes popover-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
 .v2-unit {
     @apply text-xs text-[#8a929c] font-semibold;
