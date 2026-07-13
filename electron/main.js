@@ -9,6 +9,15 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 const { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX, COUNTDOWN_MIN_INTERVAL } = require('./constants');
 
+/**
+ * 키보드 HOLD 모드의 down 재전송 주기 (ms).
+ * 물리 키를 누르고 있을 때의 OS 자동 반복(autorepeat, 약 30회/초)을 근사한다.
+ * config.interval은 PERIODIC 전용 설정(HOLD 모드에서는 UI에 노출되지 않음)이므로
+ * HOLD에서 그대로 쓰면 이전에 저장된 값(예: 5000ms)이 새어 들어와
+ * "누르고 있는데 가끔씩만 입력되는" 문제가 생긴다.
+ */
+const HOLD_KEY_REPEAT_INTERVAL = 33;
+
 const isDev = !app.isPackaged;
 app.isQuitting = false;
 
@@ -437,7 +446,11 @@ function startMacro(config) {
     }
 
     // 인터벌 범위 클램프 — UI(app/page.tsx)와 동일 기준 (electron/constants.js 공유 상수)
-    const interval = Math.min(Math.max(INTERVAL_INPUT_MIN, config.interval), INTERVAL_INPUT_MAX);
+    // 키보드 HOLD는 PERIODIC 전용인 config.interval 대신 autorepeat 근사 고정 주기를 사용한다
+    // (마우스 HOLD는 아래에서 down을 1회만 보내므로 이 값과 무관)
+    const interval = config.mode === 'HOLD'
+        ? HOLD_KEY_REPEAT_INTERVAL
+        : Math.min(Math.max(INTERVAL_INPUT_MIN, config.interval), INTERVAL_INPUT_MAX);
 
     const isMouse = isMouseCode(config.targetKey);
 
