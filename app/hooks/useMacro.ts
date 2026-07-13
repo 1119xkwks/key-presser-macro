@@ -11,6 +11,7 @@ const DEFAULT_CONFIG: MacroConfig = {
     targetKey: 'KeyW',
     mode: 'HOLD',
     interval: 100,
+    jitter: 0,
     repeatCount: 0,
     startStopShortcut: 'PageDown',
     useShift: false,
@@ -32,15 +33,18 @@ export const useMacro = () => {
     // 클라이언트 마운트 후 저장된 설정 복원 및 IPC 초기화
     useEffect(() => {
         // ① localStorage / cookie에서 저장된 설정 복원
-        const restored = loadBestConfig(DEFAULT_CONFIG);
+        // 이전 버전 저장분에는 jitter 등 신규 필드가 없을 수 있으므로 기본값과 병합
+        const restored = { ...DEFAULT_CONFIG, ...loadBestConfig(DEFAULT_CONFIG) };
         setConfig(restored);
 
         if (!window.electronAPI) return;
 
         // ② 파일 설정(가장 높은 우선순위) — Electron이 did-finish-load 후 전달
         window.electronAPI.onInitialConfig((saved: MacroConfig) => {
-            setConfig(saved);
-            window.electronAPI!.updateMacroConfig(saved);
+            // 파일 설정 역시 구버전일 수 있으므로 기본값과 병합하여 신규 필드를 채운다
+            const merged = { ...DEFAULT_CONFIG, ...saved };
+            setConfig(merged);
+            window.electronAPI!.updateMacroConfig(merged);
         });
 
         // ③ 매크로 실행 상태 변경 수신

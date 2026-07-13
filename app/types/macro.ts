@@ -15,6 +15,12 @@ export interface MacroConfig {
     mode: MacroMode;
     /** PERIODIC 모드일 때 입력 주기 (ms) */
     interval: number;
+    /**
+     * PERIODIC 모드일 때 인터벌에 매번 더해지는 랜덤 편차 폭 (±ms, 0이면 비활성).
+     * 매 입력마다 [-jitter, +jitter] 범위의 랜덤 오프셋이 인터벌에 적용된다.
+     * interval - jitter ≥ INTERVAL_INPUT_MIN, interval + jitter ≤ INTERVAL_INPUT_MAX 를 만족해야 한다.
+     */
+    jitter: number;
     /** PERIODIC 모드일 때 반복 횟수 (0이면 무제한) */
     repeatCount: number;
     /** 시작/중지 단축키 (예: 'F5', 'CommandOrControl+S') */

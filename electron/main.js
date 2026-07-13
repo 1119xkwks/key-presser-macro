@@ -452,6 +452,16 @@ function startMacro(config) {
         ? HOLD_KEY_REPEAT_INTERVAL
         : Math.min(Math.max(INTERVAL_INPUT_MIN, config.interval), INTERVAL_INPUT_MAX);
 
+    // 랜덤 편차(jitter) 클램프 — PERIODIC 전용. interval ± jitter가 항상
+    // [INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX] 범위 안에 머물도록
+    // 최대 허용치를 min(interval - MIN, MAX - interval)로 제한한다.
+    // (UI에서도 동일 기준으로 제한하지만, 파일 직접 수정 등으로 범위를 벗어난 값이
+    //  들어와도 여기서 최종 방어한다)
+    const jitterMax = Math.max(0, Math.min(interval - INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX - interval));
+    const jitter = config.mode === 'PERIODIC'
+        ? Math.min(Math.max(0, Math.round(Number(config.jitter) || 0)), jitterMax)
+        : 0;
+
     const isMouse = isMouseCode(config.targetKey);
 
     // HOLD 모드 + 마우스 버튼: down 이벤트를 반복 전송하면 OS가 매번
@@ -481,16 +491,24 @@ function startMacro(config) {
             else sendKeyLowLevel(config.targetKey, type);
         }
 
-        loopTimeout = setTimeout(macroLoop, interval);
+        // 이번 틱의 실제 대기 시간 — jitter가 설정되어 있으면 매번 ±jitter 범위의
+        // 랜덤 오프셋을 더한다 (jitterMax 클램프 덕분에 결과는 항상 입력 범위 안)
+        const tickInterval = jitter > 0
+            ? interval + Math.round((Math.random() * 2 - 1) * jitter)
+            : interval;
+
+        loopTimeout = setTimeout(macroLoop, tickInterval);
 
         // PERIODIC + 충분히 긴 인터벌일 때만 오버레이에 다음 입력 예정 시각을 알린다.
         // (오버레이는 이 시각을 기준으로 자체 타이머를 돌려 카운트다운 뱃지를 갱신)
+        // 표시 여부 판단은 기준 인터벌(interval)로 고정해 실행 중 뱃지가 껐다 켜졌다 하지 않게 하고,
+        // 카운트다운 시각 자체는 랜덤이 반영된 실제 대기 시간(tickInterval) 기준으로 보낸다.
         if (
             config.mode === 'PERIODIC' &&
             interval >= COUNTDOWN_MIN_INTERVAL &&
             overlayWindow && !overlayWindow.isDestroyed()
         ) {
-            overlayWindow.webContents.send('macro-tick', { nextAt: Date.now() + interval });
+            overlayWindow.webContents.send('macro-tick', { nextAt: Date.now() + tickInterval });
         }
     };
 

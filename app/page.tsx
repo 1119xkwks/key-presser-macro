@@ -20,6 +20,17 @@ import { SettingsPanel } from '@/app/components/SettingsPanel';
 /** 인터벌 안내 문구용 ms 값 #,### 포맷 (예: 3600000 → "3,600,000") */
 const formatMs = (ms: number) => ms.toLocaleString('ko-KR');
 
+/**
+ * 인터벌 값 기준 랜덤 편차(jitter) 최대 허용치.
+ * interval - jitter ≥ 최소 인터벌, interval + jitter ≤ 최대 인터벌을 보장한다.
+ */
+const getJitterMax = (interval: number) =>
+    Math.max(0, Math.min(interval - INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX - interval));
+
+/** 랜덤 편차 값을 현재 인터벌 기준 허용 범위 [0, jitterMax]로 보정 */
+const clampJitter = (jitter: number, interval: number) =>
+    Math.min(Math.max(0, jitter), getJitterMax(interval));
+
 /** HOLD + 좌클릭 드래그 위험 toast를 표시합니다. */
 function warnHoldLeftClick() {
     toast.warning('HOLD 모드 + 좌클릭 조합 주의', {
@@ -33,6 +44,8 @@ export default function Home() {
     const [settingsOpen, setSettingsOpen] = useState(false);
     /** 인터벌 인풋 포커스 여부 — 포커스 중에만 범위 안내 popover를 표시 */
     const [intervalFocused, setIntervalFocused] = useState(false);
+    /** 랜덤 편차 인풋 포커스 여부 — 포커스 중에만 범위 안내 popover를 표시 */
+    const [jitterFocused, setJitterFocused] = useState(false);
 
     const isConflict = config.targetKey === config.startStopShortcut;
     /** HOLD 모드 + 좌클릭 Target 조합 여부 — 드래그 오동작 위험 */
@@ -149,9 +162,11 @@ export default function Home() {
                                             onValueChange={({ floatValue }) => updateConfig({ interval: floatValue ?? 0 })}
                                             onFocus={() => setIntervalFocused(true)}
                                             // 최소값 보정은 포커스가 빠질 때 한 번만 수행 (빈 값도 최소값으로 채워짐)
+                                            // 인터벌이 바뀌면 랜덤 편차 허용 범위도 달라지므로 jitter도 함께 보정
                                             onBlur={() => {
                                                 setIntervalFocused(false);
-                                                updateConfig({ interval: Math.max(INTERVAL_INPUT_MIN, config.interval) });
+                                                const fixed = Math.max(INTERVAL_INPUT_MIN, config.interval);
+                                                updateConfig({ interval: fixed, jitter: clampJitter(config.jitter, fixed) });
                                             }}
                                         />
                                     </span>
@@ -168,6 +183,48 @@ export default function Home() {
                                         {config.interval < INTERVAL_INPUT_MIN
                                             ? `최소 ${formatMs(INTERVAL_INPUT_MIN)}ms — 포커스 해제 시 자동 보정됩니다`
                                             : `입력 범위: ${formatMs(INTERVAL_INPUT_MIN)} ~ ${formatMs(INTERVAL_INPUT_MAX)} ms`}
+                                        <Popover.Arrow className="v2-interval-popover-arrow" />
+                                    </Popover.Content>
+                                </Popover.Portal>
+                            </Popover.Root>
+                            <span className="v2-unit">ms</span>
+
+                            <div className="v2-divider" />
+                            {/* 랜덤 편차 (jitter) — 매 입력마다 인터벌에 ±jitter 범위의 랜덤 오프셋을 적용 */}
+                            <span className="v2-label">랜덤 편차</span>
+                            <Popover.Root open={jitterFocused && !isRunning}>
+                                <Popover.Anchor asChild>
+                                    <span className="v2-interval-anchor">
+                                        <NumericFormat
+                                            className="v2-jitter-input"
+                                            value={config.jitter}
+                                            prefix="±"
+                                            thousandSeparator=","
+                                            allowNegative={false}
+                                            decimalScale={0}
+                                            disabled={isRunning}
+                                            // 허용 최대치(인터벌 기준) 초과는 타이핑 단계에서 차단
+                                            isAllowed={({ floatValue }) => floatValue === undefined || floatValue <= getJitterMax(config.interval)}
+                                            onValueChange={({ floatValue }) => updateConfig({ jitter: floatValue ?? 0 })}
+                                            onFocus={() => setJitterFocused(true)}
+                                            // 포커스 해제 시 허용 범위로 최종 보정 (빈 값은 0)
+                                            onBlur={() => {
+                                                setJitterFocused(false);
+                                                updateConfig({ jitter: clampJitter(config.jitter, config.interval) });
+                                            }}
+                                        />
+                                    </span>
+                                </Popover.Anchor>
+                                <Popover.Portal>
+                                    <Popover.Content
+                                        className="v2-interval-popover"
+                                        side="top"
+                                        sideOffset={8}
+                                        // popover가 인풋의 포커스를 빼앗지 않도록 자동 포커스 차단
+                                        onOpenAutoFocus={(e) => e.preventDefault()}
+                                        onCloseAutoFocus={(e) => e.preventDefault()}
+                                    >
+                                        {`입력 범위: 0 ~ ${formatMs(getJitterMax(config.interval))} ms — 매 입력마다 인터벌에 ±편차 랜덤 적용`}
                                         <Popover.Arrow className="v2-interval-popover-arrow" />
                                     </Popover.Content>
                                 </Popover.Portal>

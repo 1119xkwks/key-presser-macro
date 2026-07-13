@@ -9,6 +9,7 @@ import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 import { MacroConfig } from '@/app/types/macro';
 import { isMouseKeyCode } from '@/app/constants/keys';
+import { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX } from '@/electron/constants';
 
 interface Props {
     isOpen: boolean;
@@ -40,7 +41,16 @@ function validateConfig(obj: Record<string, unknown>): MacroConfig | null {
     if (typeof obj.startStopShortcut !== 'string') return null;
     // 마우스 버튼은 시작/중지 단축키로 사용 불가 (globalShortcut은 키보드 전용)
     if (isMouseKeyCode(obj.startStopShortcut)) return null;
-    return obj as unknown as MacroConfig;
+
+    // 랜덤 편차(jitter)는 나중에 추가된 선택 항목 — 구버전 파일에는 없을 수 있으므로
+    // 없거나 유효하지 않으면 0으로 보정하고, interval ± jitter가 입력 범위를
+    // 벗어나지 않도록 허용 최대치(min(interval - MIN, MAX - interval))로 클램프한다.
+    const interval = Number(obj.interval);
+    const jitterMax = Math.max(0, Math.min(interval - INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX - interval));
+    const rawJitter = typeof obj.jitter === 'number' && Number.isFinite(obj.jitter) ? Math.round(obj.jitter) : 0;
+    const jitter = Math.min(Math.max(0, rawJitter), jitterMax);
+
+    return { ...(obj as unknown as MacroConfig), jitter };
 }
 
 export function SettingsPanel({ isOpen, onClose, currentConfig, isRunning, onApplyConfig, onReset }: Props) {
