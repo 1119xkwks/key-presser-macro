@@ -22,6 +22,25 @@
 - 모든 커스텀 애니메이션은 재사용성을 위해 전역 CSS 파일의 `@layer base` 등에 정의한다.
 - 코드 작성 시 JSDoc과 라인 주석을 상세히 작성하여 가독성을 높인다.
 
+### React 컨벤션
+
+- **`useEffect` 내부에서 state setter 직접 호출 금지**: `useEffect` 본문(및 cleanup)에서 `setXxx` setter를 직접 호출하지 않는다. 대신 `useEffectEvent`(React 19.2+ 정식 지원, `react`에서 임포트)로 update 함수를 만들어 우회 호출한다.
+
+  ```tsx
+  // ❌ as-is: setter 직접 호출
+  const [myNumber, setMyNumber] = useState<number>(0);
+  useEffect(() => {
+    setMyNumber(5);
+  }, []);
+
+  // ✅ to-be: useEffectEvent로 update 함수를 만들어 호출
+  const [myNumber, setMyNumber] = useState<number>(0);
+  const updateMyNumber = useEffectEvent((_v: number) => setMyNumber(_v));
+  useEffect(() => {
+    updateMyNumber(5);
+  }, []);
+  ```
+
 ## 에셋 및 리소스
 
 - **아이콘/Favicon**: 프로그램 아이콘, favicon, 윈도우 타이틀 아이콘은 모두 `docs/icons/icon.png`를 사용한다.

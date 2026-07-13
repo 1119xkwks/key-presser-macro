@@ -3,7 +3,7 @@
  * @description 매크로 상태 관리 및 설정 영속성 훅 (v2)
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useEffectEvent } from 'react';
 import { MacroConfig } from '@/app/types/macro';
 import { useSettings } from '@/app/hooks/useSettings';
 
@@ -30,12 +30,16 @@ export const useMacro = () => {
     // SSR/클라이언트 hydration mismatch 방지: 초기값은 항상 DEFAULT_CONFIG로 고정
     const [config, setConfig] = useState<MacroConfig>(DEFAULT_CONFIG);
 
+    // useEffect 내부 setter 직접 호출 금지 컨벤션 — useEffectEvent로 우회 (CLAUDE.md 참고)
+    const updateConfigState = useEffectEvent((_v: MacroConfig) => setConfig(_v));
+    const updateIsRunning = useEffectEvent((_v: boolean) => setIsRunning(_v));
+
     // 클라이언트 마운트 후 저장된 설정 복원 및 IPC 초기화
     useEffect(() => {
         // ① localStorage / cookie에서 저장된 설정 복원
         // 이전 버전 저장분에는 jitter 등 신규 필드가 없을 수 있으므로 기본값과 병합
         const restored = { ...DEFAULT_CONFIG, ...loadBestConfig(DEFAULT_CONFIG) };
-        setConfig(restored);
+        updateConfigState(restored);
 
         if (!window.electronAPI) return;
 
@@ -43,18 +47,17 @@ export const useMacro = () => {
         window.electronAPI.onInitialConfig((saved: MacroConfig) => {
             // 파일 설정 역시 구버전일 수 있으므로 기본값과 병합하여 신규 필드를 채운다
             const merged = { ...DEFAULT_CONFIG, ...saved };
-            setConfig(merged);
+            updateConfigState(merged);
             window.electronAPI!.updateMacroConfig(merged);
         });
 
         // ③ 매크로 실행 상태 변경 수신
         window.electronAPI.onMacroStatusChanged((status: boolean) => {
-            setIsRunning(status);
+            updateIsRunning(status);
         });
 
         // ④ 복원된 설정으로 단축키 등록
         window.electronAPI.updateMacroConfig(restored);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /**

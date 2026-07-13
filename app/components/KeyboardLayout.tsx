@@ -196,8 +196,6 @@ export function KeyboardLayout({
         };
 
         loadSvg();
-    // paint는 의존성에 포함하면 무한루프 → 초기 로드 1회만
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // ── 상태 변경 시 repaint ──────────────────────

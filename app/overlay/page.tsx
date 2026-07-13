@@ -5,7 +5,7 @@
  * @description 매크로 실행 상태를 보여주는 항상 위에 있는 투명 오버레이 페이지입니다.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useEffectEvent } from 'react';
 import { MacroConfig } from '@/app/types/macro';
 import { TARGET_KEYS, SHORTCUT_KEYS } from '@/app/constants/keys';
 
@@ -30,6 +30,11 @@ export default function OverlayPage() {
     /** 다음 입력까지 남은 시간 (초, 올림) */
     const [remainingSec, setRemainingSec] = useState(0);
 
+    // useEffect 내부 setter 직접 호출 금지 컨벤션 — useEffectEvent로 우회 (CLAUDE.md 참고)
+    const updateConfig = useEffectEvent((_v: MacroConfig) => setConfig(_v));
+    const updateNextAt = useEffectEvent((_v: number | null) => setNextAt(_v));
+    const updateRemainingSec = useEffectEvent((_v: number) => setRemainingSec(_v));
+
     useEffect(() => {
         // Electron transparent 창에서 html/body 배경이 흰색으로 보이는 것을 방지
         document.documentElement.style.background = 'transparent';
@@ -40,12 +45,12 @@ export default function OverlayPage() {
         if (window.electronAPI) {
             window.electronAPI.onUpdateOverlayConfig((newConfig: MacroConfig) => {
                 console.log('[OVERLAY] Received config:', newConfig);
-                setConfig(newConfig);
+                updateConfig(newConfig);
                 // 새 실행이 시작되면 이전 실행의 카운트다운 잔상을 제거
                 // (인터벌이 짧아 tick이 오지 않는 실행에서도 뱃지가 남지 않도록)
-                setNextAt(null);
+                updateNextAt(null);
             });
-            window.electronAPI.onMacroTick(({ nextAt: at }) => setNextAt(at));
+            window.electronAPI.onMacroTick(({ nextAt: at }) => updateNextAt(at));
         }
     }, []);
 
@@ -53,7 +58,7 @@ export default function OverlayPage() {
     // 1초보다 촘촘한 250ms 주기로 돌려 초 경계에서 표시가 늦게 바뀌는 현상을 방지한다.
     useEffect(() => {
         if (nextAt === null) return;
-        const update = () => setRemainingSec(Math.max(0, Math.ceil((nextAt - Date.now()) / 1000)));
+        const update = () => updateRemainingSec(Math.max(0, Math.ceil((nextAt - Date.now()) / 1000)));
         update();
         const timer = setInterval(update, 250);
         return () => clearInterval(timer);
