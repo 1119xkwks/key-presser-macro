@@ -11,4 +11,10 @@ const INTERVAL_INPUT_MIN = 10;
 /** 인터벌 입력 최대값 (ms) — 1시간 */
 const INTERVAL_INPUT_MAX = 3_600_000;
 
-module.exports = { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX };
+/**
+ * 오버레이 카운트다운 뱃지를 표시하는 최소 인터벌 (ms).
+ * 이보다 짧으면 "3.. 2.. 1.." 형태의 카운트다운이 의미가 없어 뱃지를 숨긴다.
+ */
+const COUNTDOWN_MIN_INTERVAL = 4_000;
+
+module.exports = { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX, COUNTDOWN_MIN_INTERVAL };

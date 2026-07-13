@@ -7,7 +7,7 @@ const { app, BrowserWindow, ipcMain, globalShortcut, screen } = require('electro
 const path = require('path');
 const fs = require('fs');
 const { spawn } = require('child_process');
-const { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX } = require('./constants');
+const { INTERVAL_INPUT_MIN, INTERVAL_INPUT_MAX, COUNTDOWN_MIN_INTERVAL } = require('./constants');
 
 const isDev = !app.isPackaged;
 app.isQuitting = false;
@@ -469,6 +469,16 @@ function startMacro(config) {
         }
 
         loopTimeout = setTimeout(macroLoop, interval);
+
+        // PERIODIC + 충분히 긴 인터벌일 때만 오버레이에 다음 입력 예정 시각을 알린다.
+        // (오버레이는 이 시각을 기준으로 자체 타이머를 돌려 카운트다운 뱃지를 갱신)
+        if (
+            config.mode === 'PERIODIC' &&
+            interval >= COUNTDOWN_MIN_INTERVAL &&
+            overlayWindow && !overlayWindow.isDestroyed()
+        ) {
+            overlayWindow.webContents.send('macro-tick', { nextAt: Date.now() + interval });
+        }
     };
 
     macroLoop();

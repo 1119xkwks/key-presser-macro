@@ -34,4 +34,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     /** 오버레이 창 전용 설정 업데이트 이벤트를 수신합니다. */
     onUpdateOverlayConfig: (callback) =>
         ipcRenderer.on('update-overlay-config', (_event, config) => callback(config)),
+
+    /** PERIODIC 모드에서 다음 입력 예정 시각을 수신합니다. (오버레이 카운트다운 뱃지용) */
+    onMacroTick: (callback) =>
+        ipcRenderer.on('macro-tick', (_event, tick) => callback(tick)),
 });

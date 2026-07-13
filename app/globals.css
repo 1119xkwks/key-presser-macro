@@ -550,6 +550,15 @@ html, body {
 
 .highlight { @apply text-purple-400 font-bold; }
 
+/* 다음 입력까지 남은 시간 카운트다운 뱃지 ("~ 마다 입력 중" 우측, PERIODIC + 인터벌 4초 이상일 때만 표시) */
+.overlay-countdown-badge {
+    @apply ml-1 px-2 py-0.5 rounded-lg bg-purple-500/15 border border-purple-500/40 text-purple-300 text-xs font-mono font-semibold inline-block align-middle;
+    /* 배지의 py/border가 줄 박스를 부풀려 위쪽 간격이 커 보이는 것을 방지 (.key-hint와 동일한 이유) */
+    @apply leading-none;
+    /* 카운트다운 중 숫자 폭이 바뀌어 뱃지 너비가 널뛰는 것을 방지 */
+    font-variant-numeric: tabular-nums;
+}
+
 .key-hint {
     @apply bg-zinc-800 px-2 py-0.5 rounded border border-zinc-600 text-zinc-100 mx-1 font-mono font-bold inline-block;
     /* 배지의 py/border가 줄 박스를 부풀려 위쪽 간격이 커 보이는 것을 방지 (14px + py 4px + border 2px = 20px, 줄 높이와 동일) */

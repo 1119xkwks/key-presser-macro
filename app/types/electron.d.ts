@@ -21,6 +21,8 @@ declare global {
             onInitialConfig: (callback: (config: MacroConfig) => void) => void;
             /** 오버레이 전용 설정 업데이트 이벤트를 수신합니다. */
             onUpdateOverlayConfig: (callback: (config: MacroConfig) => void) => void;
+            /** PERIODIC 모드에서 다음 입력 예정 시각을 수신합니다. (오버레이 카운트다운 뱃지용) */
+            onMacroTick: (callback: (tick: { nextAt: number }) => void) => void;
         };
     }
 }
